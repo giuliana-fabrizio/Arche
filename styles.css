@@ -1,0 +1,56 @@
+body {
+    background-color: #f5f9fd !important;
+}
+
+/* ============================================================= home teacher and user */
+
+.btn_activity,
+.scroll-top-btn {
+    align-items: center;
+    background-color: #A6B8C9 !important;
+    border: none !important;
+    display: flex;
+    justify-content: center;
+    width: 40px;
+}
+
+.btn_activity {
+    border-radius: 50% 0  0 50%!important;
+    height: 60px;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
+.offcanvas-header {
+    background-color: #E0ECF9;
+}
+
+.offcanvas-body {
+    background-color: #f5f9fd !important;
+}
+
+.card-img-top {
+    height: 7rem;
+    background-position: center;
+    background-size: cover;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#id_ue_name {
+    color: #007bc0;
+}
+
+#id_ue_name:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.scroll-top-btn {
+    bottom: 3%;
+    border-radius: 50% !important;
+    height: 40px;
+    right: 45px;
+    position: fixed;
+}
