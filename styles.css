@@ -1,0 +1,10 @@
+input:disabled {
+    background-color: #ffffff00 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.profile-name {
+    font-size: large !important;
+    font-weight: 600 !important;
+}
