@@ -16,11 +16,19 @@ function displayItems(disabled) {
 
 function editProfile() { displayItems(false); }
 
-function cancelEdit() { displayItems(true); }
+function cancelEdit() {
+    displayItems(true);
+    resetAvatar();
+}
 
-function changeAvatar(avatar, id_selected) {
+
+function resetAvatar() {
     var oldAvatar = document.getElementsByClassName("img-avatar-selected");
     if (oldAvatar.length == 1) oldAvatar[0].classList.remove("img-avatar-selected");
+}
+
+function changeAvatar(avatar, id_selected) {
+    resetAvatar()
     document.getElementById("id_avatar").value = avatar;
     document.getElementById(id_selected).classList.add("img-avatar-selected");
 }
