@@ -9,9 +9,18 @@ function displayItems(disabled) {
     document.getElementById("id_phone").disabled = disabled;
 
     document.getElementById("id_password").style.display = disabled ? "none" : "block";
+    document.getElementById("id_engage_collapse_avatar").style.display = disabled ? "none" : "block";
+    document.getElementById("id_collapse_avatar").classList.toggle("d-none", disabled)
     document.getElementById("id_btn_action").classList.toggle("d-none", disabled);
 }
 
 function editProfile() { displayItems(false); }
 
 function cancelEdit() { displayItems(true); }
+
+function changeAvatar(avatar) {
+    var oldAvatar = document.getElementsByClassName("img-avatar-selected");
+    if (oldAvatar.length == 1) oldAvatar[0].classList.remove("img-avatar-selected");
+    document.getElementById("id_avatar").value = avatar;
+    document.getElementById(avatar).classList.add("img-avatar-selected");
+}
