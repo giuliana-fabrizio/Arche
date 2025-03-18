@@ -80,8 +80,9 @@
                 </a>
 
                 <div id="id_collapse_avatar" class="collapse mb-3" style="max-width: 245px;">
-                    <div class="d-flex flex-wrap justify-content-start">
+                    <div class="align-items-center d-flex flex-wrap justify-content-start">
                         <input id="id_avatar" type="hidden" name="avatar" value="">
+                        <!-- TODO debut boucle -->
                         <img
                             id="id_avatar_astronaut"
                             src="./avatar/astronaut.png"
@@ -95,6 +96,11 @@
                         <img id="id_avatar_ghosts" src="./avatar/ghosts.png" class="img-avatar m-1" onclick="changeAvatar('ghosts', 'id_avatar_ghosts')">
                         <img id="id_avatar_ninja" src="./avatar/ninja.png" class="img-avatar m-1" onclick="changeAvatar('ninja', 'id_avatar_ninja')">
                         <img id="id_avatar_rabbit" src="./avatar/rabbit.png" class="img-avatar m-1" onclick="changeAvatar('rabbit', 'id_avatar_rabbit')">
+                        <!-- fin boucle -->
+                        <i
+                            class="bi bi-x-circle d-flex icon-remove-avatar m-1"
+                            onclick="resetAvatar()">
+                        </i>
                     </div>
                 </div>
 

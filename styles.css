@@ -13,7 +13,12 @@ input:disabled {
     width: 45px;
 }
 
-.img-avatar:hover {
+.icon-remove-avatar {
+    font-size: 45px;
+    height: 45px;
+}
+
+.img-avatar:hover, .icon-remove-avatar:hover {
     cursor: pointer;
 }
 
