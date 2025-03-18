@@ -19,6 +19,11 @@ function editProfile() { displayItems(false); }
 function cancelEdit() {
     displayItems(true);
     resetAvatar();
+    var collapse = document.getElementById("id_engage_collapse_avatar")
+    if (!collapse.classList.contains("collapsed")) {
+        collapse.classList.add("collapsed")
+        document.getElementById("id_collapse_avatar").classList.remove("show");
+    }
 }
 
 
