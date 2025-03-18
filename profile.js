@@ -23,6 +23,7 @@ function cancelEdit() {
 
 
 function resetAvatar() {
+    document.getElementById("id_avatar").value = null;
     var oldAvatar = document.getElementsByClassName("img-avatar-selected");
     if (oldAvatar.length == 1) oldAvatar[0].classList.remove("img-avatar-selected");
 }
