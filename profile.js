@@ -19,7 +19,8 @@ function editProfile() { displayItems(false); }
 function cancelEdit() {
     displayItems(true);
     resetAvatar();
-    var collapse = document.getElementById("id_engage_collapse_avatar")
+
+    const collapse = document.getElementById("id_engage_collapse_avatar")
     if (!collapse.classList.contains("collapsed")) {
         collapse.classList.add("collapsed")
         document.getElementById("id_collapse_avatar").classList.remove("show");
@@ -29,7 +30,7 @@ function cancelEdit() {
 
 function resetAvatar() {
     document.getElementById("id_avatar").value = null;
-    var oldAvatar = document.getElementsByClassName("img-avatar-selected");
+    const oldAvatar = document.getElementsByClassName("img-avatar-selected");
     if (oldAvatar.length == 1) oldAvatar[0].classList.remove("img-avatar-selected");
 }
 
@@ -40,6 +41,6 @@ function changeAvatar(avatar, id_selected) {
 }
 
 function collapseAvatar() {
-    var collapse = document.getElementById("id_engage_collapse_avatar")
+    const collapse = document.getElementById("id_engage_collapse_avatar")
     if (collapse.classList.contains("collapsed")) resetAvatar()
 }
