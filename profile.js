@@ -32,3 +32,8 @@ function changeAvatar(avatar, id_selected) {
     document.getElementById("id_avatar").value = avatar;
     document.getElementById(id_selected).classList.add("img-avatar-selected");
 }
+
+function collapseAvatar() {
+    var collapse = document.getElementById("id_engage_collapse_avatar")
+    if (collapse.classList.contains("collapsed")) resetAvatar()
+}
