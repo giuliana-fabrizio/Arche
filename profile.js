@@ -18,9 +18,9 @@ function editProfile() { displayItems(false); }
 
 function cancelEdit() { displayItems(true); }
 
-function changeAvatar(avatar) {
+function changeAvatar(avatar, id_selected) {
     var oldAvatar = document.getElementsByClassName("img-avatar-selected");
     if (oldAvatar.length == 1) oldAvatar[0].classList.remove("img-avatar-selected");
     document.getElementById("id_avatar").value = avatar;
-    document.getElementById(avatar).classList.add("img-avatar-selected");
+    document.getElementById(id_selected).classList.add("img-avatar-selected");
 }
