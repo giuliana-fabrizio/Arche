@@ -9,3 +9,8 @@ body {
     background-color: #ffffff00;
     width: min-content !important;
 }
+
+.text-bg-blue {
+    color: #fff !important;
+    background-color: #9ec5fe !important;
+}
