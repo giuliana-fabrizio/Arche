@@ -13,6 +13,19 @@
     width: 80px;
 }
 
+@media screen and (max-width: 991.9px) {
+    .img-navbar {
+        position: absolute;
+        top: 1rem;
+    }
+
+    .navbar-collapse {
+        padding: 10px;
+        position: relative;
+        top: 1rem;
+    }
+}
+
 .nav-link {
     color: white !important;
 }
