@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="../public/styles.css">
+        <script type="text/javascript" src="./catalogue_page.js"></script>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+        <title>NavBar | UTBM</title>
+    </head>
+    <body>
+        <nav class="fixed-top navbar navbar-expand-lg p-2 bg-navbar">
+            <div class="container-fluid">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <a class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <img src="../public/assets/logo-utbm.png" class="img-navbar">
+                        </a>
+
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="align-items-center navbar-nav mr-auto">
+                                <li class="d-none d-md-block nav-item">
+                                    <a class="nav-link" href="{{ path('app_index') }}">
+                                        <img src="../public/assets/logo-utbm.png" class="img-navbar">
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_index') }}">Catalogue</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_events') }}">Créer user</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_create_event') }}">Créer UE</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_user_events') }}">Choisir UE</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_user_events') }}">Contenu UE</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_user_events') }}">Créer post</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="d-flex fixed-items-navbar">
+                        <a class="nav-link" href="{{ path('app_user_profile') }}">Profil</a>
+                        <!-- TODO ou -->
+                        <a class="ms-3 nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </body>
+</html>
