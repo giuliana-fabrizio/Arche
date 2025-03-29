@@ -1,0 +1,29 @@
+input:disabled {
+    background-color: #ffffff00 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.profile-name {
+    font-size: large !important;
+    font-weight: 600 !important;
+}
+
+.img-avatar {
+    width: 45px;
+}
+
+.icon-remove-avatar {
+    font-size: 45px;
+    height: 45px;
+}
+
+.img-avatar:hover, .icon-remove-avatar:hover {
+    cursor: pointer;
+}
+
+.img-avatar-selected {
+    border: 3px solid;
+    border-color: #00aaff;
+    border-radius: 50%;
+}
