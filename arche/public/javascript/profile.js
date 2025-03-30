@@ -11,7 +11,7 @@ function displayItems(disabled) {
     document.getElementById("id_btn_edit").style.display = disabled ? "block" : "none";
 
     document.getElementById("id_mail").style.display = disabled ? "block" : "none";
-    document.getElementById("id_adress").disabled = disabled;
+    document.getElementById("id_address").disabled = disabled;
 
     document.getElementById("id_phone").disabled = disabled;
 
@@ -23,7 +23,7 @@ function displayItems(disabled) {
 
 function editProfile() { displayItems(false); }
 
-function cancelEdit() {
+function resetDisplay() {
     displayItems(true);
     resetAvatar();
 

@@ -6,11 +6,10 @@
     <input
         id="id_name"
         type="text"
-        name="name"
-        value="Giuliana GODAIL-FABRIZIO"
+        value="{{ user.name }}"
         class="form-control profile-name"
         disabled> <!-- TODO changer la value-->
-    <button id="id_btn_edit" onclick="editProfile()" class="btn">
+    <button id="id_btn_edit" type="button" onclick="editProfile()" class="btn">
         <i class="bi bi-pencil-square"></i>
     </button>
 </div>
@@ -21,14 +20,14 @@
     target="_blank"
     class="mb-2"
 >
-    giuliana.godail-fabrizio@utbm.fr <!-- TODO changer la value-->
+    {{ user.mail }} <!-- TODO changer la value-->
 </a>
 
 <input
-    id="id_adress"
+    id="id_address"
     type="text"
     name="adress"
-    value="2 rue Sainte-Victoire, 13006 Marseille"
+    value="{{ user.address }}"
     class="form-control mb-2"
     disabled> <!-- TODO changer la value-->
 
@@ -36,7 +35,7 @@
     id="id_phone"
     type="text"
     name="phone"
-    value="0744564213"
+    value="{{ user.phone }}"
     class="form-control mb-2"
     disabled> <!-- TODO changer la value-->
 
@@ -44,7 +43,7 @@
     id="id_password"
     type="password"
     name="password"
-    value="123456789"
+    value="{{ user.password }}"
     class="form-control mb-3"
     style="display: none;"> <!-- TODO changer la value-->
 
@@ -87,6 +86,6 @@
 </div>
 
 <div id="id_btn_action" class="d-flex d-none justify-content-end">
-    <button onclick="cancelEdit()" class="btn btn-danger me-2">Annuler</button>
-    <button class="btn btn-success">Valider</button>
+    <button type="button" onclick="cancel()" class="btn btn-danger me-2">Annuler</button>
+    <button type="button" onclick="update()" class="btn btn-success">Valider</button>
 </div>
