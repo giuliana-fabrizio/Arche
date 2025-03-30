@@ -36,7 +36,21 @@
             </div>
 
             <div class="d-flex fixed-items-navbar">
-                <a class="nav-link nav-link-navbar" href="{{ path('app_user_profile') }}">Profil</a>
+                <div class="container dropdown">
+                        <a
+                            class="nav-link nav-link-navbar dropdown-toggle"
+                            href="#"
+                            role="button"
+                            id="dropdownProfile"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Profil
+                        </a>
+
+                    <div class="dropdown-menu dropdown-menu-end p-3" style="width: 300px;">
+                        {% include('/profile/profile.html.twig') %}
+                    </div>
+                </div>
                 <!-- TODO ou -->
                 {# <a class="ms-3 nav-link nav-link-navbar" href="{{ path('app_login') }}">Connexion</a> #}
             </div>

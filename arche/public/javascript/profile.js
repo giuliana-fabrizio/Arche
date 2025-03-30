@@ -1,3 +1,10 @@
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".dropdown-menu").addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+});
+
+
 function displayItems(disabled) {
     document.getElementById("id_name").disabled = disabled;
     document.getElementById("id_name").classList.toggle("mb-2", !disabled);
