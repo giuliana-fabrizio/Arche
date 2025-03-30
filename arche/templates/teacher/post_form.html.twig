@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes cours | UTBM{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('javascript/post_form.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <div class="card p-3 mx-auto">
+        <div class="mb-4">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a id="id_text_tabs" class="nav-link active" onclick="changeTabs('text')">
+                        Message textuel
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a id="id_file_tabs" class="nav-link" onclick="changeTabs('file')">Fichier</a>
+                </li>
+            </ul>
+        </div>
+
+        <form id="id_form_text">
+            <fieldset>
+                <div class="mb-3">
+                    <label for="id_title" class="form-label">Titre du message</label>
+                    <input id="id_title" type="text" name="title" value="title" class="form-control" required> <!-- TODO changer la value-->
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_type" class="form-label">Type de message</label>
+                    <select id="id_type" name="type" class="form-select" required>
+                        <option selected disabled>Sélectionner un type</option>
+                        <!-- TODO boucle -->
+                        <option value="1">Important</option> <!-- TODO changer la value -->
+                        <option value="2">Informatif</option>
+                        <!-- TODO fin boucle -->
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="id_content" class="form-label">Détails</label>
+                    <textarea id="id_content" name="content" class="form-control" required><!-- TODO mettre une value--></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Valider</button>
+            </fieldset>
+        </form>
+
+        <form id="id_form_file" style="display: none;">
+            <fieldset>
+                <div class="mb-3">
+                    <label for="id_title" class="form-label">Titre du fichier</label>
+                    <input id="id_title" type="text" name="title" value="title" class="form-control" required> <!-- TODO changer la value-->
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_file" class="form-label">Fichier</label>
+                    <input id="id_file" type="file" name="file" value="file" class="form-control" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="id_content" class="form-label">Texte descriptif</label>
+                    <textarea id="id_content" name="content" class="form-control"><!-- TODO mettre une value--></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Valider</button>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

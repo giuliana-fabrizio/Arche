@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes cours | UTBM{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('javascript/home.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+        <nav class="navbar fixed-top">
+            <div>
+                <button
+                    data-bs-target="#offcanvasActivity"
+                    data-bs-toggle="offcanvas"
+                    type="button"
+                    class="navbar-toggler btn_activity"
+                >
+                    <i class="bi bi-chevron-compact-left fs-3"></i>
+                </button>
+
+                <div id="offcanvasActivity" class="offcanvas offcanvas-end">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title">Actualités</h5>
+                        <button
+                            aria-label="Close"
+                            data-bs-dismiss="offcanvas"
+                            type="button"
+                            class="btn-close"
+                        >
+                        </button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <!-- TODO boucle -->
+                        <div class="card mb-3 p-3">
+                            <p class="fw-bold">WE.4A Technologies et programmation WEB</p>
+                            <p class="m-0">M. LITZLER a posté un nouveau fichier, « Sujet Projet »</p>
+                        </div>
+                        <div class="card mb-3 p-3">
+                            <p class="fw-bold">WE.4A Technologies et programmation WEB</p>
+                            <p class="m-0">M. LOMBARD a posté un message « Changement salle »</p>
+                        </div>
+                        <div class="card mb-3 p-3">
+                            <p class="fw-bold">LE.01 Anglais</p>
+                            <p class="m-0">M. LITZLER a posté un message « Sources TP1 correction »</p>
+                        </div>
+                        <!-- TODO fin boucle-->
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="card p-3 mt-5 w-100">
+            <h3 class="fw-bold mb-4">Mes cours</h3>
+            <div class="card-body">
+                <p class="fw-bold">Vue d'ensemble des cours</p>
+                <hr>
+                <div class="gx-3 gy-3 row">
+                    <!-- TODO boucle -->
+                    <div class="col-12 col-sm-6 col-xl-4">
+                        <div class="card w-100" style="width: 18rem;">
+                            <img src="{{ asset('assets/images/image.jpg') }}" class="card-img-top" alt="Image WE4A">
+                            <div class="card-body">
+                                <a id="id_ue_name" href="" class="card-title">
+                                    WE4A Technologies et programmation WEB
+                                </a>
+                                <p class="card-text mt-1">FISE Informatique</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-4">
+                        <div class="card w-100" style="width: 18rem;">
+                            <img src="{{ asset('assets/images/image.jpg') }}" class="card-img-top" alt="Image WE4A">
+                            <div class="card-body">
+                                <a id="id_ue_name" href="" class="card-title">
+                                    WE4A Technologies et programmation WEB
+                                </a>
+                                <p class="card-text mt-1">FISE Informatique</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-4">
+                        <div class="card w-100" style="width: 18rem;">
+                            <img src="{{ asset('assets/images/image.jpg') }}" class="card-img-top" alt="Image WE4A">
+                            <div class="card-body">
+                                <a id="id_ue_name" href="" class="card-title">
+                                    WE4A Technologies et programmation WEB
+                                </a>
+                                <p class="card-text mt-1">FISE Informatique</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-4">
+                        <div class="card w-100" style="width: 18rem;">
+                            <img src="{{ asset('assets/images/image.jpg') }}" class="card-img-top" alt="Image WE4A">
+                            <div class="card-body">
+                                <a id="id_ue_name" href="" class="card-title">
+                                    WE4A Technologies et programmation WEB
+                                </a>
+                                <p class="card-text mt-1">FISE Informatique</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-4">
+                        <div class="card w-100" style="width: 18rem;">
+                            <img src="{{ asset('assets/images/image.jpg') }}" class="card-img-top" alt="Image WE4A">
+                            <div class="card-body">
+                                <a id="id_ue_name" href="" class="card-title">
+                                    WE4A Technologies et programmation WEB
+                                </a>
+                                <p class="card-text mt-1">FISE Informatique</p>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- TODO fin boucle -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button
+        id="id_btn_scroll_top"
+        onclick="scrollToTop()"
+        class="scroll-top-btn"
+        style="display: hidden"
+    >
+        <i class="bi bi-chevron-compact-up fs-4"></i>
+    </button>
+{% endblock %}

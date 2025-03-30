@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil | UTBM{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('javascript/profile.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-end p-3">
+        <div class="card p-3">
+            <div class="d-flex justify-content-center">
+                <i class="bi bi-person-circle fs-1 mb-3 person-icon"></i>
+            </div>
+
+            <div class="align-items-center d-flex">
+                <input
+                    id="id_name"
+                    type="text"
+                    name="name"
+                    value="Giuliana GODAIL-FABRIZIO"
+                    class="form-control profile-name"
+                    disabled> <!-- TODO changer la value-->
+                <button id="id_btn_edit" onclick="editProfile()" class="btn">
+                    <i class="bi bi-pencil-square"></i>
+                </button>
+            </div>
+
+            <a
+                id="id_mail"
+                href="mailto:godailfabriziogiuliana@gmail.com" <!-- TODO changer la value
+                target="_blank"
+                class="mb-2"
+            >
+                giuliana.godail-fabrizio@utbm.fr <!-- TODO changer la value-->
+            </a>
+
+            <input
+                id="id_adress"
+                type="text"
+                name="adress"
+                value="2 rue Sainte-Victoire, 13006 Marseille"
+                class="form-control mb-2"
+                disabled> <!-- TODO changer la value-->
+
+            <input
+                id="id_phone"
+                type="text"
+                name="phone"
+                value="0744564213"
+                class="form-control mb-2"
+                disabled> <!-- TODO changer la value-->
+
+            <input
+                id="id_password"
+                type="password"
+                name="password"
+                value="123456789"
+                class="form-control mb-3"
+                style="display: none;"> <!-- TODO changer la value-->
+
+            <a
+                id="id_engage_collapse_avatar"
+                aria-expanded="false"
+                data-bs-toggle="collapse"
+                href="#id_collapse_avatar"
+                role="button"
+                onclick="collapseAvatar()"
+                class="btn mb-3"
+                style="display: none;"
+            >
+                Changer votre avatar
+            </a>
+
+            <div id="id_collapse_avatar" class="collapse mb-3" style="max-width: 245px;">
+                <div class="align-items-center d-flex flex-wrap justify-content-start">
+                    <input id="id_avatar" type="hidden" name="avatar" value="">
+                    <!-- TODO debut boucle -->
+                    <img
+                        id="id_avatar_astronaut"
+                        src="{{ asset('assets/images/avatar/astronaut.png') }}"
+                        class="img-avatar m-1"
+                        onclick="changeAvatar('astronaut', 'id_avatar_astronaut')">
+                    <img id="id_avatar_bee" src="{{ asset('assets/images/avatar/bee.png') }}" class="img-avatar m-1" onclick="changeAvatar('bee', 'id_avatar_bee')">
+                    <img id="id_avatar_cat" src="{{ asset('assets/images/avatar/cat.png') }}" class="img-avatar m-1" onclick="changeAvatar('cat', 'id_avatar_cat')">
+                    <img id="id_avatar_cow" src="{{ asset('assets/images/avatar/cow.png') }}" class="img-avatar m-1" onclick="changeAvatar('cow', 'id_avatar_cow')">
+                    <img id="id_avatar_dinosaur" src="{{ asset('assets/images/avatar/dinosaur.png') }}" class="img-avatar m-1" onclick="changeAvatar('dinosaur', 'id_avatar_dinosaur')">
+                    <img id="id_avatar_elephant" src="{{ asset('assets/images/avatar/elephant.png') }}" class="img-avatar m-1" onclick="changeAvatar('elephant', 'id_avatar_elephant')">
+                    <img id="id_avatar_ghosts" src="{{ asset('assets/images/avatar/ghosts.png') }}" class="img-avatar m-1" onclick="changeAvatar('ghosts', 'id_avatar_ghosts')">
+                    <img id="id_avatar_ninja" src="{{ asset('assets/images/avatar/ninja.png') }}" class="img-avatar m-1" onclick="changeAvatar('ninja', 'id_avatar_ninja')">
+                    <img id="id_avatar_rabbit" src="{{ asset('assets/images/avatar/rabbit.png') }}" class="img-avatar m-1" onclick="changeAvatar('rabbit', 'id_avatar_rabbit')">
+                    <!-- fin boucle -->
+                    <i
+                        class="bi bi-x-circle d-flex icon-remove-avatar m-1"
+                        onclick="resetAvatar()">
+                    </i>
+                </div>
+            </div>
+
+            <div id="id_btn_action" class="d-flex d-none justify-content-end">
+                <button onclick="cancelEdit()" class="btn btn-danger me-2">Annuler</button>
+                <button class="btn btn-success">Valider</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
