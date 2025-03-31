@@ -1,5 +1,5 @@
 controllers:
-    resource: ../src/Controller/
+    resource: ../src/Controller/ # TODO ici sont définies les routes
     type: annotation
 
 kernel:

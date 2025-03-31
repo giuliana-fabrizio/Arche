@@ -3,7 +3,8 @@
 {% block title %}Catalogue UE et utilisateurs | UTBM{% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('javascript/catalogue_page.js') }}" defer></script>
+    <script src="{{ asset('ajax/catalogue.js') }}" defer></script>
+    <script src="{{ asset('javascript/catalogue.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
@@ -32,7 +33,7 @@
 
         <div id="id_ue">
             <!-- TODO boucle -->
-            <div class="align-items-center justify-content-between mb-3 row">
+            <div id="id_ue_1" class="align-items-center justify-content-between mb-3 row">
                 <p class="col-12 col-md-6 m-0"><strong>WE4A Technologies et programmation WEB</strong></p>
                 <p class="col-12 col-md-4 m-0">Enseignant responsable d'UE</p>
                 <span id="id_ue" value=1 hidden></span>
@@ -40,7 +41,7 @@
                     <button class="btn btn-success btn-sm me-2">
                         <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button class="btn btn-danger btn-sm">
+                    <button onclick="deleteUe('id_ue_1')" class="btn btn-danger btn-sm">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>
@@ -64,7 +65,7 @@
 
         <div id="id_user" style="display: none">
             <!-- TODO boucle -->
-            <div class="align-items-center justify-content-between mb-3 row">
+            <div id="id_user_1" class="align-items-center justify-content-between mb-3 row">
                 <p class="d-flex col-12 col-md-2 m-0">Giuliana GODAIL-FABRIZIO</p>
                 <p class="d-flex col-12 col-md-3 m-0">giuliana.godail-fabrizio@utbm.fr</p>
                 <p class="col-12 col-md-2 m-0">Étudiante</p>
@@ -79,7 +80,7 @@
                     <button class="btn btn-success btn-sm me-2">
                         <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button class="btn btn-danger btn-sm">
+                    <button onclick="deleteUser('id_user_1')" class="btn btn-danger btn-sm">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>
