@@ -6,7 +6,6 @@
     <input
         id="id_name"
         type="text"
-        value="{{ user.name }}"
         class="form-control profile-name"
         disabled> <!-- TODO changer la value-->
     <button id="id_btn_edit" type="button" onclick="editProfile()" class="btn">
@@ -20,14 +19,13 @@
     target="_blank"
     class="mb-2"
 >
-    {{ user.mail }} <!-- TODO changer la value-->
+    <!-- TODO changer la value-->
 </a>
 
 <input
     id="id_address"
     type="text"
     name="adress"
-    value="{{ user.address }}"
     class="form-control mb-2"
     disabled> <!-- TODO changer la value-->
 
@@ -35,7 +33,6 @@
     id="id_phone"
     type="text"
     name="phone"
-    value="{{ user.phone }}"
     class="form-control mb-2"
     disabled> <!-- TODO changer la value-->
 
@@ -43,7 +40,6 @@
     id="id_password"
     type="password"
     name="password"
-    value="{{ user.password }}"
     class="form-control mb-3"
     style="display: none;"> <!-- TODO changer la value-->
 
@@ -86,6 +82,6 @@
 </div>
 
 <div id="id_btn_action" class="d-flex d-none justify-content-end">
-    <button type="button" onclick="cancel()" class="btn btn-danger me-2">Annuler</button>
+    <button type="button" onclick="initialView()" class="btn btn-danger me-2">Annuler</button>
     <button type="button" onclick="update()" class="btn btn-success">Valider</button>
 </div>

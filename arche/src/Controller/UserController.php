@@ -25,7 +25,7 @@ class UserController extends AbstractController {
                 'phone' => '0744564213',
                 'password' => '123456789'
             ];
-    
+
             return new JsonResponse($user);
         }
         return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
@@ -34,11 +34,22 @@ class UserController extends AbstractController {
     #[Route('/ajax/post/profile', name: 'app_ajax_post_profile', methods: ['POST'])]
     public function manageProfile(Request $request): JsonResponse {
         if($request->isXmlHttpRequest()) {
+            $user = [
+                'name' => 'Giuliana FABRIZIO',
+                'address' => '2 rue Sainte-Victoire, 13006 Marseille',
+                'mail' => 'giuliana.godail-fabrizio@utbm.fr',
+                'phone' => '0744564213',
+                'password' => '123456789'
+            ];
+
             $data = json_decode($request->getContent(), true);
 
-            // TODO update en db
+            $user['name'] = $data['name'];
+            $user['address'] = $data['address'];
+            $user['phone'] = $data['phone'];
+            $user['password'] = $data['password'];
 
-            return new JsonResponse($data);
+            return new JsonResponse($user);
         }
         return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
     }

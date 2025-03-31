@@ -21,7 +21,7 @@
         <script src="{{ asset('ajax/profile.js') }}"></script> {# use by profile in navbar #}
     </head>
     <body>
-        {% include 'navbar.html.twig'  with {'user': user} %}
+        {% include 'navbar.html.twig' %}
         <div class="container mt-5">
             {% block body %}{% endblock %}
         </div>

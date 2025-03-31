@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function () {
+    initialView();
+});
+
 function getFields() {
     return {
         full_name: document.getElementById('id_name'),
@@ -10,8 +14,11 @@ function getFields() {
 
 
 function updateFields(response, full_name, address, phone, password, avatar) {
+    mail = document.getElementById('id_mail');
+
     full_name.value = response['name'];
     address.value = response['address'];
+    mail.innerHTML = response['mail'];
     phone.value = response['phone'];
     password.value = response['password']
     avatar.value = response['avatar'];
@@ -40,19 +47,18 @@ async function update() {
         });
 
         let response = await request.text();
-
         response = JSON.parse(response);
 
-        updateFields(response, full_name, address, phone, password, avatar)
+        updateFields(response, full_name, address, phone, password, avatar);
 
-        resetDisplay()
+        resetDisplay();
     } catch (error) {
         console.error("Erreur lors de la récupération des données:", error);
     }
 }
 
 
-async function cancel() {
+async function initialView() {
     const { full_name, address, phone, password, avatar } = getFields();
 
     try {
@@ -65,12 +71,11 @@ async function cancel() {
         });
 
         let response = await request.text();
-
         response = JSON.parse(response);
 
-        updateFields(response, full_name, address, phone, password, avatar)
+        updateFields(response, full_name, address, phone, password, avatar);
 
-        resetDisplay()
+        cancelEdit();
     } catch (error) {
         console.error("Erreur lors de la récupération des données:", error);
     }

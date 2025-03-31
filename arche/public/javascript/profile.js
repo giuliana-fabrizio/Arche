@@ -23,7 +23,7 @@ function displayItems(disabled) {
 
 function editProfile() { displayItems(false); }
 
-function resetDisplay() {
+function cancelEdit() {
     displayItems(true);
     resetAvatar();
 
