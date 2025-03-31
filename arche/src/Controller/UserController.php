@@ -23,7 +23,8 @@ class UserController extends AbstractController {
                 'address' => '2 rue Sainte-Victoire, 13006 Marseille',
                 'mail' => 'giuliana.godail-fabrizio@utbm.fr',
                 'phone' => '0744564213',
-                'password' => '123456789'
+                'password' => '123456789',
+                'avatar' => 'cat'
             ];
 
             return new JsonResponse($user);
@@ -39,7 +40,8 @@ class UserController extends AbstractController {
                 'address' => '2 rue Sainte-Victoire, 13006 Marseille',
                 'mail' => 'giuliana.godail-fabrizio@utbm.fr',
                 'phone' => '0744564213',
-                'password' => '123456789'
+                'password' => '123456789',
+                'avatar' => 'cat'
             ];
 
             $data = json_decode($request->getContent(), true);
@@ -48,6 +50,7 @@ class UserController extends AbstractController {
             $user['address'] = $data['address'];
             $user['phone'] = $data['phone'];
             $user['password'] = $data['password'];
+            $user['avatar'] = $data['avatar'];
 
             return new JsonResponse($user);
         }

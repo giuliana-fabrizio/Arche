@@ -42,12 +42,13 @@ function resetAvatar() {
 }
 
 function changeAvatar(avatar, id_selected) {
-    resetAvatar()
+    resetAvatar();
     document.getElementById("id_avatar").value = avatar;
     document.getElementById(id_selected).classList.add("img-avatar-selected");
+    console.log(document.getElementById(id_selected).classList, id_selected)
 }
 
 function collapseAvatar() {
-    const collapse = document.getElementById("id_engage_collapse_avatar")
-    if (collapse.classList.contains("collapsed")) resetAvatar()
+    const collapse = document.getElementById("id_engage_collapse_avatar");
+    if (collapse.classList.contains("collapsed")) resetAvatar(); // TODO corriger si le mec sélectionne juste pas d'icon
 }
