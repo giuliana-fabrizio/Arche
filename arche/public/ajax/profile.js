@@ -26,6 +26,7 @@ function updateFields(response, full_name, address, phone, password, avatar, ava
 
     if (response['avatar']) {
         avatar_default.style.display = "none";
+        avatar.style.display = "block";
         avatar.src = `/assets/images/avatar/${response['avatar']}.png`;
         avatar_selected.value = response['avatar'];
         changeAvatar(response['avatar'], `id_avatar_${response['avatar']}`);
