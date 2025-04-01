@@ -58,6 +58,10 @@ body {
 
 /* =========================================================================== profile */
 
+.dropdown-menu {
+    z-index: 9999 !important;
+}
+
 input:disabled {
     background-color: #ffffff00 !important;
     border: none !important;
@@ -106,7 +110,13 @@ input:disabled {
     height: 60px;
     position: fixed;
     right: 10px;
-    top: 10px;
+    top: 123px;
+}
+
+@media screen and (max-width: 767.9px) {
+    .btn_activity {
+        top: 50%;
+    }
 }
 
 .offcanvas-header {
@@ -127,6 +137,7 @@ input:disabled {
 
 #id_ue_name {
     color: #007bc0;
+    text-decoration: none;
 }
 
 #id_ue_name:hover {
