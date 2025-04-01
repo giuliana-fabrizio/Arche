@@ -15,6 +15,16 @@ class UserController extends AbstractController {
         return $this->render("/admin/user_form.html.twig");
     }
 
+
+    #[Route('/ajax/delete/user/{id}', name: 'app_ajax_delete_user')]
+    public function deleteUe(Request $request) : Response {
+        if($request->isXmlHttpRequest()) {
+            return new JsonResponse(200);
+        }
+        return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+    }
+
+
     #[Route('/ajax/profile', name: 'app_ajax_profile')]
     public function getProfile(Request $request) : Response {
         if($request->isXmlHttpRequest()) {
@@ -31,6 +41,7 @@ class UserController extends AbstractController {
         }
         return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
     }
+
 
     #[Route('/ajax/post/profile', name: 'app_ajax_post_profile', methods: ['POST'])]
     public function manageProfile(Request $request): JsonResponse {

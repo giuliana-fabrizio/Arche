@@ -45,7 +45,6 @@ function changeAvatar(avatar, id_selected) {
     resetAvatar();
     document.getElementById("id_avatar").value = avatar;
     document.getElementById(id_selected).classList.add("img-avatar-selected");
-    console.log(document.getElementById(id_selected).classList, id_selected)
 }
 
 function collapseAvatar() {
