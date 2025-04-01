@@ -12,7 +12,9 @@ async function deleteUe(id) {
         let response = await request.text();
         response = JSON.parse(response);
 
-        document.getElementById(id).remove()
+        if (response == 200) {
+            document.getElementById(id).remove()
+        }
     } catch (error) {
         console.error("Erreur lors de la récupération des données:", error);
     }
@@ -33,7 +35,9 @@ async function deleteUser(id) {
         let response = await request.text();
         response = JSON.parse(response);
 
-        document.getElementById(id).remove()
+        if (response == 200) {
+            document.getElementById(id).remove()
+        }
     } catch (error) {
         console.error("Erreur lors de la récupération des données:", error);
     }

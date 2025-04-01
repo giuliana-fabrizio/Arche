@@ -19,7 +19,7 @@ class UeController extends AbstractController {
     #[Route('/ajax/delete/ue/{id}', name: 'app_ajax_delete_ue')]
     public function deleteUe(Request $request) : Response {
         if($request->isXmlHttpRequest()) {
-            return new JsonResponse("Success");
+            return new JsonResponse(200);
         }
         return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
     }
