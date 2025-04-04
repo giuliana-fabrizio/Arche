@@ -151,6 +151,30 @@ input:disabled {
     border-bottom-right-radius: 0;
 }
 
+.tooltip-home {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-home .tooltiptext-home {
+    background-color: #484848;
+    border-radius: 5px;
+    color: #fff;
+    font-size: x-small;
+    padding: 5px 10px;
+    position: absolute;
+    text-align: center;
+    top: 30px;
+    right: -40px;
+    visibility: hidden;
+    width: max-content;
+    z-index: 1;
+}
+
+.tooltip-home:hover .tooltiptext-home {
+    visibility: visible;
+}
+
 #id_ue_name {
     color: #007bc0;
     text-decoration: none;
