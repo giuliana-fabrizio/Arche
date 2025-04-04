@@ -13,10 +13,12 @@ class MainController extends AbstractController {
         return $this->render("base.html.twig");
     }
 
+
     #[Route('/create_post', name: 'app_post_create')]
     public function createUe() : Response {
         return $this->render("/teacher/post_form.html.twig");
     }
+
 
     #[Route('/manage_resource', name: 'app_catalogue')]
     public function manageResource() : Response {
