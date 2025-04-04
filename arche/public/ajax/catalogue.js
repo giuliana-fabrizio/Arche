@@ -23,7 +23,7 @@ async function deleteUe(id) {
 
 
 async function deleteUser(id) {
-    if (window.confirm("Souhaitez-vous vraiment supprimer cette ue ?")) {
+    if (window.confirm("Souhaitez-vous vraiment supprimer cet utilisateur ?")) {
         try {
             const request = await fetch(`/ajax/delete/user/${id}`, {
                 method: 'DELETE',
