@@ -58,6 +58,22 @@ body {
 
 /* =========================================================================== profile */
 
+.dimens-profile {
+    width: 300px;
+}
+
+@media screen and (max-width: 360px) {
+    .dimens-profile {
+        width: 260px;
+    }
+}
+
+@media screen and (min-width: 460px) {
+    .dimens-profile {
+        width: 340px;
+    }
+}
+
 .dropdown-menu {
     z-index: 9999 !important;
 }
