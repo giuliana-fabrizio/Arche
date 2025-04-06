@@ -18,18 +18,21 @@ async function addUser(user) {
             document.getElementById("id_users").innerHTML +=
                 `
                 <div id="id_user_3" class="align-items-center justify-content-between mb-3 row">
-                    <p class="d-flex col-12 col-md-2 m-0">${user.firstname} ${user.name}</p>
-                    <p class="d-flex col-12 col-md-3 m-0">${user.mail}</p>
-                    <p class="col-12 col-md-2 m-0">${user.role}</p>
+                    <p id="id_user_name_3" class="d-flex col-12 col-md-2 m-0">${user.firstname} ${user.name}</p>
+                    <p id="id_user_mail_3" class="d-flex col-12 col-md-3 m-0">${user.mail}</p>
+                    <p id="id_user_role_3" class="col-12 col-md-2 m-0">${user.role}</p>
                     <div class="align-items-center col-12 col-md-3 d-flex flex-wrap justify-content-start">
                         <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                         <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                         <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                         <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                     </div>
-
                     <div class="col-12 col-md-2 d-flex justify-content-center">
-                        <button class="btn btn-success btn-sm me-2">
+                        <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#id_add_modal"
+                            onclick="wantEditUser(3)"
+                            class="btn btn-success btn-sm me-2">
                             <i class="bi bi-pencil-square"></i>
                         </button>
                         <button onclick="deleteUser('id_user_3')" class="btn btn-danger btn-sm">
