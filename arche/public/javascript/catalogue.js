@@ -1,3 +1,21 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const modalElement = document.getElementById('id_add_modal');
+
+    modalElement.addEventListener('hidden.bs.modal', function () {
+        const id_user = document.getElementById("id_user");
+        id_user.value = "";
+
+        const form = document.getElementById('id_user_form');
+        new FormData(form).forEach((_, key) => {
+            const input = document.getElementById(`id_${key}_form`);
+            if (input) {
+                input.value = "";
+            }
+        });
+    });
+});
+
+
 function changeTabs(dest) {
     if (dest == "ue") {
         document.getElementById("id_title_modal").innerHTML = "Ajouter une UE";
