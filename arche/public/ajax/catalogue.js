@@ -4,8 +4,8 @@ async function deleteUe(id) {
             const request = await fetch(`/ajax/delete/ue/${id}`, {
                 method: 'DELETE',
                 headers: {
-                    "Content-Type": "application/json", // TODO cette ligne indique dans l'entête de la requête qu'il y aura du contenu JSON
-                    "X-Requested-with": "XMLHttpRequest" // TODO cette ligne indique dans l'entête de la requête qu'il s'agit d'une requête ajax
+                    "Content-Type": "application/json",
+                    "X-Requested-with": "XMLHttpRequest"
                 }
             });
 
@@ -28,8 +28,8 @@ async function deleteUser(id) {
             const request = await fetch(`/ajax/delete/user/${id}`, {
                 method: 'DELETE',
                 headers: {
-                    "Content-Type": "application/json", // TODO cette ligne indique dans l'entête de la requête qu'il y aura du contenu JSON
-                    "X-Requested-with": "XMLHttpRequest" // TODO cette ligne indique dans l'entête de la requête qu'il s'agit d'une requête ajax
+                    "Content-Type": "application/json",
+                    "X-Requested-with": "XMLHttpRequest"
                 }
             });
 

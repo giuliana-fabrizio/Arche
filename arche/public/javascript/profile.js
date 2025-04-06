@@ -53,5 +53,5 @@ function changeAvatar(avatar, id_selected) {
 
 function collapseAvatar() {
     const collapse = document.getElementById("id_engage_collapse_avatar");
-    if (collapse.classList.contains("collapsed")) resetAvatar(); // TODO corriger si le mec sélectionne juste pas d'icon
+    if (collapse.classList.contains("collapsed")) resetAvatar();
 }

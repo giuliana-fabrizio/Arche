@@ -31,7 +31,7 @@ class UeController extends AbstractController {
     }
 
 
-    #[Route('/', name: 'app_ue_content')] // TODO intégrer le code d'Amir
+    #[Route('/', name: 'app_ue_content')]
     public function getUe() : Response {
         return $this->render("/profile/catalogue.html.twig");
     }
