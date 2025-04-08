@@ -1,5 +1,4 @@
 async function addUser(user) {
-
     try {
         const request = await fetch(`/ajax/create/user`, {
             method: 'POST',
@@ -49,7 +48,6 @@ async function addUser(user) {
 
 
 async function editUser(user) {
-
     try {
         const request = await fetch(`/ajax/edit/user`, {
             method: 'PUT',
