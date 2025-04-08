@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const modalElement = document.getElementById('id_add_modal');
+const modalElement = document.getElementById('id_add_modal');
 
+document.addEventListener('DOMContentLoaded', function () {
     modalElement.addEventListener('hidden.bs.modal', function () {
         const id_user = document.getElementById("id_user");
         id_user.value = "";
@@ -32,4 +32,9 @@ function changeTabs(dest) {
         document.getElementById("id_ues").style.display = "none";
         document.getElementById("id_ue_tabs").classList.remove("active");
     }
+}
+
+function closeModal() {
+    const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+    modalInstance.hide();
 }

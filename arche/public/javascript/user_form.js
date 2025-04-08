@@ -2,9 +2,7 @@ const action_modal = document.getElementById("id_action_modal");
 const btn_submit = document.getElementById("id_btn_create_user");
 const form = document.getElementById('id_user_form');
 
-btn_submit.addEventListener("click", function (event) {
-    event.stopPropagation();
-
+function modalUser() {
     if (form.checkValidity()) {
         const formData = {};
         new FormData(form).forEach((value, key) => {
@@ -16,13 +14,11 @@ btn_submit.addEventListener("click", function (event) {
         } else {
             editUser(formData);
         }
-        const modalElement = document.getElementById('id_add_modal');
-        const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-        modalInstance.hide();
+        closeModal();
     } else {
         form.reportValidity();
     }
-});
+}
 
 
 function wantAddUser() {
