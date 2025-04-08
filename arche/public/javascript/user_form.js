@@ -37,12 +37,12 @@ function wantEditUser(id) { // TODO mettre le user entier : )
     // });
 
     const id_user = document.getElementById("id_user");
-    const firstname = document.getElementById("id_firstname_form");
-    const name = document.getElementById("id_name_form");
-    const mail = document.getElementById("id_mail_form");
-    const phone = document.getElementById("id_phone_form");
-    const adress = document.getElementById("id_address_form");
-    const role = document.getElementById("id_role_form");
+    const firstname = document.getElementById("id_firstname_form_user");
+    const name = document.getElementById("id_name_form_user");
+    const mail = document.getElementById("id_mail_form_user");
+    const phone = document.getElementById("id_phone_form_user");
+    const adress = document.getElementById("id_address_form_user");
+    const role = document.getElementById("id_role_form_user");
 
     id_user.value = id;
     firstname.value = nameOld.innerText;
@@ -54,6 +54,6 @@ function wantEditUser(id) { // TODO mettre le user entier : )
 
 
 function changeRole() {
-    const value = document.getElementById("id_role_form").value;
+    const value = document.getElementById("id_role_form_user").value;
     document.getElementById("id_container_ues").style.display = value == 1 ? "none" : "block";
 }
