@@ -5,15 +5,22 @@ const form = document.getElementById('id_user_form');
 btn_submit.addEventListener("click", function (event) {
     event.stopPropagation();
 
-    const formData = {};
-    new FormData(form).forEach((value, key) => {
-        formData[key] = value;
-    });
+    if (form.checkValidity()) {
+        const formData = {};
+        new FormData(form).forEach((value, key) => {
+            formData[key] = value;
+        });
 
-    if (action_modal.value == "add") {
-        addUser(formData);
+        if (action_modal.value == "add") {
+            addUser(formData);
+        } else {
+            editUser(formData);
+        }
+        const modalElement = document.getElementById('id_add_modal');
+        const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+        modalInstance.hide();
     } else {
-        editUser(formData);
+        form.reportValidity();
     }
 });
 
