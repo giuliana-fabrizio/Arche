@@ -21,7 +21,7 @@
         </div>
         <button
             id="id_btn_add"
-            onclick="wantAddUser()"
+            onclick="wantAdd()"
             data-bs-toggle="modal"
             data-bs-target="#id_add_modal"
             class="btn btn-primary mb-3">
@@ -43,10 +43,10 @@
                 </div>
                 <div class="modal-body">
                     <!-- TODO à inverser le display none -->
-                    <div id="id_modal_body_ue" style="display: none">
-                        {# {% include '/admin/ue_form.html.twig' %} #}
+                    <div id="id_modal_body_ue">
+                        {% include '/admin/ue_form.html.twig' %}
                     </div>
-                    <div id="id_modal_body_user">
+                    <div id="id_modal_body_user" style="display: none">
                         {% include '/admin/user_form.html.twig' %}
                     </div>
                 </div>

@@ -42,3 +42,7 @@ function closeModal() {
     const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
     modalInstance.hide();
 }
+
+function wantAdd() {
+    action_modal.value = "add";
+}
