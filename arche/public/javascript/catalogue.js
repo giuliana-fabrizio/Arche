@@ -2,12 +2,12 @@ const modalElement = document.getElementById('id_add_modal');
 
 document.addEventListener('DOMContentLoaded', function () {
     modalElement.addEventListener('hidden.bs.modal', function () {
-        const id_user = document.getElementById("id_user");
+        const id_user = document.getElementById("id_user_form");
         id_user.value = "";
 
-        const form = document.getElementById('id_user_form');
+        const form = document.getElementById('id_form_user');
         new FormData(form).forEach((_, key) => {
-            const input = document.getElementById(`id_${key}_form`);
+            const input = document.getElementById(`id_${key}_form_user`);
             if (input) {
                 input.value = "";
             }

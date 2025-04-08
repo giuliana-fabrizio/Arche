@@ -63,7 +63,7 @@ async function editUser(user) {
 
         if (response == 200) {
             // TODO faire les ue et l'id dans span, edit et delete
-            const id = user['id_user'];
+            const id = user['user'];
 
             document.getElementById(`id_user_name_${id}`).innerHTML = user['firstname'] +
                 " " + user['name'];
