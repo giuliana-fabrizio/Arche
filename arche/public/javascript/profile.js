@@ -21,7 +21,9 @@ function displayItems(disabled) {
     document.getElementById("id_btn_action").classList.toggle("d-none", disabled);
 }
 
+
 function editProfile() { displayItems(false); }
+
 
 function cancelEdit() {
     displayItems(true);
@@ -41,13 +43,15 @@ function resetAvatar() {
     if (oldAvatar.length == 1) oldAvatar[0].classList.remove("img-avatar-selected");
 }
 
+
 function changeAvatar(avatar, id_selected) {
     resetAvatar();
     document.getElementById("id_avatar").value = avatar;
     document.getElementById(id_selected).classList.add("img-avatar-selected");
 }
 
+
 function collapseAvatar() {
     const collapse = document.getElementById("id_engage_collapse_avatar");
-    if (collapse.classList.contains("collapsed")) resetAvatar(); // TODO corriger si le mec sélectionne juste pas d'icon
+    if (collapse.classList.contains("collapsed")) resetAvatar();
 }

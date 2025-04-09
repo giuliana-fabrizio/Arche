@@ -17,10 +17,7 @@
                             <a class="nav-link nav-link-navbar" href="{{ path('app_catalogue') }}">Catalogue</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-navbar" href="{{ path('app_user_create') }}">Créer user</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-navbar" href="{{ path('app_ue_create') }}">Créer UE</a>
+                            {# <a class="nav-link nav-link-navbar" href="{{ path('app_ue_create') }}">Créer UE</a> #}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-navbar" href="{{ path('app_ue_choose') }}">Choisir UE</a>
@@ -47,7 +44,7 @@
                         Profil
                     </a>
 
-                    <div class="dropdown-menu dropdown-menu-end p-3" style="width: 300px;">
+                    <div class="dropdown-menu dropdown-menu-end p-3 dimens-profile">
                         {% include '/profile/profile.html.twig' %}
                     </div>
                 </div>

@@ -10,9 +10,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController {
 
-    #[Route('/create_user', name: 'app_user_create')]
-    public function createUser() : Response {
-        return $this->render("/admin/user_form.html.twig");
+    #[Route('/ajax/create/user', name: 'app_ajax_user_create', methods: ['POST'])]
+    public function createUser(Request $request) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        return new JsonResponse(200);
+    }
+
+
+    #[Route('/ajax/edit/user', name: 'app_ajax_user_edit', methods: ['PUT'])]
+    public function editUser(Request $request) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        return new JsonResponse(200);
     }
 
 

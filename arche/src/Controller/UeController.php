@@ -10,9 +10,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UeController extends AbstractController {
 
-    #[Route('/create_ue', name: 'app_ue_create')]
-    public function createUe() : Response {
-        return $this->render("/admin/ue_form.html.twig");
+    #[Route('/ajax/create/ue', name: 'app_ajax_ue_create', methods: ['POST'])]
+    public function createUe(Request $request) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        return new JsonResponse(200);
+    }
+
+
+    #[Route('/ajax/edit/ue', name: 'app_ajax_ue_edit', methods: ['PUT'])]
+    public function editUe(Request $request) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        return new JsonResponse(200);
     }
 
 

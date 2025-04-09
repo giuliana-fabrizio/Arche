@@ -11,6 +11,10 @@ body {
     width: min-content !important;
 }
 
+.code-catalogue {
+    width: 50px;
+}
+
 .text-bg-blue {
     color: #fff !important;
     background-color: #9ec5fe !important;
@@ -57,6 +61,22 @@ body {
 
 
 /* =========================================================================== profile */
+
+.dimens-profile {
+    width: 300px;
+}
+
+@media screen and (max-width: 360px) {
+    .dimens-profile {
+        width: 260px;
+    }
+}
+
+@media screen and (min-width: 460px) {
+    .dimens-profile {
+        width: 340px;
+    }
+}
 
 .dropdown-menu {
     z-index: 9999 !important;
@@ -134,6 +154,30 @@ input:disabled {
     background-size: cover;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+.tooltip-home {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-home .tooltiptext-home {
+    background-color: #484848;
+    border-radius: 5px;
+    color: #fff;
+    font-size: x-small;
+    padding: 5px 10px;
+    position: absolute;
+    text-align: center;
+    top: 30px;
+    right: -40px;
+    visibility: hidden;
+    width: max-content;
+    z-index: 1;
+}
+
+.tooltip-home:hover .tooltiptext-home {
+    visibility: visible;
 }
 
 #id_ue_name {
