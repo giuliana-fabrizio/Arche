@@ -8,47 +8,45 @@
 
 {% block body %}
     <div>
-        <nav class="navbar fixed-top">
-            <div>
-                <button
-                    data-bs-target="#offcanvasActivity"
-                    data-bs-toggle="offcanvas"
-                    type="button"
-                    class="navbar-toggler btn_activity"
-                >
-                    <i class="bi bi-chevron-compact-left fs-3"></i>
-                </button>
+        <div>
+            <button
+                data-bs-target="#offcanvasActivity"
+                data-bs-toggle="offcanvas"
+                type="button"
+                class="navbar-toggler btn_activity"
+            >
+                <i class="bi bi-chevron-compact-left fs-3"></i>
+            </button>
 
-                <div id="offcanvasActivity" class="offcanvas offcanvas-end">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title">Actualités</h5>
-                        <button
-                            aria-label="Close"
-                            data-bs-dismiss="offcanvas"
-                            type="button"
-                            class="btn-close"
-                        >
-                        </button>
+            <div id="offcanvasActivity" class="offcanvas offcanvas-end">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title">Actualités</h5>
+                    <button
+                        aria-label="Close"
+                        data-bs-dismiss="offcanvas"
+                        type="button"
+                        class="btn-close"
+                    >
+                    </button>
+                </div>
+                <div class="offcanvas-body">
+                    <!-- TODO boucle -->
+                    <div class="card mb-3 p-3">
+                        <p class="fw-bold">WE.4A Technologies et programmation WEB</p>
+                        <p class="m-0">M. LITZLER a posté un nouveau fichier, « Sujet Projet »</p>
                     </div>
-                    <div class="offcanvas-body">
-                        <!-- TODO boucle -->
-                        <div class="card mb-3 p-3">
-                            <p class="fw-bold">WE.4A Technologies et programmation WEB</p>
-                            <p class="m-0">M. LITZLER a posté un nouveau fichier, « Sujet Projet »</p>
-                        </div>
-                        <div class="card mb-3 p-3">
-                            <p class="fw-bold">WE.4A Technologies et programmation WEB</p>
-                            <p class="m-0">M. LOMBARD a posté un message « Changement salle »</p>
-                        </div>
-                        <div class="card mb-3 p-3">
-                            <p class="fw-bold">LE.01 Anglais</p>
-                            <p class="m-0">M. LITZLER a posté un message « Sources TP1 correction »</p>
-                        </div>
-                        <!-- TODO fin boucle-->
+                    <div class="card mb-3 p-3">
+                        <p class="fw-bold">WE.4A Technologies et programmation WEB</p>
+                        <p class="m-0">M. LOMBARD a posté un message « Changement salle »</p>
                     </div>
+                    <div class="card mb-3 p-3">
+                        <p class="fw-bold">LE.01 Anglais</p>
+                        <p class="m-0">M. LITZLER a posté un message « Sources TP1 correction »</p>
+                    </div>
+                    <!-- TODO fin boucle-->
                 </div>
             </div>
-        </nav>
+        </div>
 
         <div class="card p-3 mt-5 w-100">
             <h3 class="fw-bold mb-4">Mes cours</h3>
