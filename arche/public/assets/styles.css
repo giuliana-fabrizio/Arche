@@ -82,7 +82,8 @@ input:disabled {
     height: 45px;
 }
 
-.img-avatar:hover, .icon-remove-avatar:hover {
+.img-avatar:hover,
+.icon-remove-avatar:hover {
     cursor: pointer;
 }
 
@@ -106,7 +107,7 @@ input:disabled {
 }
 
 .btn_activity {
-    border-radius: 50% 0  0 50%!important;
+    border-radius: 50% 0 0 50% !important;
     height: 60px;
     position: fixed;
     right: 10px;
@@ -151,4 +152,43 @@ input:disabled {
     height: 40px;
     right: 45px;
     position: fixed;
+}
+
+
+/* ============================================================= home teacher and user */
+
+.accordion {
+    --bs-accordion-border-color: none !important;
+}
+
+.accordion-button {
+    border-radius: 0px !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #eef5ff !important;
+}
+
+.badge-category {
+    background-color: #dae3eb;
+    border-radius: 5px;
+    padding: 5px 10px;
+    max-width: max-content;
+}
+
+.nav-item-ue a:hover {
+    background-color: #dae3eb3a;
+    border-bottom: solid #dae3eb0a !important;
+}
+
+.nav-item-ue .active {
+    border-bottom: solid #007BC0 !important;
+}
+
+.nav-item-ue .active:hover {
+    border-bottom: solid #007BC0 !important;
+}
+
+.nav-underline {
+    --bs-nav-underline-gap: none !important;
 }
