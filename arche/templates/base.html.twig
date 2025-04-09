@@ -20,11 +20,14 @@
         {% block javascripts %}{% endblock %}
         <script src="{{ asset('javascript/profile.js') }}"></script> {# use by profile in navbar #}
         <script src="{{ asset('ajax/profile.js') }}"></script> {# use by profile in navbar #}
+
+        <script src="{{ asset('javascript/top_scroll_button.js') }}"></script>
     </head>
     <body>
         {% include 'navbar.html.twig' %}
         <div class="container mt-5">
             {% block body %}{% endblock %}
         </div>
+        {% include 'top_scroll_button.html.twig' %}
     </body>
 </html>
