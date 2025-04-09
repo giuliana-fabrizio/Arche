@@ -1,5 +1,4 @@
-const action_modal = document.getElementById("id_action_modal");
-const btn_submit = document.getElementById("id_btn_create_user");
+const action_modal_user = document.getElementById("id_action_modal");
 const form = document.getElementById('id_form_user');
 
 function modalUser() {
@@ -9,7 +8,7 @@ function modalUser() {
             formData[key] = value;
         });
 
-        if (action_modal.value == "add") {
+        if (action_modal_user.value == "add") {
             addUser(formData);
         } else {
             editUser(formData);
@@ -18,11 +17,6 @@ function modalUser() {
     } else {
         form.reportValidity();
     }
-}
-
-
-function wantAddUser() {
-    action_modal.value = "add";
 }
 
 
@@ -49,7 +43,7 @@ function wantEditUser(id) { // TODO mettre le user entier : )
     mail.value = mailOld.innerText;
 
     document.getElementById("id_title_modal").innerHTML = "Modifier un utilisateur";
-    action_modal.value = "edit";
+    action_modal_user.value = "edit";
 }
 
 

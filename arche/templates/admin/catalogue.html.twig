@@ -6,6 +6,9 @@
     <script src="{{ asset('ajax/catalogue.js') }}" defer></script>
     <script src="{{ asset('javascript/catalogue.js') }}" defer></script>
 
+    <script src="{{ asset('ajax/ue_form.js') }}" defer></script>
+    <script src="{{ asset('javascript/ue_form.js') }}" defer></script>
+
     <script src="{{ asset('ajax/user_form.js') }}" defer></script>
     <script src="{{ asset('javascript/user_form.js') }}" defer></script>
 {% endblock %}
@@ -69,11 +72,18 @@
         <div id="id_ues">
             <!-- TODO boucle -->
             <div id="id_ue_1" class="align-items-center justify-content-between mb-3 row">
-                <p class="col-12 col-md-6 m-0"><strong>WE4A Technologies et programmation WEB</strong></p>
-                <p class="col-12 col-md-4 m-0">Enseignant responsable d'UE</p>
+                <div class="col-12 col-md-6 d-flex flex-wrap">
+                    <p id="id_ue_code_1" class="fw-bold m-0 me-2 code-catalogue">WE4A</p>
+                    <p id="id_ue_name_1" class="m-0">Technologies et programmation WEB</p>
+                </div>
+                <p id="id_ue_teacher_1" class="col-12 col-md-4 m-0">Enseignant responsable d'UE</p>
 
                 <div class="col-12 col-md-2 d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm me-2">
+                    <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#id_add_modal"
+                        onclick="wantEditUe(1)"
+                        class="btn btn-success btn-sm me-2">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     <button onclick="deleteUe('id_ue_1')" class="btn btn-danger btn-sm">
@@ -82,12 +92,19 @@
                 </div>
             </div>
                 <!-- TODO to remove -->
-                <div id="id_ue_2" class="align-items-center justify-content-between row">
-                    <p class="col-12 col-md-6 m-0"><strong>SI40 Systèmes d'information</strong></p>
-                    <p class="col-12 col-md-4 m-0">Enseignant responsable d'UE</p>
+                    <div id="id_ue_2" class="align-items-center justify-content-between mb-3 row">
+                        <div class="col-12 col-md-6 d-flex flex-wrap">
+                        <p id="id_ue_code_2" class="fw-bold m-0 me-2 code-catalogue">SI40</p>
+                        <p id="id_ue_name_2" class="m-0">Systèmes d'information</p>
+                    </div>
+                    <p id="id_ue_teacher_2" class="col-12 col-md-4 m-0">Enseignant responsable d'UE</p>
 
                     <div class="col-12 col-md-2 d-flex justify-content-center">
-                        <button class="btn btn-success btn-sm me-2">
+                        <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#id_add_modal"
+                            onclick="wantEditUe(2)"
+                            class="btn btn-success btn-sm me-2">
                             <i class="bi bi-pencil-square"></i>
                         </button>
                         <button onclick="deleteUe('id_ue_2')" class="btn btn-danger btn-sm">

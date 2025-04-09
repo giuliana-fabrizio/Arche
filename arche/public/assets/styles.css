@@ -11,6 +11,10 @@ body {
     width: min-content !important;
 }
 
+.code-catalogue {
+    width: 50px;
+}
+
 .text-bg-blue {
     color: #fff !important;
     background-color: #9ec5fe !important;
@@ -98,7 +102,8 @@ input:disabled {
     height: 45px;
 }
 
-.img-avatar:hover, .icon-remove-avatar:hover {
+.img-avatar:hover,
+.icon-remove-avatar:hover {
     cursor: pointer;
 }
 
@@ -122,7 +127,7 @@ input:disabled {
 }
 
 .btn_activity {
-    border-radius: 50% 0  0 50%!important;
+    border-radius: 50% 0 0 50% !important;
     height: 60px;
     position: fixed;
     right: 10px;

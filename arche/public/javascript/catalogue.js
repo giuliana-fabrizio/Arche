@@ -5,9 +5,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const id_user = document.getElementById("id_user_form");
         id_user.value = "";
 
-        const form = document.getElementById('id_form_user');
-        new FormData(form).forEach((_, key) => {
+        const form_user = document.getElementById('id_form_user');
+        new FormData(form_user).forEach((_, key) => {
             const input = document.getElementById(`id_${key}_form_user`);
+            if (input) {
+                input.value = "";
+            }
+        });
+
+        const form_ue = document.getElementById('id_form_ue');
+        new FormData(form_ue).forEach((_, key) => {
+            const input = document.getElementById(`id_${key}_form_ue`);
             if (input) {
                 input.value = "";
             }

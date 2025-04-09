@@ -1,25 +1,46 @@
 const action_modal = document.getElementById("id_action_modal");
-const btn_submit = document.getElementById("id_btn_form_ue");
-const form = document.getElementById('id_user_form');
+const form_ue = document.getElementById('id_form_ue');
 
 function modalUe() {
-    if (form.checkValidity()) {
+    if (form_ue.checkValidity()) {
         const formData = {};
-        new FormData(form).forEach((value, key) => {
+        new FormData(form_ue).forEach((value, key) => {
             formData[key] = value;
         });
 
         if (action_modal.value == "add") {
-            addUser(formData);
+            addUe(formData);
         } else {
-            editUser(formData);
+            editUe(formData);
         }
         closeModal();
     } else {
-        form.reportValidity();
+        form_ue.reportValidity();
     }
 }
 
 
-function wantEditUser(id) { // TODO mettre le user entier : )
+function wantEditUe(id) { // TODO mettre l'ue entière : )
+    const codeOld = document.getElementById(`id_ue_code_${id}`);
+    const nameOld = document.getElementById(`id_ue_name_${id}`);
+    const oldImage = document.getElementById(``)
+
+    // TODO donner pour value le ue[key]
+    // const formData = {};
+    // new FormData(form_ue).forEach((value, key) => {
+    //     formData[key] = value;
+    // });
+
+    const id_ue = document.getElementById("id_ue_form");
+    const code = document.getElementById("id_code_form_ue");
+    const name = document.getElementById("id_name_form_ue");
+    const image = document.getElementById("id_image_form_ue");
+
+    id_ue.value = id;
+    name.value = nameOld.innerText;
+    code.value = codeOld.innerText;
+    // image.value = oldImage.value;
+
+    document.getElementById("id_title_modal").innerHTML = "Modifier une UE";
+    action_modal.value = "edit";
 }
