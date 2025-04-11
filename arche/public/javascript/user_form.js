@@ -1,6 +1,61 @@
 const action_modal_user = document.getElementById("id_action_modal");
 const form = document.getElementById('id_form_user');
 
+const container_ues = document.getElementById("id_container_ues");
+const searchInput = document.getElementById("id_ues_form_user");
+const selectedItems = container_ues.querySelector('.selected-items');
+const options_list = document.getElementById("id_ues_list");
+const selected_ues = [];
+
+
+searchInput.addEventListener('input', filterOptions);
+
+function filterOptions() {
+    const filter = searchInput.value.toLowerCase().trim();
+    const options = options_list.querySelectorAll('.option');
+
+    options.forEach(option => {
+        const text = option.textContent.toLowerCase();
+        if (text.includes(filter)) {
+            option.style.display = "block";
+        } else {
+            option.style.display = "none";
+        }
+    });
+}
+
+
+function removeTag(span, value) {
+    const index = selected_ues.indexOf(value);
+    if (index > -1) {
+        selected_ues.splice(index, 1);
+    }
+    span.parentElement.remove();
+}
+
+
+function selectUe(event) {
+    const value = event.textContent; // TODO changer !
+    if (selected_ues.includes(value)) return
+
+    selected_ues.push(value);
+
+    const tag = document.createElement('div');
+    tag.className = 'badge m-1 text-bg-blue';
+    tag.innerHTML = `${value}<span onclick="removeTag(this, '${value}')">&times;</span>`;
+
+    searchInput.insertAdjacentElement('beforebegin', tag);
+    searchInput.value = '';
+    filterOptions();
+}
+
+
+function changeRole() {
+    const value = document.getElementById("id_role_form_user").value;
+    document.getElementById("id_container_ues").style.display = value == 1 ? "none" : "block";
+}
+
+
 function modalUser() {
     if (form.checkValidity()) {
         const formData = {};
@@ -44,10 +99,4 @@ function wantEditUser(id) { // TODO mettre le user entier : )
 
     document.getElementById("id_title_modal").innerHTML = "Modifier un utilisateur";
     action_modal_user.value = "edit";
-}
-
-
-function changeRole() {
-    const value = document.getElementById("id_role_form_user").value;
-    document.getElementById("id_container_ues").style.display = value == 1 ? "none" : "block";
 }
