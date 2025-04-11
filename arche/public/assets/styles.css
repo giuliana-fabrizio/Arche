@@ -96,8 +96,9 @@ input:disabled {
     font-weight: 600 !important;
 }
 
-.img-avatar {
-    width: 45px;
+.img-avatar,
+.img-person-avatar {
+    width: 50px;
 }
 
 .icon-remove-avatar {
@@ -114,6 +115,33 @@ input:disabled {
     border: 3px solid;
     border-color: #00aaff;
     border-radius: 50%;
+}
+
+.input-group-profile {
+    position: relative;
+}
+
+.input-group-profile label {
+    background: white;
+    color: #aaa;
+    font-size: 16px;
+    left: 10px;
+    padding: 0 3px;
+    pointer-events: none;
+    position: absolute;
+    top: 7px;
+    transition: all 0.2s ease;
+}
+
+.input-group-profile input:focus+label,
+.input-group-profile input:not(:placeholder-shown)+label {
+    color: #333;
+    font-size: 12px;
+    top: -10px;
+}
+
+.input-group-profile input:disabled+label {
+    display: none;
 }
 
 

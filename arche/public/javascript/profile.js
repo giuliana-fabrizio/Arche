@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function displayItems(disabled) {
+    document.getElementById("id_firstname").disabled = disabled;
+    document.getElementById("id_firstname").classList.toggle("mb-2", !disabled);
     document.getElementById("id_name").disabled = disabled;
     document.getElementById("id_name").classList.toggle("mb-2", !disabled);
     document.getElementById("id_btn_edit").style.display = disabled ? "block" : "none";
@@ -15,10 +17,13 @@ function displayItems(disabled) {
 
     document.getElementById("id_phone").disabled = disabled;
 
-    document.getElementById("id_password").style.display = disabled ? "none" : "block";
+    document.getElementById("id_password_container").style.display = disabled ? "none" : "block";
     document.getElementById("id_engage_collapse_avatar").style.display = disabled ? "none" : "block";
-    document.getElementById("id_collapse_avatar").classList.toggle("d-none", disabled)
-    document.getElementById("id_btn_action").classList.toggle("d-none", disabled);
+    document.getElementById("id_collapse_avatar").classList.toggle("d-none", disabled);
+
+    document.getElementById("id_btn_logout").classList.toggle("d-none", !disabled);
+    document.getElementById("id_btn_cancel").classList.toggle("d-none", disabled);
+    document.getElementById("id_btn_valid").classList.toggle("d-none", disabled);
 }
 
 
@@ -53,5 +58,5 @@ function changeAvatar(avatar, id_selected) {
 
 function collapseAvatar() {
     const collapse = document.getElementById("id_engage_collapse_avatar");
-    if (collapse.classList.contains("collapsed")) resetAvatar();
+    if (collapse.classList.contains("collapsed")) resetAvatar(); // TODO corriger si le mec sélectionne juste pas d'icon
 }
