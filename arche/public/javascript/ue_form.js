@@ -1,6 +1,16 @@
 const action_modal = document.getElementById("id_action_modal");
 const form_ue = document.getElementById('id_form_ue');
 
+function clearUeForm() {
+    new FormData(form_ue).forEach((_, key) => {
+        const input = document.getElementById(`id_${key}_form_ue`);
+        if (input) {
+            input.value = "";
+        }
+    });
+}
+
+
 function modalUe() {
     if (form_ue.checkValidity()) {
         const formData = {};

@@ -1,5 +1,5 @@
 const action_modal_user = document.getElementById("id_action_modal");
-const form = document.getElementById('id_form_user');
+const form_user = document.getElementById('id_form_user');
 
 const container_ues = document.getElementById("id_container_ues");
 const searchInput = document.getElementById("id_ues_form_user");
@@ -36,7 +36,7 @@ function removeTag(span, value) {
 
 function selectUe(event) {
     const value = event.textContent; // TODO changer !
-    if (selected_ues.includes(value)) return
+    if (selected_ues.includes(value)) return;
 
     selected_ues.push(value);
 
@@ -56,10 +56,31 @@ function changeRole() {
 }
 
 
+function clearAllTags() {
+    const tags = document.querySelectorAll('#id_selected_ue .badge');
+    tags.forEach(tag => tag.remove());
+
+    selected_ues.length = 0;
+    searchInput.value = '';
+}
+
+
+function clearUserForm() {
+    new FormData(form_user).forEach((_, key) => {
+        const input = document.getElementById(`id_${key}_form_user`);
+        if (input) {
+            input.value = "";
+        }
+    });
+
+    clearAllTags();
+}
+
+
 function modalUser() {
-    if (form.checkValidity()) {
+    if (form_user.checkValidity()) {
         const formData = {};
-        new FormData(form).forEach((value, key) => {
+        new FormData(form_user).forEach((value, key) => {
             formData[key] = value;
         });
 
@@ -70,7 +91,7 @@ function modalUser() {
         }
         closeModal();
     } else {
-        form.reportValidity();
+        form_user.reportValidity();
     }
 }
 
@@ -81,7 +102,7 @@ function wantEditUser(id) { // TODO mettre le user entier : )
 
     // TODO donner pour value le user[key]
     // const formData = {};
-    // new FormData(form).forEach((value, key) => {
+    // new FormData(form_user).forEach((value, key) => {
     //     formData[key] = value;
     // });
 
