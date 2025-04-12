@@ -24,10 +24,10 @@
         <script src="{{ asset('javascript/top_scroll_button.js') }}"></script>
     </head>
     <body>
-        {% include 'navbar.html.twig' %}
+        {% include '_navbar.html.twig' %}
         <div class="container mt-5">
             {% block body %}{% endblock %}
         </div>
-        {% include 'top_scroll_button.html.twig' %}
+        {% include '_top_scroll_button.html.twig' %}
     </body>
 </html>
