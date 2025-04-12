@@ -266,9 +266,6 @@ input:disabled {
     position: fixed;
 }
 
-
-/* ============================================================= home teacher and user */
-
 .accordion {
     --bs-accordion-border-color: none !important;
 }
