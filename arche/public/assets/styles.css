@@ -20,6 +20,43 @@ body {
     background-color: #9ec5fe !important;
 }
 
+.badge-ues span {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.search-input {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    width: 90%;
+}
+
+#id_selected_ue {
+    border-radius: 10px;
+    transition: border 0.2s ease;
+}
+
+#id_selected_ue:focus-within {
+    border: 4px solid #BBD7FD !important;
+}
+
+.disable {
+    color: gray;
+    display: none;
+    padding: 3px 10px;
+}
+
+.option {
+    padding: 3px 10px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #767676;
+    color: white
+}
+
 
 /* =========================================================================== navbar */
 
@@ -96,8 +133,9 @@ input:disabled {
     font-weight: 600 !important;
 }
 
-.img-avatar {
-    width: 45px;
+.img-avatar,
+.img-person-avatar {
+    width: 50px;
 }
 
 .icon-remove-avatar {
@@ -114,6 +152,33 @@ input:disabled {
     border: 3px solid;
     border-color: #00aaff;
     border-radius: 50%;
+}
+
+.input-group-profile {
+    position: relative;
+}
+
+.input-group-profile label {
+    background: white;
+    color: #aaa;
+    font-size: 16px;
+    left: 10px;
+    padding: 0 3px;
+    pointer-events: none;
+    position: absolute;
+    top: 7px;
+    transition: all 0.2s ease;
+}
+
+.input-group-profile input:focus+label,
+.input-group-profile input:not(:placeholder-shown)+label {
+    color: #333;
+    font-size: 12px;
+    top: -10px;
+}
+
+.input-group-profile input:disabled+label {
+    display: none;
 }
 
 
@@ -200,9 +265,6 @@ input:disabled {
     right: 45px;
     position: fixed;
 }
-
-
-/* ============================================================= home teacher and user */
 
 .accordion {
     --bs-accordion-border-color: none !important;
