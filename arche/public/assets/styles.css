@@ -305,6 +305,17 @@ input:disabled {
 
 /* ======================================================================== content ue */
 
+.participant-name {
+    align-items: center;
+    background-color: #e9ecef;
+    border-radius: 50%;
+    color: #343a40;
+    display: inline-flex;
+    justify-content: center;
+    padding: 6px;
+    vertical-align: middle;
+}
+
 .post-img {
     width: 35px;
 }
