@@ -41,6 +41,12 @@ body {
     border: 4px solid #BBD7FD !important;
 }
 
+.disable {
+    color: gray;
+    display: none;
+    padding: 3px 10px;
+}
+
 .option {
     padding: 3px 10px;
     cursor: pointer;

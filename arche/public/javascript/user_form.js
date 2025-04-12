@@ -13,15 +13,20 @@ searchInput.addEventListener('input', filterOptions);
 function filterOptions() {
     const filter = searchInput.value.toLowerCase().trim();
     const options = options_list.querySelectorAll('.option');
+    const no_option = options_list.querySelectorAll('.disable')[0];
+    let isResult = false;
 
     options.forEach(option => {
         const text = option.textContent.toLowerCase();
         if (text.includes(filter)) {
+            isResult = true;
             option.style.display = "block";
         } else {
             option.style.display = "none";
         }
     });
+
+    no_option.style.display = isResult ? "none" : "block";
 }
 
 
