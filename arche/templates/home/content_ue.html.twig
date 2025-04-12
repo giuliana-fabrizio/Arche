@@ -2,7 +2,9 @@
 
 {% block title %}Mes cours | UTBM{% endblock %}
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('ajax/content_ue.js') }}" defer></script>
+{% endblock %}
 
 {% block body %}
     <div>
@@ -32,7 +34,7 @@
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse show">
                         <div class="accordion-body">
-                            <div>
+                            <div id="id_section_1_post_1">
                                 <div class="align-items-center d-flex justify-content-between">
                                     <div>
                                         <div class="align-items-center d-flex mb-1">
@@ -48,7 +50,7 @@
                                             class="btn btn-success btn-sm mb-2">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-sm">
+                                        <button onclick="deletePost('id_section_1_post_1')" class="btn btn-danger btn-sm">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </div>
@@ -56,7 +58,7 @@
                                 <hr>
                             </div>
 
-                            <div>
+                            <div id="id_section_1_post_2">
                                 <div class="align-items-center d-flex justify-content-between">
                                     <div>
                                         <div class="align-items-center d-flex mb-1">
@@ -72,7 +74,7 @@
                                             class="btn btn-success btn-sm mb-2">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-sm">
+                                        <button onclick="deletePost('id_section_1_post_2')" class="btn btn-danger btn-sm">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </div>
@@ -80,7 +82,7 @@
                                 <hr>
                             </div>
 
-                            <div>
+                            <div id="id_section_1_post_3">
                                 <div class="align-items-center d-flex justify-content-between">
                                     <div>
                                         <div class="align-items-center d-flex mb-1">
@@ -96,7 +98,7 @@
                                             class="btn btn-success btn-sm mb-2">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-sm">
+                                        <button onclick="deletePost('id_section_1_post_3')" class="btn btn-danger btn-sm">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </div>
@@ -104,7 +106,7 @@
                                 <hr>
                             </div>
                             
-                            <div>
+                            <div id="id_section_1_post_4">
                                 <div class="align-items-center d-flex justify-content-between">
                                     <div>
                                         <div class="align-items-center d-flex mb-1">
@@ -120,7 +122,7 @@
                                             class="btn btn-success btn-sm mb-2">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-sm">
+                                        <button onclick="deletePost('id_section_1_post_4')" class="btn btn-danger btn-sm">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </div>
@@ -128,7 +130,7 @@
                                 <hr>
                             </div>
                             
-                            <div>
+                            <div id="id_section_1_post_5">
                                 <div class="align-items-center d-flex justify-content-between">
                                     <div>
                                         <div class="align-items-center d-flex mb-1">
@@ -144,7 +146,7 @@
                                             class="btn btn-success btn-sm mb-2">
                                             <i class="bi bi-pencil-square"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-sm">
+                                        <button onclick="deletePost('id_section_1_post_5')" class="btn btn-danger btn-sm">
                                             <i class="bi bi-trash"></i>
                                         </button>
                                     </div>
