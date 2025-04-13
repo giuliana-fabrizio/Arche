@@ -13,8 +13,8 @@
             <p class="badge-category">POLE Humanités / GE : Gestion</h3>
             <h3 class="fw-bold mb-4">WE4A Technologies et programmation WEB</h3>
 
-            <div class="align-items-center d-flex justify-content-between">
-                <ul class="nav nav-underline mb-4">
+            <div class="align-items-center d-flex flex-wrap justify-content-between mb-4">
+                <ul class="nav nav-underline">
                     <li class="nav-item-ue">
                         <a id="id_tab_cours" class="nav-link active p-3 pe-5 ps-5" onclick="changeTabs(this, 'cours')">Cours</a>
                     </li>
@@ -23,12 +23,20 @@
                     </li>
                 </ul>
 
-                <a
-                    id="id_btn_add_post"
-                    href="{{ path('app_post_create') }}"
-                    class="btn btn-primary">
-                    Ajouter un post
-                </a>
+                <div class="align-items-center d-flex flex-wrap">
+                    <a
+                        id="id_btn_add_section"
+                        href="{{ path('app_post_create') }}"
+                        class="btn btn-primary me-2 mt-2 mt-md-0">
+                        Ajouter une section
+                    </a>
+                    <a
+                        id="id_btn_add_post"
+                        href="{{ path('app_post_create') }}"
+                        class="btn btn-primary mt-2 mt-md-0">
+                        Ajouter un post
+                    </a>
+                </div>
             </div>
 
             <div id="id_cours" class="accordion">
