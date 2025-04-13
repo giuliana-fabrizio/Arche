@@ -2,6 +2,14 @@ body {
     background-color: #f5f9fd !important;
 }
 
+.scroll-top-btn {
+    bottom: 3%;
+    border-radius: 50% !important;
+    height: 40px;
+    right: 45px;
+    position: fixed;
+}
+
 
 /*====================================================================== catalogue page*/
 
@@ -258,14 +266,8 @@ input:disabled {
     text-decoration: underline;
 }
 
-.scroll-top-btn {
-    bottom: 3%;
-    border-radius: 50% !important;
-    height: 40px;
-    right: 45px;
-    position: fixed;
-}
 
+/* ======================================================================== content ue */
 .accordion {
     --bs-accordion-border-color: none !important;
 }
@@ -276,13 +278,6 @@ input:disabled {
 
 .accordion-button:not(.collapsed) {
     background-color: #eef5ff !important;
-}
-
-.badge-category {
-    background-color: #dae3eb;
-    border-radius: 5px;
-    padding: 5px 10px;
-    max-width: max-content;
 }
 
 .nav-item-ue a:hover {
@@ -302,8 +297,12 @@ input:disabled {
     --bs-nav-underline-gap: none !important;
 }
 
-
-/* ======================================================================== content ue */
+.badge-category {
+    background-color: #dae3eb;
+    border-radius: 5px;
+    padding: 5px 10px;
+    max-width: max-content;
+}
 
 .post-img {
     width: 35px;
