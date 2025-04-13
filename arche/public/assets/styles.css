@@ -266,18 +266,6 @@ input:disabled {
     position: fixed;
 }
 
-.accordion {
-    --bs-accordion-border-color: none !important;
-}
-
-.accordion-button {
-    border-radius: 0px !important;
-}
-
-.accordion-button:not(.collapsed) {
-    background-color: #eef5ff !important;
-}
-
 .badge-category {
     background-color: #dae3eb;
     border-radius: 5px;
@@ -304,6 +292,40 @@ input:disabled {
 
 
 /* ======================================================================== content ue */
+
+.accordion {
+    --bs-accordion-border-color: none !important;
+}
+
+.accordion-button {
+    border-radius: 0px !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #eef5ff !important;
+}
+
+.accordion-button::after {
+    margin-right: 30px;
+}
+
+.accordion-header {
+    position: relative;
+}
+
+.accordion-header .dropdown-plus {
+    bottom: 22%;
+    position: absolute;
+    right: 1rem;
+    top: 28%;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.dropdown-toggle-plus {
+    color: var(--bs-accordion-active-color) !important;
+    text-decoration: none;
+}
 
 .participant-name {
     align-items: center;
