@@ -1,14 +1,19 @@
 <div class="d-flex justify-content-center">
-    <i id="id_avatar_default" class="bi bi-person-circle fs-1 mb-3 person-icon"></i>
-    <img id="id_avatar_image" class="img-avatar m-1">
+    <i id="id_avatar_default" class="bi bi-person-circle fs-1 mb-3"></i>
+    <img id="id_avatar_image" class="img-person-avatar m-1">
 </div>
 
-<div class="align-items-center d-flex">
-    <input
-        id="id_name"
-        type="text"
-        class="form-control profile-name"
-        disabled> <!-- TODO changer la value-->
+<div class="align-items-center d-flex mb-1">
+    <div class="me-2 input-group-profile">
+        <input id="id_firstname" type="text" class="form-control profile-name" placeholder="" required>
+        <label for="id_firstname">Prénom</label>
+    </div>
+
+    <div class="input-group-profile">
+        <input id="id_name" type="text" class="form-control profile-name" placeholder="" disabled>
+        <label for="id_name">Nom</label>
+    </div>
+
     <button id="id_btn_edit" type="button" onclick="editProfile()" class="btn">
         <i class="bi bi-pencil-square"></i>
     </button>
@@ -18,31 +23,23 @@
     id="id_mail"
     href="mailto:godailfabriziogiuliana@gmail.com" <!-- TODO changer la value
     target="_blank"
-    class="mb-2"
->
-    <!-- TODO changer la value-->
-</a>
+    class="mb-3"
+></a>
 
-<input
-    id="id_address"
-    type="text"
-    name="adress"
-    class="form-control mb-2"
-    disabled> <!-- TODO changer la value-->
+<div class="mb-3 input-group-profile">
+    <input id="id_address" type="text" name="adress" class="form-control" placeholder="" disabled>
+    <label for="id_address">Adresse</label>
+</div>
 
-<input
-    id="id_phone"
-    type="text"
-    name="phone"
-    class="form-control mb-2"
-    disabled> <!-- TODO changer la value-->
+<div class="mb-3 input-group-profile">
+    <input id="id_phone" type="text" name="phone" class="form-control" placeholder="" disabled>
+    <label for="id_phone">Téléphone</label>
+</div>
 
-<input
-    id="id_password"
-    type="password"
-    name="password"
-    class="form-control mb-3"
-    style="display: none;"> <!-- TODO changer la value-->
+<div id="id_password_container" class="mb-3 input-group-profile" style="display: none;">
+    <input id="id_password" type="password" name="password" class="form-control mb-3" placeholder="">
+    <label for="id_password">Mot de passe</label>
+</div>
 
 <a
     id="id_engage_collapse_avatar"
@@ -57,7 +54,7 @@
     Changer votre avatar
 </a>
 
-<div id="id_collapse_avatar" class="collapse mb-3" style="max-width: 245px;">
+<div id="id_collapse_avatar" class="collapse mb-4" style="max-width: 245px;">
     <div class="align-items-center d-flex flex-wrap justify-content-start">
         <input id="id_avatar" type="hidden" name="avatar" value="">
         <!-- TODO debut boucle -->
@@ -82,7 +79,9 @@
     </div>
 </div>
 
-<div id="id_btn_action" class="d-flex d-none justify-content-end">
-    <button type="button" onclick="initialView()" class="btn btn-danger me-2">Annuler</button>
-    <button type="button" onclick="update()" class="btn btn-success">Valider</button>
+<div class="d-flex justify-content-end">
+    <button id="id_btn_logout" type="button" class="btn btn-danger">Déconnexion</button>
+
+    <button id="id_btn_cancel" type="button" onclick="initialView()" class="btn btn-danger me-2">Annuler</button>
+    <button id="id_btn_valid" type="button" onclick="update()" class="btn btn-success">Valider</button>
 </div>

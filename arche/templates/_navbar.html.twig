@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg p-2 bg-navbar">
+<nav class="navbar navbar-expand-lg p-2 sticky-top bg-navbar">
     <div class="container-fluid">
         <div class="d-flex justify-content-between">
             <div>
@@ -9,25 +9,20 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="align-items-center navbar-nav mr-auto">
                         <li class="d-none d-lg-block nav-item">
-                            <a class="nav-link nav-link-navbar" href="{{ path('app_index') }}">
-                                <img src="{{ asset('assets/images/logo-utbm.png') }}" class="img-navbar">
-                            </a>
+                            <img src="{{ asset('assets/images/logo-utbm.png') }}" class="nav-link img-navbar">  
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-navbar" href="{{ path('app_catalogue') }}">Catalogue</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-navbar" href="{{ path('app_user_create') }}">Créer user</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-navbar" href="{{ path('app_ue_create') }}">Créer UE</a>
+                            {# <a class="nav-link nav-link-navbar" href="{{ path('app_ue_create') }}">Créer UE</a> #}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-navbar" href="{{ path('app_ue_choose') }}">Choisir UE</a>
                         </li>
-                        {# <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link nav-link-navbar" href="{{ path('app_ue_content') }}">Contenu UE</a>
-                        </li> #}
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link nav-link-navbar" href="{{ path('app_post_create') }}">Créer post</a>
                         </li>
@@ -47,12 +42,12 @@
                         Profil
                     </a>
 
-                    <div class="dropdown-menu dropdown-menu-end p-3" style="width: 300px;">
-                        {% include '/profile/profile.html.twig' %}
+                    <div class="dropdown-menu dropdown-menu-end p-3 dimens-profile">
+                        {% include '/profile/_profile.html.twig' %}
                     </div>
                 </div>
                 <!-- TODO ou -->
-                {# <a class="ms-3 nav-link nav-link-navbar" href="{{ path('app_login') }}">Connexion</a> #}
+                <a class="ms-3 nav-link nav-link-navbar" href="{{ path('app_login') }}">Connexion</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,315 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes cours | UTBM{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('ajax/content_ue.js') }}" defer></script>
+    <script src="{{ asset('javascript/content_ue.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+        <div class="card p-3 mt-5 w-100">
+            <p class="badge-category">POLE Humanités / GE : Gestion</h3>
+            <h3 class="fw-bold mb-4">WE4A Technologies et programmation WEB</h3>
+
+            <div class="align-items-center d-flex flex-wrap justify-content-between mb-4">
+                <ul class="nav nav-underline">
+                    <li class="nav-item-ue">
+                        <a id="id_tab_cours" class="nav-link active p-3 pe-5 ps-5" onclick="changeTabs(this, 'cours')">Cours</a>
+                    </li>
+                    <li class="nav-item-ue">
+                        <a id="id_tab_participants" class="nav-link p-3 pe-5 ps-5" onclick="changeTabs(this, 'participants')">Participants</a>
+                    </li>
+                </ul>
+
+                <div class="align-items-center d-flex flex-wrap">
+                    <a
+                        id="id_btn_add_section"
+                        href="{{ path('app_post_create') }}"
+                        class="btn btn-primary me-2 mt-2 mt-md-0">
+                        Ajouter une section
+                    </a>
+                    <a
+                        id="id_btn_add_post"
+                        href="{{ path('app_post_create') }}"
+                        class="btn btn-primary mt-2 mt-md-0">
+                        Ajouter un post
+                    </a>
+                </div>
+            </div>
+
+            <div id="id_cours" class="accordion">
+                <div class="accordion-item mb-5">
+                    <div class="accordion-header">
+                        <h2 class="w-100">
+                            <button
+                                class="accordion-button fs-5 fw-bold"
+                                data-bs-target="#collapseOne"
+                                data-bs-toggle="collapse"
+                                type="button">
+                                Section #1
+                            </button>
+                        </h2>
+                        <div class="dropdown dropdown-plus">
+                            <a class="dropdown-toggle-plus" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-end p-0">
+                                <li><a class="dropdown-item text-success" href="#">Éditer</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Supprimer</a></li>
+                             </ul>
+                        </div>
+                    </div>
+                    <div id="collapseOne" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <div id="id_section_1_post_1">
+                                <div class="align-items-center d-flex justify-content-between">
+                                    <div>
+                                        <div class="align-items-center d-flex mb-1">
+                                            <image src="{{ asset('/assets/images/doc.png') }}" class="me-3 post-img">
+                                            <a href="{{ asset('/files/WE4A - Moodle Simplifié (devoir retiré).pdf') }}" class="m-0 post-title">Titre du post</a>
+                                        </div>
+                                        <p class="ms-1">Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.</p>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-between ms-1">
+                                        <button
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#id_add_modal"
+                                            class="btn btn-success btn-sm mb-2">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button onclick="deletePost('id_section_1_post_1')" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+
+                            <div id="id_section_1_post_2">
+                                <div class="align-items-center d-flex justify-content-between">
+                                    <div>
+                                        <div class="align-items-center d-flex mb-1">
+                                            <image src="{{ asset('/assets/images/other.png') }}" class="me-3 post-img">
+                                            <a href="{{ asset('/files/WE4A - Moodle Simplifié (devoir retiré).pdf') }}" class="m-0 post-title">Titre du post</a>
+                                        </div>
+                                        <p class="ms-1">Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.</p>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-between ms-1">
+                                        <button
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#id_add_modal"
+                                            class="btn btn-success btn-sm mb-2">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button onclick="deletePost('id_section_1_post_2')" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+
+                            <div id="id_section_1_post_3">
+                                <div class="align-items-center d-flex justify-content-between">
+                                    <div>
+                                        <div class="align-items-center d-flex mb-1">
+                                            <image src="{{ asset('/assets/images/pdf.png') }}" class="me-3 post-img">
+                                            <a href="{{ asset('/files/WE4A - Moodle Simplifié (devoir retiré).pdf') }}" class="m-0 post-title">Titre du post</a>
+                                        </div>
+                                        <p class="ms-1">Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.</p>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-between ms-1">
+                                        <button
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#id_add_modal"
+                                            class="btn btn-success btn-sm mb-2">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button onclick="deletePost('id_section_1_post_3')" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            
+                            <div id="id_section_1_post_4">
+                                <div class="align-items-center d-flex justify-content-between">
+                                    <div>
+                                        <div class="align-items-center d-flex mb-1">
+                                            <image src="{{ asset('/assets/images/xls.png') }}" class="me-3 post-img">
+                                            <a href="{{ asset('/files/WE4A - Moodle Simplifié (devoir retiré).pdf') }}" class="m-0 post-title">Titre du post</a>
+                                        </div>
+                                        <p class="ms-1">Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.</p>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-between ms-1">
+                                        <button
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#id_add_modal"
+                                            class="btn btn-success btn-sm mb-2">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button onclick="deletePost('id_section_1_post_4')" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                            
+                            <div id="id_section_1_post_5">
+                                <div class="align-items-center d-flex justify-content-between">
+                                    <div>
+                                        <div class="align-items-center d-flex mb-1">
+                                            <image src="{{ asset('/assets/images/zip.png') }}" class="me-3 post-img">
+                                            <a href="{{ asset('/files/WE4A - Moodle Simplifié (devoir retiré).pdf') }}" class="m-0 post-title">Titre du post</a>
+                                        </div>
+                                        <p class="ms-1">Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.</p>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-between ms-1">
+                                        <button
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#id_add_modal"
+                                            class="btn btn-success btn-sm mb-2">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <button onclick="deletePost('id_section_1_post_5')" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item mb-5">
+                    <div class="accordion-header">
+                        <h2 class="w-100">
+                            <button
+                                class="accordion-button collapsed fs-5 fw-bold"
+                                data-bs-target="#collapseTwo"
+                                data-bs-toggle="collapse"
+                                type="button">
+                                Section #2
+                            </button>
+                        </h2>
+                        <div class="dropdown dropdown-plus">
+                            <a class="dropdown-toggle-plus" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-end p-0">
+                                <li><a class="dropdown-item text-success" href="#">Éditer</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Supprimer</a></li>
+                             </ul>
+                        </div>
+                    </div>
+                    <div id="collapseTwo" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the
+                            collapse
+                            plugin
+                            adds the appropriate classes that we use to style each element. These classes control the
+                            overall
+                            appearance, as
+                            well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS
+                            or
+                            overriding our
+                            default variables. It's also worth noting that just about any HTML can go within the
+                            <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h2 class="w-100">
+                            <button
+                                class="accordion-button collapsed fs-5 fw-bold"
+                                data-bs-target="#collapseThree"
+                                data-bs-toggle="collapse"
+                                type="button">
+                                Section #2
+                            </button>
+                        </h2>
+                        <div class="dropdown dropdown-plus">
+                            <a class="dropdown-toggle-plus" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-end p-0">
+                                <li><a class="dropdown-item text-success" href="#">Éditer</a></li>
+                                <li><a class="dropdown-item text-danger" href="#">Supprimer</a></li>
+                             </ul>
+                        </div>
+                    </div>
+                    <div id="collapseThree" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
+                            collapse
+                            plugin
+                            adds the appropriate classes that we use to style each element. These classes control the
+                            overall
+                            appearance, as
+                            well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS
+                            or
+                            overriding our
+                            default variables. It's also worth noting that just about any HTML can go within the
+                            <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="id_participants" class="accordion" style="display: none;">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button
+                            class="accordion-button fs-5 fw-bold"
+                            data-bs-target="#collapseStudent"
+                            data-bs-toggle="collapse"
+                            type="button">
+                            Étudiants
+                        </button>
+                    </h2>
+                    <div id="collapseStudent" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <div>
+                                <div class="align-items-center d-flex flex-wrap justify-content-between">
+                                    <p class="m-0 participant-name">GG</p> <!-- TODO firstname[0] -->
+                                    <p class="m-0">Giuliana GODAIL-FABRIZIO</p>
+                                    <a
+                                        id="id_mail"
+                                        href="mailto:godailfabriziogiuliana@gmail.com" <!-- TODO changer la value
+                                        target="_blank"
+                                    >giuliana.godail-fabrizio.utbm.fr</a>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button
+                            class="accordion-button collapsed fs-5 fw-bold"
+                            data-bs-target="#collapseTeacher"
+                            data-bs-toggle="collapse"
+                            type="button">
+                            Professeurs
+                        </button>
+                    </h2>
+                    <div id="collapseTeacher" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

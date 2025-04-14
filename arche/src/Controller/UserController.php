@@ -10,9 +10,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController {
 
-    #[Route('/create_user', name: 'app_user_create')]
-    public function createUser() : Response {
-        return $this->render("/admin/user_form.html.twig");
+    #[Route('/ajax/create/user', name: 'app_ajax_user_create', methods: ['POST'])]
+    public function createUser(Request $request) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        return new JsonResponse(200);
+    }
+
+
+    #[Route('/ajax/edit/user', name: 'app_ajax_user_edit', methods: ['PUT'])]
+    public function editUser(Request $request) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        return new JsonResponse(200);
     }
 
 
@@ -29,7 +47,8 @@ class UserController extends AbstractController {
     public function getProfile(Request $request) : Response {
         if($request->isXmlHttpRequest()) {
             $user = [
-                'name' => 'Giuliana FABRIZIO',
+                'firstname' => 'Giuliana',
+                'name' => 'FABRIZIO',
                 'address' => '2 rue Sainte-Victoire, 13006 Marseille',
                 'mail' => 'giuliana.godail-fabrizio@utbm.fr',
                 'phone' => '0744564213',
@@ -47,7 +66,8 @@ class UserController extends AbstractController {
     public function manageProfile(Request $request): JsonResponse {
         if($request->isXmlHttpRequest()) {
             $user = [
-                'name' => 'Giuliana FABRIZIO',
+                'firstname' => 'Giuliana',
+                'name' => 'FABRIZIO',
                 'address' => '2 rue Sainte-Victoire, 13006 Marseille',
                 'mail' => 'giuliana.godail-fabrizio@utbm.fr',
                 'phone' => '0744564213',
@@ -57,6 +77,7 @@ class UserController extends AbstractController {
 
             $data = json_decode($request->getContent(), true);
 
+            $user['firstname'] = $data['firstname'];
             $user['name'] = $data['name'];
             $user['address'] = $data['address'];
             $user['phone'] = $data['phone'];

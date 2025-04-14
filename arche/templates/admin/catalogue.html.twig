@@ -5,6 +5,12 @@
 {% block javascripts %}
     <script src="{{ asset('ajax/catalogue.js') }}" defer></script>
     <script src="{{ asset('javascript/catalogue.js') }}" defer></script>
+
+    <script src="{{ asset('ajax/ue_form.js') }}" defer></script>
+    <script src="{{ asset('javascript/ue_form.js') }}" defer></script>
+
+    <script src="{{ asset('ajax/user_form.js') }}" defer></script>
+    <script src="{{ asset('javascript/user_form.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
@@ -16,7 +22,39 @@
                 <i class="bi bi-search"></i>
             </button>
         </div>
-        <button class="btn btn-primary mb-3">Ajouter</button>
+        <button
+            id="id_btn_add"
+            onclick="wantAdd()"
+            data-bs-toggle="modal"
+            data-bs-target="#id_add_modal"
+            class="btn btn-primary mb-3">
+            Ajouter
+        </button>
+    </div>
+
+    <div id="id_add_modal" class="modal fade" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-navbar">
+                    <h1 id="id_title_modal" class="modal-title fs-5 text-white">Ajouter une UE</h1>
+                    <span id="id_action_modal" hidden>add</span>
+                    <button
+                        aria-label="Close"
+                        data-bs-dismiss="modal"
+                        type="button"
+                        class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- TODO à inverser le display none -->
+                    <div id="id_modal_body_ue">
+                        {% include '/admin/_ue_form.html.twig' %}
+                    </div>
+                    <div id="id_modal_body_user" style="display: none">
+                        {% include '/admin/_user_form.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="card p-3 w-100">
@@ -31,14 +69,21 @@
             </ul>
         </div>
 
-        <div id="id_ue">
+        <div id="id_ues">
             <!-- TODO boucle -->
             <div id="id_ue_1" class="align-items-center justify-content-between mb-3 row">
-                <p class="col-12 col-md-6 m-0"><strong>WE4A Technologies et programmation WEB</strong></p>
-                <p class="col-12 col-md-4 m-0">Enseignant responsable d'UE</p>
-                <span id="id_ue" value=1 hidden></span>
+                <div class="col-12 col-md-6 d-flex flex-wrap">
+                    <p id="id_ue_code_1" class="fw-bold m-0 me-2 code-catalogue">WE4A</p>
+                    <p id="id_ue_name_1" class="m-0">Technologies et programmation WEB</p>
+                </div>
+                <p id="id_ue_teacher_1" class="col-12 col-md-4 m-0">Enseignant responsable d'UE</p>
+
                 <div class="col-12 col-md-2 d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm me-2">
+                    <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#id_add_modal"
+                        onclick="wantEditUe(1)"
+                        class="btn btn-success btn-sm me-2">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     <button onclick="deleteUe('id_ue_1')" class="btn btn-danger btn-sm">
@@ -47,15 +92,22 @@
                 </div>
             </div>
                 <!-- TODO to remove -->
-                <div class="align-items-center justify-content-between row">
-                    <p class="col-12 col-md-6 m-0"><strong>SI40 Systèmes d'information</strong></p>
-                    <p class="col-12 col-md-4 m-0">Enseignant responsable d'UE</p>
-                    <span id="id_ue" value=2 hidden></span>
+                    <div id="id_ue_2" class="align-items-center justify-content-between mb-3 row">
+                        <div class="col-12 col-md-6 d-flex flex-wrap">
+                        <p id="id_ue_code_2" class="fw-bold m-0 me-2 code-catalogue">SI40</p>
+                        <p id="id_ue_name_2" class="m-0">Systèmes d'information</p>
+                    </div>
+                    <p id="id_ue_teacher_2" class="col-12 col-md-4 m-0">Enseignant responsable d'UE</p>
+
                     <div class="col-12 col-md-2 d-flex justify-content-center">
-                        <button class="btn btn-success btn-sm me-2">
+                        <button
+                            data-bs-toggle="modal"
+                            data-bs-target="#id_add_modal"
+                            onclick="wantEditUe(2)"
+                            class="btn btn-success btn-sm me-2">
                             <i class="bi bi-pencil-square"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm">
+                        <button onclick="deleteUe('id_ue_2')" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
@@ -63,21 +115,24 @@
             <!-- fin boucle -->
         </div>
 
-        <div id="id_user" style="display: none">
+        <div id="id_users" style="display: none">
             <!-- TODO boucle -->
             <div id="id_user_1" class="align-items-center justify-content-between mb-3 row">
-                <p class="d-flex col-12 col-md-2 m-0">Giuliana GODAIL-FABRIZIO</p>
-                <p class="d-flex col-12 col-md-3 m-0">giuliana.godail-fabrizio@utbm.fr</p>
-                <p class="col-12 col-md-2 m-0">Étudiante</p>
+                <p id="id_user_name_1" class="d-flex col-12 col-md-2 m-0">Giuliana GODAIL-FABRIZIO</p>
+                <p id="id_user_mail_1" class="d-flex col-12 col-md-3 m-0">giuliana.godail-fabrizio@utbm.fr</p>
+                <p id="id_user_role_1" class="col-12 col-md-2 m-0">Étudiante</p>
                 <div class="align-items-center col-12 col-md-3 d-flex flex-wrap justify-content-start">
                     <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                     <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                     <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                     <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                 </div>
-                <span id="id_user" value=1 hidden></span>
                 <div class="col-12 col-md-2 d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm me-2">
+                    <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#id_add_modal"
+                        onclick="wantEditUser(1)"
+                        class="btn btn-success btn-sm me-2">
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     <button onclick="deleteUser('id_user_1')" class="btn btn-danger btn-sm">
@@ -85,22 +140,25 @@
                     </button>
                 </div>
             </div>
-            <div class="align-items-center justify-content-between mb-3 row">
-                <p class="d-flex col-12 col-md-2 m-0">Simon NGUYEN</p>
-                <p class="d-flex col-12 col-md-3 m-0">simon.nguyen@utbm.fr</p>
-                <p class="col-12 col-md-2 m-0">Étudiant</p>
+            <div id="id_user_2" class="align-items-center justify-content-between mb-3 row">
+                <p id="id_user_name_2" class="d-flex col-12 col-md-2 m-0">Simon NGUYEN</p>
+                <p id="id_user_mail_2" class="d-flex col-12 col-md-3 m-0">simon.nguyen@utbm.fr</p>
+                <p id="id_user_role_2" class="col-12 col-md-2 m-0">Étudiant</p>
                 <div class="align-items-center col-12 col-md-3 d-flex flex-wrap justify-content-start">
                     <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                     <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                     <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                     <p class="badge m-0 m-1 text-bg-blue">WE.4A</p>
                 </div>
-                <span id="id_user" value=1 hidden></span>
                 <div class="col-12 col-md-2 d-flex justify-content-center">
-                    <button class="btn btn-success btn-sm me-2">
+                    <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#id_add_modal"
+                        onclick="wantEditUser(2)"
+                        class="btn btn-success btn-sm me-2">
                         <i class="bi bi-pencil-square"></i>
                     </button>
-                    <button class="btn btn-danger btn-sm">
+                    <button onclick="deleteUser('id_user_2')" class="btn btn-danger btn-sm">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>

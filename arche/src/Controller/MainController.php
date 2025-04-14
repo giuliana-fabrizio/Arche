@@ -8,15 +8,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController {
 
-    #[Route('/', name: 'app_index')]
-    public function homepage() : Response {
-        return $this->render("base.html.twig");
+    #[Route('/', name: 'app_login')]
+    public function login() : Response {
+        return $this->render("login.html.twig");
     }
+
 
     #[Route('/create_post', name: 'app_post_create')]
     public function createUe() : Response {
         return $this->render("/teacher/post_form.html.twig");
     }
+
 
     #[Route('/manage_resource', name: 'app_catalogue')]
     public function manageResource() : Response {
