@@ -1,0 +1,48 @@
+<div id="id_add_section_modal" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ajouter une section</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="id_form_section">
+                    <fieldset>
+                        <input id="id_section_form" name="section" hidden>
+                        <div class="mb-3">
+                            <label for="id_name_form_section">Nom de Section</label>
+                            <input
+                                id="id_name_form_section"
+                                type="text"
+                                name="name"
+                                value=""
+                                class="form-control"
+                                required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="id_classement_form_section" class="form-label">
+                                Position de la section (laisser vide pour la placer à la fin)
+                            </label>
+
+                            <select id="id_classement_form_section" name="classement" class="form-select">
+                                <option selected disabled>Choisissez la section suivante</option>
+                                <!-- TODO boucle -->
+                                <option value="1">Section 1</option> <!-- TODO changer la value -->
+                                <option value="2">Section 2</option>
+                                <!-- TODO fin boucle -->
+                            </select>
+                        </div>
+
+                        <button onclick="modalSection()" type="button" class="btn btn-primary w-100">Valider</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@
 {% block title %}Mes cours | UTBM{% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('ajax/post_form.js') }}" defer></script>
     <script src="{{ asset('javascript/post_form.js') }}" defer></script>
 {% endblock %}
 
@@ -21,48 +22,77 @@
             </ul>
         </div>
 
-        <form id="id_form_text">
+        {% include '/teacher/_section_form.html.twig' %}
+
+        <form>
             <fieldset>
-                <div class="mb-3">
-                    <label for="id_title" class="form-label">Titre du message</label>
-                    <input id="id_title" type="text" name="title" value="title" class="form-control" required> <!-- TODO changer la value-->
+                <div id="id_form_text">
+                    <div class="mb-3">
+                        <label for="id_title" class="form-label">Titre du message</label>
+                        <input id="id_title" type="text" name="title" value="title" class="form-control" required> <!-- TODO changer la value-->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_type" class="form-label">Type de message</label>
+                        <select id="id_type" name="type" class="form-select" required>
+                            <option selected disabled>Sélectionner un type</option>
+                            <!-- TODO boucle -->
+                            <option value="1">Important</option> <!-- TODO changer la value -->
+                            <option value="2">Informatif</option>
+                            <!-- TODO fin boucle -->
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_content" class="form-label">Détails</label>
+                        <textarea id="id_content" name="content" class="form-control" required><!-- TODO mettre une value--></textarea>
+                    </div>
+                </div>
+
+                <div id="id_form_file" style="display: none;">
+                    {# <div class="mb-3">
+                        <label for="id_title" class="form-label">Titre du fichier</label>
+                        <input id="id_title" type="text" name="title" value="title" class="form-control" required> <!-- TODO changer la value-->
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_file" class="form-label">Fichier</label>
+                        <input id="id_file" type="file" name="file" value="file" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_content" class="form-label">Texte descriptif</label>
+                        <textarea id="id_content" name="content" class="form-control"><!-- TODO mettre une value--></textarea>
+                    </div> #}
                 </div>
 
                 <div class="mb-3">
-                    <label for="id_type" class="form-label">Type de message</label>
-                    <select id="id_type" name="type" class="form-select" required>
-                        <option selected disabled>Sélectionner un type</option>
+                    <div class="align-items-center d-flex justify-content-between mb-2">
+                        <label for="id_section_post" class="form-label">Section du post</label>
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#id_add_section_modal">Ajouter une section</button>
+                    </div>
+                    <select id="id_section_post" name="section_post" class="form-select" required>
+                        <option selected disabled>Choisissez la section du post</option>
                         <!-- TODO boucle -->
-                        <option value="1">Important</option> <!-- TODO changer la value -->
-                        <option value="2">Informatif</option>
+                        <option value="1">Section 1</option> <!-- TODO changer la value -->
+                        <option value="2">Section 2</option>
                         <!-- TODO fin boucle -->
                     </select>
                 </div>
 
                 <div class="mb-4">
-                    <label for="id_content" class="form-label">Détails</label>
-                    <textarea id="id_content" name="content" class="form-control" required><!-- TODO mettre une value--></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">Valider</button>
-            </fieldset>
-        </form>
-
-        <form id="id_form_file" style="display: none;">
-            <fieldset>
-                <div class="mb-3">
-                    <label for="id_title" class="form-label">Titre du fichier</label>
-                    <input id="id_title" type="text" name="title" value="title" class="form-control" required> <!-- TODO changer la value-->
-                </div>
-
-                <div class="mb-3">
-                    <label for="id_file" class="form-label">Fichier</label>
-                    <input id="id_file" type="file" name="file" value="file" class="form-control" required>
-                </div>
-
-                <div class="mb-4">
-                    <label for="id_content" class="form-label">Texte descriptif</label>
-                    <textarea id="id_content" name="content" class="form-control"><!-- TODO mettre une value--></textarea>
+                    <label for="id_classement_post" class="form-label">Position du post (laisser vide pour le placer à la fin)</label>
+                    <select id="id_classement_post" name="classement_post" class="form-select" required>
+                        <option selected disabled>Choisissez le post suivant</option>
+                        <!-- TODO boucle -->
+                        <option value="1">Post 1</option> <!-- TODO changer la value -->
+                        <option value="2">Post 2</option>
+                        <!-- TODO fin boucle -->
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-100">Valider</button>
