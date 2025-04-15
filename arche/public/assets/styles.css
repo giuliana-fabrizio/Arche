@@ -192,6 +192,7 @@ input:disabled {
     display: flex;
     justify-content: center;
     width: 40px;
+    z-index: 1000;
 }
 
 .btn_activity {
