@@ -4,11 +4,15 @@
 
 {% block javascripts %}
     <script src="{{ asset('ajax/content_ue.js') }}" defer></script>
+    <script src="{{ asset('ajax/section_form.js') }}" defer></script>
     <script src="{{ asset('javascript/content_ue.js') }}" defer></script>
+    <script src="{{ asset('javascript/section_form.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
     <div>
+        {% include '/teacher/_section_form.html.twig' with {'origin': 'content_ue'} %}
+
         <div class="card p-3 mt-5 w-100">
             <p class="badge-category">POLE Humanités / GE : Gestion</h3>
             <h3 class="fw-bold mb-4">WE4A Technologies et programmation WEB</h3>
@@ -24,12 +28,13 @@
                 </ul>
 
                 <div class="align-items-center d-flex flex-wrap">
-                    <a
-                        id="id_btn_add_section"
-                        href="{{ path('app_post_create') }}"
-                        class="btn btn-primary me-2 mt-2 mt-md-0">
+                    <button
+                        type="button"
+                        class="btn btn-primary me-2 mt-2 mt-md-0"
+                        data-bs-toggle="modal"
+                        data-bs-target="#id_add_section_modal">
                         Ajouter une section
-                    </a>
+                    </button>
                     <a
                         id="id_btn_add_post"
                         href="{{ path('app_post_create') }}"
@@ -224,7 +229,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item">
+                <div class="accordion-item mb-5">
                     <div class="accordion-header">
                         <h2 class="w-100">
                             <button

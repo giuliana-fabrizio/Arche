@@ -3,8 +3,9 @@
 {% block title %}Mes cours | UTBM{% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('ajax/post_form.js') }}" defer></script>
+    <script src="{{ asset('ajax/section_form.js') }}" defer></script>
     <script src="{{ asset('javascript/post_form.js') }}" defer></script>
+    <script src="{{ asset('javascript/section_form.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
@@ -22,7 +23,7 @@
             </ul>
         </div>
 
-        {% include '/teacher/_section_form.html.twig' %}
+        {% include '/teacher/_section_form.html.twig' with {'origin': 'post_form'} %}
 
         <form>
             <fieldset>
