@@ -18,7 +18,11 @@ class SectionController extends AbstractController {
 
         $data = json_decode($request->getContent(), true);
 
-        return new JsonResponse([ 'code' => 200 ]);
+        $html = $this->renderView('home/_section.html.twig', [
+            'section' => $data,
+        ]);
+
+        return new JsonResponse([ 'code' => 200, 'html' => $html ]);
     }
 
 
