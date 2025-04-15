@@ -45,7 +45,7 @@
             </div>
 
             <div id="id_cours" class="accordion">
-                <div class="accordion-item mb-5">
+                <div id="id_section_1" class="accordion-item mb-5">
                     <div class="accordion-header">
                         <h2 class="w-100">
                             <button
@@ -63,7 +63,7 @@
 
                             <ul class="dropdown-menu dropdown-menu-end p-0">
                                 <li><a class="dropdown-item text-success" href="#">Éditer</a></li>
-                                <li><a class="dropdown-item text-danger" href="#">Supprimer</a></li>
+                                <li><a class="dropdown-item text-danger" onclick="deleteSection('id_section_1')">Supprimer</a></li>
                              </ul>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item mb-5">
+                <div id="id_section_2" class="accordion-item mb-5">
                     <div class="accordion-header">
                         <h2 class="w-100">
                             <button
@@ -209,7 +209,7 @@
 
                             <ul class="dropdown-menu dropdown-menu-end p-0">
                                 <li><a class="dropdown-item text-success" href="#">Éditer</a></li>
-                                <li><a class="dropdown-item text-danger" href="#">Supprimer</a></li>
+                                <li><a class="dropdown-item text-danger" onclick="deleteSection('id_section_2')">Supprimer</a></li>
                              </ul>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion-item mb-5">
+                <div id="id_section_3" class="accordion-item mb-5">
                     <div class="accordion-header">
                         <h2 class="w-100">
                             <button
@@ -237,7 +237,7 @@
                                 data-bs-target="#collapseThree"
                                 data-bs-toggle="collapse"
                                 type="button">
-                                Section #2
+                                Section #3
                             </button>
                         </h2>
                         <div class="dropdown dropdown-plus">
@@ -247,7 +247,7 @@
 
                             <ul class="dropdown-menu dropdown-menu-end p-0">
                                 <li><a class="dropdown-item text-success" href="#">Éditer</a></li>
-                                <li><a class="dropdown-item text-danger" href="#">Supprimer</a></li>
+                                <li><a class="dropdown-item text-danger"  onclick="deleteSection('id_section_3')">Supprimer</a></li>
                              </ul>
                         </div>
                     </div>

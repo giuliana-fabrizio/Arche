@@ -20,4 +20,14 @@ class SectionController extends AbstractController {
 
         return new JsonResponse([ 'code' => 200 ]);
     }
+
+
+    #[Route('/ajax/delete/section/{id}', name: 'app_ajax_delete_section')]
+    public function deleteSection(Request $request): Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        return new JsonResponse(200);
+    }
 }
