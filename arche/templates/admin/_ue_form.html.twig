@@ -3,19 +3,37 @@
         <input id="id_ue_form" name="ue" hidden>
         <div class="mb-3">
             <label for="id_code_form_ue" class="form-label">Code l'UE</label>
-            <input id="id_code_form_ue" type="text" name="code" value="" class="form-control" required>
+            <input
+                id="id_code_form_ue"
+                type="text"
+                name="code"
+                value=""
+                minlength="4"
+                maxlength="4"
+                class="form-control"
+                required>
         </div>
         <div class="mb-3">
             <label for="id_name_form_ue" class="form-label">Intitulé de l'UE</label>
             <input id="id_name_form_ue" type="text" name="name" value="" class="form-control" required>
         </div>
         <div class="mb-3">
+            <label for="id_category_form_ue" class="form-label">Intitulé de l'UE</label>
+            <select id="id_category_form_ue" name="category_form_ue" class="form-select" required>
+                <option selected disabled>Sélectionner une catégorie</option>
+                {# TODO boucle #}
+                    <option value="1">POLE Informatique</option> {#  TODO changer la value #}
+                    <option value="2">POLE Humanité</option>
+                {# TODO fin boucle #}
+            </select>
+        </div>
+        <div class="mb-3">
             <label for="id_image_form_ue" class="form-label">Image de l'UE</label>
             <input id="id_image_form_ue" type="file" name="image" value="" class="form-control" required>
         </div>
         <div class="mb-4">
-            <label for="teatcherRef" class="form-label">Professeur référent de l'UE</label>
-            <select id="teatcherRef" name="teatcherRef" class="form-select" required>
+            <label for="id_teacher_ref" class="form-label">Professeur référent de l'UE</label>
+            <select id="id_teacher_ref" name="teacher_ref" class="form-select" required>
                 <option selected disabled>Sélectionner un professeur</option>
                 {# TODO boucle #}
                 <option value="1">Professeur 1</option> TODO changer la value
