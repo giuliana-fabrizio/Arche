@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UeController extends AbstractController {
 
-    #[Route('/ajax/create/ue', name: 'app_ajax_ue_create', methods: ['POST'])]
+    #[Route('/admin/ajax/create/ue', name: 'app_ajax_ue_create', methods: ['POST'])]
     public function createUe(Request $request) : Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
@@ -22,7 +22,7 @@ class UeController extends AbstractController {
     }
 
 
-    #[Route('/ajax/edit/ue', name: 'app_ajax_ue_edit', methods: ['PUT'])]
+    #[Route('/admin/ajax/edit/ue', name: 'app_ajax_ue_edit', methods: ['PUT'])]
     public function editUe(Request $request) : Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
@@ -34,7 +34,7 @@ class UeController extends AbstractController {
     }
 
 
-    #[Route('/ajax/delete/ue/{id}', name: 'app_ajax_delete_ue')]
+    #[Route('/teacher/ajax/delete/ue/{id}', name: 'app_ajax_delete_ue')]
     public function deleteUe(Request $request) : Response {
         if($request->isXmlHttpRequest()) {
             return new JsonResponse(200);

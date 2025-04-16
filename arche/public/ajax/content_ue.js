@@ -1,7 +1,7 @@
 async function deletePost(id) {
     if (window.confirm("Souhaitez-vous vraiment supprimer ce post ?")) {
         try {
-            const request = await fetch(`/ajax/delete/post/${id}`, {
+            const request = await fetch(`/teacher/ajax/delete/post/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",
@@ -25,7 +25,7 @@ async function deletePost(id) {
 async function deleteSection(id) {
     if (window.confirm("Souhaitez-vous vraiment supprimer cette section et tous les posts qui lui sont rattachés ?")) {
         try {
-            const request = await fetch(`/ajax/delete/section/${id}`, {
+            const request = await fetch(`/teacher/ajax/delete/section/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",

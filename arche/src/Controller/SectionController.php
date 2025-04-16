@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SectionController extends AbstractController {
 
-    #[Route('/ajax/create/section', name: 'app_ajax_section_create', methods: ['POST'])]
+    #[Route('/teacher/ajax/create/section', name: 'app_ajax_section_create', methods: ['POST'])]
     public function createSection(Request $request) : Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
@@ -26,7 +26,7 @@ class SectionController extends AbstractController {
     }
 
 
-    #[Route('/ajax/delete/section/{id}', name: 'app_ajax_delete_section')]
+    #[Route('/teacher/ajax/delete/section/{id}', name: 'app_ajax_delete_section')]
     public function deleteSection(Request $request): Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);

@@ -14,13 +14,7 @@ class MainController extends AbstractController {
     }
 
 
-    #[Route('/create_post', name: 'app_post_create')]
-    public function createUe() : Response {
-        return $this->render("/teacher/post_form.html.twig");
-    }
-
-
-    #[Route('/manage_resource', name: 'app_catalogue')]
+    #[Route('/admin/manage_resource', name: 'app_catalogue')]
     public function manageResource() : Response {
         return $this->render("/admin/catalogue.html.twig");
     }
