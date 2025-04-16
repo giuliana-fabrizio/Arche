@@ -71,6 +71,11 @@ Puis, pour exécuter les instructions permettant de créer les tables dans la ba
 php bin/console doctrine:migrations:migrate
 ```
 
+Enfin, pour récupérer les fixtures, exécuter la commande qui suit :
+```bash
+php bin/console doctrine:fixtures:load
+```
+
 <br>
 
 ### **Lancement du projet**
