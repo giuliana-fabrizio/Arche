@@ -34,7 +34,7 @@ class UeController extends AbstractController {
     }
 
 
-    #[Route('/teacher/ajax/delete/ue/{id}', name: 'app_ajax_delete_ue')]
+    #[Route('/admin/ajax/delete/ue/{id}', name: 'app_ajax_delete_ue')]
     public function deleteUe(Request $request) : Response {
         if($request->isXmlHttpRequest()) {
             return new JsonResponse(200);
@@ -43,13 +43,13 @@ class UeController extends AbstractController {
     }
 
 
-    #[Route('/choose_ue', name: 'app_ue_choose')]
+    #[Route('/basic/personal_ue', name: 'app_ue_personal')]
     public function chooseUe() : Response {
         return $this->render("/home/home.html.twig");
     }
 
 
-    #[Route('/ue', name: 'app_ue_content')]
+    #[Route('/basic/ue', name: 'app_ue_content')]
     public function getUe() : Response {
         return $this->render("/home/content_ue.html.twig");
     }

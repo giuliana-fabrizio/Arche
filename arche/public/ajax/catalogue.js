@@ -1,7 +1,7 @@
 async function deleteUe(id) {
     if (window.confirm("Souhaitez-vous vraiment supprimer cette ue ?")) {
         try {
-            const request = await fetch(`/teacher/ajax/delete/ue/${id}`, {
+            const request = await fetch(`/admin/ajax/delete/ue/${id}`, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",
