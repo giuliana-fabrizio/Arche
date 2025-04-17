@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250416215409 extends AbstractMigration
+final class Version20250417101500 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -30,16 +30,13 @@ final class Version20250416215409 extends AbstractMigration
             CREATE TABLE post_type (id INT AUTO_INCREMENT NOT NULL, label VARCHAR(20) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
-            CREATE TABLE role (id INT AUTO_INCREMENT NOT NULL, label VARCHAR(20) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
-        SQL);
-        $this->addSql(<<<'SQL'
             CREATE TABLE section (id INT AUTO_INCREMENT NOT NULL, fk_ue_id INT NOT NULL, label VARCHAR(50) NOT NULL, ranking INT DEFAULT NULL, INDEX IDX_2D737AEFA305A0C4 (fk_ue_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE ue (id INT AUTO_INCREMENT NOT NULL, fk_category_id INT NOT NULL, user_id INT NOT NULL, code VARCHAR(4) NOT NULL, label VARCHAR(100) NOT NULL, photo VARCHAR(50) DEFAULT NULL, INDEX IDX_2E490A9B7BB031D6 (fk_category_id), INDEX IDX_2E490A9BA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
-            CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, role_id INT NOT NULL, address VARCHAR(50) DEFAULT NULL, avatar VARCHAR(50) DEFAULT NULL, email VARCHAR(50) NOT NULL, firstname VARCHAR(20) NOT NULL, lastname VARCHAR(20) NOT NULL, password VARCHAR(50) NOT NULL, phone VARCHAR(10) NOT NULL, INDEX IDX_8D93D649D60322AC (role_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
+            CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, address VARCHAR(50) DEFAULT NULL, avatar VARCHAR(50) DEFAULT NULL, email VARCHAR(180) NOT NULL, firstname VARCHAR(20) NOT NULL, lastname VARCHAR(20) NOT NULL, phone VARCHAR(10) NOT NULL, password VARCHAR(255) NOT NULL, roles JSON NOT NULL, UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE user_ue (user_id INT NOT NULL, ue_id INT NOT NULL, INDEX IDX_361EBE5EA76ED395 (user_id), INDEX IDX_361EBE5E62E883B1 (ue_id), PRIMARY KEY(user_id, ue_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
@@ -61,9 +58,6 @@ final class Version20250416215409 extends AbstractMigration
         SQL);
         $this->addSql(<<<'SQL'
             ALTER TABLE ue ADD CONSTRAINT FK_2E490A9BA76ED395 FOREIGN KEY (user_id) REFERENCES user (id)
-        SQL);
-        $this->addSql(<<<'SQL'
-            ALTER TABLE user ADD CONSTRAINT FK_8D93D649D60322AC FOREIGN KEY (role_id) REFERENCES role (id)
         SQL);
         $this->addSql(<<<'SQL'
             ALTER TABLE user_ue ADD CONSTRAINT FK_361EBE5EA76ED395 FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
@@ -95,9 +89,6 @@ final class Version20250416215409 extends AbstractMigration
             ALTER TABLE ue DROP FOREIGN KEY FK_2E490A9BA76ED395
         SQL);
         $this->addSql(<<<'SQL'
-            ALTER TABLE user DROP FOREIGN KEY FK_8D93D649D60322AC
-        SQL);
-        $this->addSql(<<<'SQL'
             ALTER TABLE user_ue DROP FOREIGN KEY FK_361EBE5EA76ED395
         SQL);
         $this->addSql(<<<'SQL'
@@ -111,9 +102,6 @@ final class Version20250416215409 extends AbstractMigration
         SQL);
         $this->addSql(<<<'SQL'
             DROP TABLE post_type
-        SQL);
-        $this->addSql(<<<'SQL'
-            DROP TABLE role
         SQL);
         $this->addSql(<<<'SQL'
             DROP TABLE section
