@@ -4,12 +4,14 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -142,12 +144,21 @@ class User implements PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFkRole(): ?Role
+    public function getRoles(): array
     {
-        return $this->role;
+        $roleMap = [
+            'Admin' => 'ROLE_ADMIN',
+            'Admin & Professeur' => 'ROLE_ADMIN_PROFESSEUR',
+            'Professeur' => 'ROLE_PROFESSEUR',
+            'Étudiant' => 'ROLE_ETUDIANT',
+        ];
+
+        $label = $this->role->getLabel();
+        return [$roleMap[$label]];
     }
 
-    public function setFkRole(?Role $role): static
+
+    public function setRole(?Role $role): static
     {
         $this->role = $role;
 
@@ -176,5 +187,16 @@ class User implements PasswordAuthenticatedUserInterface
         $this->associates_ues->removeElement($associatesUe);
 
         return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
