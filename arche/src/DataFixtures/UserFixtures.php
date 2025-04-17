@@ -53,7 +53,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setEmail($data['email']);
             $user->setPhone('0600000000');
             $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
-            $user->setFkRole($this->getReference($data['role'], Role::class));
+            $user->setRole($this->getReference($data['role'], Role::class));
 
             $errors = $this->validator->validate($user);
             if (count($errors) > 0) {
