@@ -18,8 +18,8 @@ security:
             custom_authenticator: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+                target: app_login
+                
 
             remember_me:
                 secret: '%kernel.secret%'
@@ -44,6 +44,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/teacher, roles: ROLE_PROFESSEUR }
+        - { path: ^/basic, roles: ROLE_ETUDIANT }
         - { path: ^/login, roles: [] }
         - { path: ^/.*, roles: IS_AUTHENTICATED_FULLY }
 
