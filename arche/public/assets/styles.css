@@ -330,7 +330,7 @@ input:disabled {
 
 .participant-name {
     align-items: center;
-    background-color: #e9ecef;
+    background-color: #E9ECEF;
     border-radius: 50%;
     color: #343a40;
     display: inline-flex;
@@ -346,4 +346,13 @@ input:disabled {
 .post-title {
     font-size: 18px;
     text-decoration: none;
+}
+
+.post-title-message {
+    cursor: text !important;
+}
+
+.no-result {
+    font-size: large;
+    font-weight: 600;
 }

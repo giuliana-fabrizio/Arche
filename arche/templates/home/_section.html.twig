@@ -1,46 +1,57 @@
-<div id="id_section_TODO" class="accordion-item mb-5">
+<div id="id_section_{{ section.id }}" class="accordion-item mb-5">
     <div class="accordion-header">
-
         <h2 class="w-100">
             <button
-                class="accordion-button collapsed fs-5 fw-bold"
-                data-bs-target="#collapse_TODO"
+                class="accordion-button fs-5 fw-bold"
+                data-bs-target="#collapse{{ section.id }}"
                 data-bs-toggle="collapse"
                 type="button">
-                {{ section.name }}
+                {{ section.label }}
             </button>
         </h2>
-
         <div class="dropdown dropdown-plus">
             <a class="dropdown-toggle-plus" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-three-dots-vertical"></i>
             </a>
 
             <ul class="dropdown-menu dropdown-menu-end p-0">
-                <li><a class="dropdown-item text-success" href="#">Éditer</a></li>
                 <li>
-                    <a class="dropdown-item text-danger" onclick="deleteSection('id_section_TODO')">
-                        Supprimer
-                    </a>
+                    <button
+                        data-bs-toggle="modal"
+                        data-bs-target="#id_add_section_modal"
+                        class="dropdown-item text-success"
+                    >
+                        Éditer
+                    </button>
                 </li>
+                <li><a class="dropdown-item text-danger" onclick="deleteSection('id_section_1')">Supprimer</a></li>
             </ul>
         </div>
     </div>
-
-    <div id="collapse_TODO" class="accordion-collapse collapse">
-        <div id="id_body_section_TODO" class="accordion-body">
-            {# TODO vérif si la liste de post est vide #}
-                <p id="id_no_content" class="text-muted">Aucun contenu pour le moment</p>
-            {# TODO Sinon #}
-                {# TODO début boucle + changer les valeurs #}
-                <div id="id_section_1_post_1">
+    <div id="collapse{{ section.id }}" class="accordion-collapse collapse show">
+        <div class="accordion-body">
+            {% for post in section.posts %}
+                <div id="id_section_{{ section.id }}_post_{{ post.id }}">
                     <div class="align-items-center d-flex justify-content-between">
                         <div>
                             <div class="align-items-center d-flex mb-1">
-                                <image src="{{ asset('/assets/images/doc.png') }}" class="me-3 post-img">
-                                <a href="{{ asset('/files/WE4A - Moodle Simplifié (devoir retiré).pdf') }}" class="m-0 post-title">Titre du post</a>
+                                {% if post.filetype %}
+                                    <image
+                                        src="{{ asset('/assets/images/' ~ post.filetype ~ '.png') }}"
+                                        onerror="this.onerror = null; this.src = '{{ asset('/assets/images/other.png') }}';"
+                                        class="me-3 post-img"
+                                    >
+                                    <a href="{{ asset('/files/' ~ post.filename) }}" target="blank" class="m-0 post-title">
+                                        {{ post.label }}
+                                    </a>
+                                {% else %}
+                                    <image src="{{ asset('/assets/images/' ~ post.getFkPostType().label ~ '.png') }}" class="me-3 post-img">
+                                    <a role="button" class="m-0 post-title post-title-message">
+                                        {{ post.label }}
+                                    </a>
+                                {% endif %}
                             </div>
-                            <p class="ms-1">Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.</p>
+                            <p class="ms-1">{{ post.description }}</p>
                         </div>
                         <div class="d-flex flex-column justify-content-between ms-1">
                             <button
@@ -56,6 +67,7 @@
                     </div>
                     <hr>
                 </div>
+            {% endfor %}
         </div>
     </div>
 </div>
