@@ -1,7 +1,8 @@
 async function deletePost(id) {
+    const send_id = id.replace(/^id_section_\d+_post_/, '');
     if (window.confirm("Souhaitez-vous vraiment supprimer ce post ?")) {
         try {
-            const request = await fetch(`/teacher/ajax/delete/post/${id}`, {
+            const request = await fetch(`/teacher/ajax/delete/post/${send_id}`, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",
@@ -10,7 +11,7 @@ async function deletePost(id) {
             });
 
             let response = await request.text();
-            response = JSON.parse(response);
+            // response = JSON.parse(response);
 
             if (response == 200) {
                 document.getElementById(id).remove()
@@ -23,9 +24,11 @@ async function deletePost(id) {
 
 
 async function deleteSection(id) {
+    const send_id = id.replace('id_section_', '');
+    console.log("ID envoyé pour suppression :", send_id);
     if (window.confirm("Souhaitez-vous vraiment supprimer cette section et tous les posts qui lui sont rattachés ?")) {
         try {
-            const request = await fetch(`/teacher/ajax/delete/section/${id}`, {
+            const request = await fetch(`/teacher/ajax/delete/section/${send_id}`, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",
@@ -34,7 +37,7 @@ async function deleteSection(id) {
             });
 
             let response = await request.text();
-            response = JSON.parse(response);
+            //response = JSON.parse(response);
 
             if (response == 200) {
                 document.getElementById(id).remove()
