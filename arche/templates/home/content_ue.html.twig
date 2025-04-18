@@ -14,8 +14,8 @@
         {% include '/teacher/_section_form.html.twig' with {'origin': 'content_ue'} %}
 
         <div class="card p-3 mt-5 w-100">
-            <p class="badge-category">POLE Humanités / GE : Gestion</h3>
-            <h3 class="fw-bold mb-4">WE4A Technologies et programmation WEB</h3>
+            <p class="badge-category">{{ ue.getFkCategory().label }}</h3>
+            <h3 class="fw-bold mb-4">{{ ue.label }}</h3>
 
             <div class="align-items-center d-flex flex-wrap justify-content-between mb-4">
                 <ul class="nav nav-underline">
