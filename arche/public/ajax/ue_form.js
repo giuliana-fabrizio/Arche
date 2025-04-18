@@ -1,6 +1,6 @@
 async function addUe(ue) {
     try {
-        const request = await fetch(`/ajax/create/ue`, {
+        const request = await fetch(`/admin/ajax/create/ue`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -46,7 +46,7 @@ async function addUe(ue) {
 
 async function editUe(ue) {
     try {
-        const request = await fetch(`/ajax/edit/ue`, {
+        const request = await fetch(`/admin/ajax/edit/ue`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",

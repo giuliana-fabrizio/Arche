@@ -1,6 +1,6 @@
 async function addUser(user) {
     try {
-        const request = await fetch(`/ajax/create/user`, {
+        const request = await fetch(`/admin/ajax/create/user`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -49,7 +49,7 @@ async function addUser(user) {
 
 async function editUser(user) {
     try {
-        const request = await fetch(`/ajax/edit/user`, {
+        const request = await fetch(`/admin/ajax/edit/user`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",

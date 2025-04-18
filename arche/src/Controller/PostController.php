@@ -10,7 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController {
 
-    #[Route('/ajax/delete/post/{id}', name: 'app_ajax_delete_post')]
+    #[Route('/teacher/create_post', name: 'app_post_create')]
+    public function createUe() : Response {
+        return $this->render("/teacher/post_form.html.twig");
+    }
+
+
+    #[Route('/teacher/ajax/delete/post/{id}', name: 'app_ajax_delete_post')]
     public function deletePost(Request $request) : Response {
         if($request->isXmlHttpRequest()) {
             return new JsonResponse(200);

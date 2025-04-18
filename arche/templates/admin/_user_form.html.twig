@@ -31,10 +31,10 @@
             <select id="id_role_form_user" name="role" class="form-select" onchange="changeRole()" required>
                 <option value="" selected disabled hidden>Sélectionner un rôle</option>
                 <!-- TODO boucle-->
-                <option value=1>Admin</option>
-                <option value=2>Prof</option>
-                <option value=3>Admin & prof</option>
-                <option value=4>Étudiant</option>
+                <option value="ROLE_ADMIN">Administateur</option>
+                <option value="ROLE_ADMIN_PROFESSEUR">Administateur & professeur</option>
+                <option value="ROLE_PROFESSEUR">Professeur</option>
+                <option value="ROLE_ETUDIANT">Étudiant</option>
                 <!-- fin boucle -->
             </select>
         </div>

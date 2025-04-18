@@ -2,15 +2,13 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Role;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class UserFixtures extends Fixture implements DependentFixtureInterface
+class UserFixtures extends Fixture
 {
     public function __construct(
         private UserPasswordHasherInterface $passwordHasher,
@@ -24,25 +22,25 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'lastname' => 'ADMIN',
                 'firstname' => 'Admin',
                 'email' => 'admin@utbm.fr',
-                'role' => 'role_0',
+                'role' => ['ROLE_ADMIN'],
             ],
             [
                 'lastname' => 'MARTIN',
                 'firstname' => 'Matin',
                 'email' => 'matin.martin@utbm.fr',
-                'role' => 'role_1',
+                'role' => ['ROLE_ADMIN_PROFESSEUR'],
             ],
             [
                 'lastname' => 'DUPONT',
                 'firstname' => 'Pierre',
                 'email' => 'pierre.dupont@utbm.fr',
-                'role' => 'role_2',
+                'role' => ['ROLE_PROFESSEUR'],
             ],
             [
                 'lastname' => 'DURAND',
                 'firstname' => 'Marion',
                 'email' => 'marion.durand@utbm.fr',
-                'role' => 'role_3',
+                'role' => ['ROLE_ETUDIANT'],
             ],
         ];
 
@@ -53,7 +51,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setEmail($data['email']);
             $user->setPhone('0600000000');
             $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
-            $user->setFkRole($this->getReference($data['role'], Role::class));
+            $user->setRoles($data['role']);
 
             $errors = $this->validator->validate($user);
             if (count($errors) > 0) {
@@ -68,12 +66,5 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $manager->flush();
-    }
-
-    public function getDependencies(): array
-    {
-        return [
-            RoleFixtures::class,
-        ];
     }
 }

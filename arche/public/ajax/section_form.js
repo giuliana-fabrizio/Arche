@@ -1,6 +1,6 @@
 async function addSection(origin, section) {
     try {
-        const request = await fetch(`/ajax/create/section`, {
+        const request = await fetch(`/teacher/ajax/create/section`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
