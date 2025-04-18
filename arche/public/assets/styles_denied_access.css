@@ -1,0 +1,47 @@
+#id_access_denied {
+    display: flex !important;
+    justify-content: center !important;
+    max-width: 65% !important;
+}
+
+@media screen and (max-width: 1140px) {
+    #id_access_denied {
+        max-width: 90% !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #id_access_denied {
+        max-width: 100% !important;
+    }
+}
+
+svg#freepik_stories-403-error-forbidden:not(.animated) .animable {
+    opacity: 0;
+}
+
+svg#freepik_stories-403-error-forbidden.animated #freepik--Sign--inject-65 {
+    animation: 1.5s Infinite linear floating;
+    animation-delay: 0s;
+}
+
+svg#freepik_stories-403-error-forbidden.animated #freepik--Texts--inject-65 {
+    animation: 1.5s Infinite linear floating;
+    animation-delay: 0s;
+}
+
+@keyframes floating {
+    0% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
