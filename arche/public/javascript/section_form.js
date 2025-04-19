@@ -35,3 +35,8 @@ function modalSection(origin) {
         form_section.reportValidity();
     }
 }
+
+
+function wantEditSection(id) {
+    document.getElementById("id_title_modal_section").innerHTML = "Modifier une section";
+}
