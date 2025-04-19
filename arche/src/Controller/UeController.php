@@ -64,10 +64,9 @@ class UeController extends AbstractController {
         $sections = $ue->getSections();
         return $this->render(
             "/home/content_ue.html.twig",
-            [
+            [   
                 'ue' => $ue,
-                'sections' => $sections,
-                'len' => count($sections)
+                'sections' => $sections
             ]
         );
     }

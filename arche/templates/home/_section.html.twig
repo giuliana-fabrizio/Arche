@@ -2,7 +2,7 @@
     <div class="accordion-header">
         <h2 class="w-100">
             <button
-                class="accordion-button fs-5 fw-bold"
+                class="accordion-button {% if not isCollapse %} collapsed {% endif %} fs-5 fw-bold"
                 data-bs-target="#collapse{{ section.id }}"
                 data-bs-toggle="collapse"
                 type="button">
@@ -33,7 +33,7 @@
             </ul>
         </div>
     </div>
-    <div id="collapse{{ section.id }}" class="accordion-collapse collapse show">
+    <div id="collapse{{ section.id }}" class="accordion-collapse collapse {% if isCollapse %} show {% endif %}">
         <div class="accordion-body">
             {% for post in section.posts %}
                 <div id="id_section_{{ section.id }}_post_{{ post.id }}">
@@ -73,6 +73,12 @@
                     <hr>
                 </div>
             {% endfor %}
+
+            {% if section.posts|length == 0%}
+                <p class="text-center no-result">
+                    Aucun post pour cette section. Revenez plus tard !
+                </p>
+            {% endif %}
         </div>
     </div>
 </div>

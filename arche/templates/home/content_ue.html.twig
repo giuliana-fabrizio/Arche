@@ -70,10 +70,15 @@
             </div>
 
             <div id="id_cours" class="accordion">
-                {% for section in sections %}
-                    {% include 'home/_section.html.twig' with {'section': section} %}
+                {% for key, section in sections %}
+                    {% include 'home/_section.html.twig'
+                        with {
+                            'section': section,
+                            'isCollapse': key == 0
+                        }
+                    %}
                 {% endfor %}
-                {% if len == 0 %}
+                {% if sections|length == 0 %}
                     <p class="mt-2 text-center no-result">
                         Aucune section ni post pour cette UE. Revenez plus tard !
                     </p>
