@@ -42,7 +42,11 @@ function modalSection(origin) {
 }
 
 
-function wantEditSection(id) {
+function wantEditSection(id, label, ranking) {
+    document.getElementById("id_section_form").value = id;
+    document.getElementById("id_name_form_section").value = label;
+    document.getElementById("id_ranking_form_section").value = ranking;
+
     document.getElementById("id_title_modal_section").innerHTML = "Modifier une section";
     action_modal.value = "edit";
 }
