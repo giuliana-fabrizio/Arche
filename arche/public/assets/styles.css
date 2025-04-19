@@ -328,6 +328,10 @@ input:disabled {
     text-decoration: none;
 }
 
+.bg-section_actions {
+    background-color: #ffffff00 !important;
+}
+
 .participant-name {
     align-items: center;
     background-color: #E9ECEF;

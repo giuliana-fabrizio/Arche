@@ -8,7 +8,6 @@
                 id="id_name_form_section"
                 type="text"
                 name="label"
-                value=""
                 class="form-control"
                 required>
         </div>
@@ -21,7 +20,7 @@
             <select id="id_ranking_form_section" name="classement" class="form-select">
                 <option selected disabled>Choisissez la section suivante</option>
                 {% for section in sections %}
-                    <option value="{{ section.id }}">{{ section.label }}</option> <!-- TODO changer la value -->
+                    <option value="{{ section.id }}" class="ranking-option">{{ section.label }}</option> <!-- TODO changer la value -->
                 {% endfor %}
             </select>
         </div>
