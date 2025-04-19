@@ -11,7 +11,7 @@
 
 {% block body %}
     <div>
-        {% include '/teacher/_section_form.html.twig' with {'origin': 'content_ue'} %}
+        {% include '/teacher/_section_form.html.twig' with {'origin': 'content_ue', 'sections' : sections} %}
 
         <div class="card p-3 mt-5 w-100">
             <p class="badge-category">{{ ue.getFkCategory().label }}</h3>

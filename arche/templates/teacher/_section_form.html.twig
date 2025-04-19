@@ -32,10 +32,9 @@
 
                             <select id="id_classement_form_section" name="classement" class="form-select">
                                 <option selected disabled>Choisissez la section suivante</option>
-                                <!-- TODO boucle -->
-                                <option value="1">Section 1</option> <!-- TODO changer la value -->
-                                <option value="2">Section 2</option>
-                                <!-- TODO fin boucle -->
+                                {% for section in sections %}
+                                    <option value="{{ section.id }}">{{ section.label }}</option> <!-- TODO changer la value -->
+                                {% endfor %}
                             </select>
                         </div>
 
