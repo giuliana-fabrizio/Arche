@@ -11,7 +11,32 @@
 
 {% block body %}
     <div>
-        {% include '/teacher/_section_form.html.twig' with {'origin': 'content_ue', 'sections' : sections} %}
+        <div id="id_add_section_modal" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="id_title_modal_section" class="modal-title">Ajouter une section</h5>
+                        <span id="id_action_modal_section" hidden>add</span>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% include '/teacher/_section_form.html.twig'
+                            with {
+                                'origin': 'content_ue',
+                                'id_ue' : ue.id,
+                                'sections' : sections
+                            }
+                        %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="card p-3 mt-5 w-100">
             <p class="badge-category">{{ ue.getFkCategory().label }}</h3>

@@ -1,3 +1,4 @@
+const action_modal = document.getElementById("id_action_modal_section");
 const modalElement = document.getElementById('id_add_section_modal');
 const form_section = document.getElementById('id_form_section');
 
@@ -29,7 +30,11 @@ function modalSection(origin) {
             formData[key] = value;
         });
 
-        addSection(origin, formData);
+        if (action_modal.innerText == "add") {
+            addSection(origin, formData);
+        } else {
+            editSection(formData);
+        }
         closeModalSection();
     } else {
         form_section.reportValidity();
@@ -39,4 +44,5 @@ function modalSection(origin) {
 
 function wantEditSection(id) {
     document.getElementById("id_title_modal_section").innerHTML = "Modifier une section";
+    action_modal.value = "edit";
 }

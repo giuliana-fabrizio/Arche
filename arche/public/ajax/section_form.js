@@ -16,8 +16,8 @@ async function addSection(origin, section) {
                 const select_section = document.getElementById("id_section_post");
                 const option = document.createElement("option");
 
-                option.value = section['name']; // TODO mettre l'id
-                option.innerHTML = section['name'];
+                option.value = response.section_id;
+                option.innerHTML = response.section_name;
                 option.selected = true;
 
                 select_section.appendChild(option);

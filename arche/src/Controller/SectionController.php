@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Section;
+use App\Repository\UeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SectionController extends AbstractController {
 
     public function __construct(
+        private readonly UeRepository $ueRepository,
         private EntityManagerInterface $entityManager
     ) {
     }
@@ -25,12 +27,29 @@ class SectionController extends AbstractController {
         }
 
         $data = json_decode($request->getContent(), true);
+        $ue = $this->ueRepository->find($data['ue_id']);
+
+        $section = new Section();
+        $section->setLabel($data['label']);
+        $section->setFkUe($ue);
+
+        if (!empty($data['classement'])) {
+            $section->setRanking($data['classement']);
+        }
+
+        $this->entityManager->persist($section);
+        $this->entityManager->flush();
 
         $html = $this->renderView('home/_section.html.twig', [
-            'section' => $data,
+            'section' => $section,
         ]);
 
-        return new JsonResponse([ 'code' => 200, 'html' => $html ]);
+        return new JsonResponse([
+            'code' => 200,
+            'html' => $html,
+            'section_id' => $section->getId(), // utile pour le front
+            'section_name' => $section->getLabel()
+        ]);
     }
 
 
