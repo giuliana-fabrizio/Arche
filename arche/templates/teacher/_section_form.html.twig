@@ -14,11 +14,11 @@
         </div>
 
         <div class="mb-4">
-            <label for="id_classement_form_section" class="form-label">
+            <label for="id_ranking_form_section" class="form-label">
                 Position de la section (laisser vide pour la placer à la fin)
             </label>
 
-            <select id="id_classement_form_section" name="classement" class="form-select">
+            <select id="id_ranking_form_section" name="classement" class="form-select">
                 <option selected disabled>Choisissez la section suivante</option>
                 {% for section in sections %}
                     <option value="{{ section.id }}">{{ section.label }}</option> <!-- TODO changer la value -->

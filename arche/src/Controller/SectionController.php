@@ -48,7 +48,7 @@ class SectionController extends AbstractController {
             'code' => 200,
             'html' => $html,
             'section_id' => $section->getId(), // utile pour le front
-            'section_name' => $section->getLabel()
+            'section_label' => $section->getLabel()
         ]);
     }
 
