@@ -44,45 +44,7 @@
     <div id="collapse{{ section.id }}" class="accordion-collapse collapse {% if isCollapse %} show {% endif %}">
         <div class="accordion-body">
             {% for post in section.posts %}
-                <div id="id_section_{{ section.id }}_post_{{ post.id }}">
-                    <div class="align-items-center d-flex justify-content-between">
-                        <div>
-                            <div class="align-items-center d-flex mb-1">
-                                {% if post.filetype %}
-                                    <image
-                                        src="{{ asset('/assets/images/' ~ post.filetype ~ '.png') }}"
-                                        onerror="this.onerror = null; this.src = '{{ asset('/assets/images/other.png') }}';"
-                                        class="me-3 post-img"
-                                    >
-                                    <a href="{{ asset('/files/' ~ post.filename) }}" target="blank" class="m-0 post-title">
-                                        {{ post.label }}
-                                    </a>
-                                {% else %}
-                                    <image src="{{ asset('/assets/images/' ~ post.getFkPostType().label ~ '.png') }}" class="me-3 post-img">
-                                    <a role="button" class="m-0 post-title post-title-message">
-                                        {{ post.label }}
-                                    </a>
-                                {% endif %}
-                            </div>
-                            <p class="ms-1">{{ post.description }}</p>
-                        </div>
-
-                        {% if is_granted('ROLE_PROFESSEUR') %}
-                            <div class="d-flex flex-column justify-content-between ms-1">
-                                <button
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#id_add_modal"
-                                    class="btn btn-success btn-sm mb-2">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
-                                <button onclick="deletePost('id_section_{{ section.id }}_post_{{ post.id }}')" class="btn btn-danger btn-sm">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <hr>
-                </div>
+                {% include '/home/_post.html.twig' with { 'id_section': section.id, 'post': post } %}
             {% endfor %}
 
             <p
