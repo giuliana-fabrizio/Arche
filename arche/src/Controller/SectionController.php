@@ -22,8 +22,14 @@ class SectionController extends AbstractController {
     ) {
     }
 
+
     private function updateSectionsRanking(Ue $ue, Int $id_section, Int $start_ranking, Int $stop_ranking) {
-        $sections = $this->sectionRepository->getSectionsToUpdateRanking($ue, $id_section, $start_ranking, $stop_ranking);
+        $sections = $this->sectionRepository->getSectionsToUpdateRanking(
+            $ue,
+            $id_section,
+            $start_ranking,
+            $stop_ranking
+        );
 
         foreach ($sections as $section) {
             $ranking = $section->getRanking();
@@ -50,6 +56,20 @@ class SectionController extends AbstractController {
 
         if (!empty($data['classement'])) {
             $section->setRanking((int) $data['classement']);
+        }
+
+        $count_sections = $this->sectionRepository->countSections($section->getFkUe());
+
+        if (!empty($data['classement'])) {
+            $this->updateSectionsRanking(
+                $section->getFkUe(),
+                0,
+                $count_sections + 1,
+                (int) $data['classement']
+            );
+            $section->setRanking((int) $data['classement']);
+        } else {
+            $section->setRanking($count_sections + 1);
         }
 
         $this->entityManager->persist($section);

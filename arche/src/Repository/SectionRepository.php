@@ -17,11 +17,11 @@ class SectionRepository extends ServiceEntityRepository
         parent::__construct($registry, Section::class);
     }
 
-       /**
-        * @return Section[] Returns an array of Section objects
-        */
-       public function getSectionsWithPostsOrdered(Ue $ue): array
-       {
+        /**
+            * @return Section[] Returns an array of Section objects
+            */
+        public function getSectionsWithPostsOrdered(Ue $ue): array
+        {
             return $this->createQueryBuilder('s')
                 ->leftJoin('s.posts', 'p')
                 ->addSelect('p')
@@ -33,11 +33,11 @@ class SectionRepository extends ServiceEntityRepository
                 ->getResult();
        }
 
-       /**
-        * @return Section[] Returns an array of Section objects
-        */
-       public function getSectionsToUpdateRanking(Ue $ue, Int $id_section, Int $start_ranking, Int $stop_ranking): array
-       {
+        /**
+            * @return Section[] Returns an array of Section objects
+            */
+        public function getSectionsToUpdateRanking(Ue $ue, Int $id_section, Int $start_ranking, Int $stop_ranking): array
+        {
             $request = $this->createQueryBuilder('s')
                 ->where('s.fk_ue = :ue')
                 ->andWhere('s.id != :id_section');
@@ -59,4 +59,17 @@ class SectionRepository extends ServiceEntityRepository
                 ->getQuery()
                 ->getResult();
        }
+
+        /**
+            * @return Int Returns number of Section objects
+            */
+        public function countSections(Ue $ue): int
+        {
+            return $this->createQueryBuilder('s')
+                ->select('count(s.id)')
+                ->where('s.fk_ue = :ue')
+                ->setParameter('ue', $ue)
+                ->getQuery()
+                ->getSingleScalarResult();;
+        }
 }
