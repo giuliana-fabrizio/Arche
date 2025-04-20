@@ -1,61 +1,58 @@
-<div id="id_section_TODO" class="accordion-item mb-5">
+<div id="id_section_{{ section.id }}" class="accordion-item mb-5">
     <div class="accordion-header">
-
         <h2 class="w-100">
             <button
-                class="accordion-button collapsed fs-5 fw-bold"
-                data-bs-target="#collapse_TODO"
+                id="id_label_section"
+                class="accordion-button {% if not isCollapse %} collapsed {% endif %} fs-5 fw-bold"
+                data-bs-target="#collapse{{ section.id }}"
                 data-bs-toggle="collapse"
                 type="button">
-                {{ section.name }}
+                {{ section.label }}
             </button>
         </h2>
 
-        <div class="dropdown dropdown-plus">
-            <a class="dropdown-toggle-plus" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-three-dots-vertical"></i>
-            </a>
+        {% if is_granted('ROLE_PROFESSEUR') %}
+            <div class="dropdown dropdown-plus">
+                <a class="dropdown-toggle-plus" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a>
 
-            <ul class="dropdown-menu dropdown-menu-end p-0">
-                <li><a class="dropdown-item text-success" href="#">Éditer</a></li>
-                <li>
-                    <a class="dropdown-item text-danger" onclick="deleteSection('id_section_TODO')">
-                        Supprimer
-                    </a>
-                </li>
-            </ul>
-        </div>
+                <ul class="dropdown-menu dropdown-menu-end p-0">
+                    <li>
+                        <button
+                            id="id_btn_edit_section"
+                            data-bs-toggle="modal"
+                            data-bs-target="#id_add_section_modal"
+                            onclick="wantEditSection('{{ section.id }}', '{{ section.label }}', '{{ section.ranking }}')"
+                            class="dropdown-item text-success bg-section-actions"
+                        >
+                            Éditer
+                        </button>
+                    </li>
+                    <li>
+                        <a
+                            class="dropdown-item text-danger bg-section-actions"
+                            onclick="deleteSection('id_section_{{ section.id }}')"
+                        >
+                            Supprimer
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
     </div>
+    <div id="collapse{{ section.id }}" class="accordion-collapse collapse {% if isCollapse %} show {% endif %}">
+        <div class="accordion-body">
+            {% for post in section.posts %}
+                {% include '/home/_post.html.twig' with { 'id_section': section.id, 'post': post } %}
+            {% endfor %}
 
-    <div id="collapse_TODO" class="accordion-collapse collapse">
-        <div id="id_body_section_TODO" class="accordion-body">
-            {# TODO vérif si la liste de post est vide #}
-                <p id="id_no_content" class="text-muted">Aucun contenu pour le moment</p>
-            {# TODO Sinon #}
-                {# TODO début boucle + changer les valeurs #}
-                <div id="id_section_1_post_1">
-                    <div class="align-items-center d-flex justify-content-between">
-                        <div>
-                            <div class="align-items-center d-flex mb-1">
-                                <image src="{{ asset('/assets/images/doc.png') }}" class="me-3 post-img">
-                                <a href="{{ asset('/files/WE4A - Moodle Simplifié (devoir retiré).pdf') }}" class="m-0 post-title">Titre du post</a>
-                            </div>
-                            <p class="ms-1">Lorem ipsum dolor sit amet consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit quisque faucibus.</p>
-                        </div>
-                        <div class="d-flex flex-column justify-content-between ms-1">
-                            <button
-                                data-bs-toggle="modal"
-                                data-bs-target="#id_add_modal"
-                                class="btn btn-success btn-sm mb-2">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            <button onclick="deletePost('id_section_1_post_1')" class="btn btn-danger btn-sm">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
+            <p
+                id="id_ajax_no_post"
+                class="text-center no-result"
+                style="display: {% if section.posts|length == 0%} block {% else %} none {% endif %};">
+                Aucun post pour cette section. Revenez plus tard !
+            </p>
         </div>
     </div>
 </div>

@@ -3,12 +3,22 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Ue;
+use App\Repository\UeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UeController extends AbstractController {
+
+    public function __construct(
+        private readonly UeRepository $ueRepository,
+        private EntityManagerInterface $entityManager
+    ) {
+    }
+
 
     #[Route('/admin/ajax/create/ue', name: 'app_ajax_ue_create', methods: ['POST'])]
     public function createUe(Request $request) : Response {
@@ -49,8 +59,15 @@ class UeController extends AbstractController {
     }
 
 
-    #[Route('/basic/ue', name: 'app_ue_content')]
-    public function getUe() : Response {
-        return $this->render("/home/content_ue.html.twig");
+    #[Route('/basic/ue/{id}', name: 'app_ue_content')]
+    public function getUe(Ue $ue) : Response {
+        $sections = $ue->getSections();
+        return $this->render(
+            "/home/content_ue.html.twig",
+            [   
+                'ue' => $ue,
+                'sections' => $sections
+            ]
+        );
     }
 }

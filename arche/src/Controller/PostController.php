@@ -59,11 +59,15 @@ class PostController extends AbstractController {
     }
 
 
-    #[Route('/teacher/ajax/delete/post/{id}', name: 'app_ajax_delete_post')]
-    public function deletePost(Request $request) : Response {
-        if($request->isXmlHttpRequest()) {
-            return new JsonResponse(200);
+    #[Route('/teacher/ajax/delete/post/{id}', name: 'app_ajax_delete_post', methods: ['DELETE'])]
+    public function deletePost(Request $request, Post $post) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
         }
-        return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+
+        $this->entityManager->remove($post);
+        $this->entityManager->flush();
+
+        return new JsonResponse(200);
     }
 }

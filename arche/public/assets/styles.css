@@ -328,9 +328,13 @@ input:disabled {
     text-decoration: none;
 }
 
+.bg-section-actions {
+    background-color: #ffffff00 !important;
+}
+
 .participant-name {
     align-items: center;
-    background-color: #e9ecef;
+    background-color: #E9ECEF;
     border-radius: 50%;
     color: #343a40;
     display: inline-flex;

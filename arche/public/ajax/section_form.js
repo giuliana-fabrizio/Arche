@@ -16,8 +16,8 @@ async function addSection(origin, section) {
                 const select_section = document.getElementById("id_section_post");
                 const option = document.createElement("option");
 
-                option.value = section['name']; // TODO mettre l'id
-                option.innerHTML = section['name'];
+                option.value = response.section_id;
+                option.innerHTML = response.section_label;
                 option.selected = true;
 
                 select_section.appendChild(option);
@@ -25,6 +25,35 @@ async function addSection(origin, section) {
                 const cours = document.getElementById("id_cours");
                 cours.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
             }
+
+            document.getElementById("id_ajax_no_result").style.display = "none";
+        }
+    } catch (error) {
+        console.error("Erreur lors de l'ajout de section:", error);
+    }
+}
+
+
+async function editSection(data) {
+    try {
+        console.log(data)
+        const request = await fetch(`/teacher/ajax/edit/section/${data.id_section}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-with": "XMLHttpRequest"
+            },
+            body: JSON.stringify(data),
+        });
+
+        const response = await request.json();
+
+        if (response.code == 200) {
+            document.getElementById("id_label_section").innerHTML = response.section_label;
+
+            document.getElementById("id_btn_edit_section").addEventListener("click", function () {
+                wantEditSection(data.id_section, response.section_label, response.section_ranking);
+            });
         }
     } catch (error) {
         console.error("Erreur lors de l'ajout de section:", error);
