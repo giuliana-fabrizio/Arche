@@ -78,11 +78,13 @@
                         }
                     %}
                 {% endfor %}
-                {% if sections|length == 0 %}
-                    <p class="mt-2 text-center no-result">
-                        Aucune section ni post pour cette UE. Revenez plus tard !
-                    </p>
-                {% endif %}
+                <p
+                    id="id_ajax_no_result"
+                    class="mt-2 text-center no-result"
+                    style="display: {% if sections|length == 0 %} block {% else %} none {% endif %};"
+                >
+                    Aucune section ni post pour cette UE. Revenez plus tard !
+                </p>
             </div>
 
             <div id="id_participants" class="accordion" style="display: none;">

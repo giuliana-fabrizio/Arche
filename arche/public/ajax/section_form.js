@@ -25,6 +25,8 @@ async function addSection(origin, section) {
                 const cours = document.getElementById("id_cours");
                 cours.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
             }
+
+            document.getElementById("id_ajax_no_result").style.display = "none";
         }
     } catch (error) {
         console.error("Erreur lors de l'ajout de section:", error);

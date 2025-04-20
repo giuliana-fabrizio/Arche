@@ -42,12 +42,13 @@ class SectionController extends AbstractController {
 
         $html = $this->renderView('home/_section.html.twig', [
             'section' => $section,
+            'isCollapse' => false
         ]);
 
         return new JsonResponse([
             'code' => 200,
             'html' => $html,
-            'section_id' => $section->getId(), // utile pour le front
+            'section_id' => $section->getId(),
             'section_label' => $section->getLabel()
         ]);
     }

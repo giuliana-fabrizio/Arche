@@ -42,6 +42,10 @@ async function deleteSection(id) {
             if (response == 200) {
                 document.getElementById(id).remove()
             }
+            const actions = document.querySelectorAll(".bg-section-actions");
+            if (actions.length == 0) {
+                document.getElementById("id_ajax_no_result").style.display = "block";
+            }
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
         }
