@@ -32,4 +32,31 @@ class SectionRepository extends ServiceEntityRepository
                 ->getQuery()
                 ->getResult();
        }
+
+       /**
+        * @return Section[] Returns an array of Section objects
+        */
+       public function getSectionsToUpdateRanking(Ue $ue, Int $id_section, Int $start_ranking, Int $stop_ranking): array
+       {
+            $request = $this->createQueryBuilder('s')
+                ->where('s.fk_ue = :ue')
+                ->andWhere('s.id != :id_section');
+
+            if ($start_ranking < $stop_ranking) {
+                $request
+                    ->andWhere('s.ranking > :start_ranking')
+                    ->andWhere('s.ranking <= :stop_ranking');
+            } else {
+                $request
+                    ->andWhere('s.ranking < :start_ranking')
+                    ->andWhere('s.ranking >= :stop_ranking');
+            }
+            return $request
+                ->setParameter('ue', $ue)
+                ->setParameter('id_section', $id_section)
+                ->setParameter('start_ranking', $start_ranking)
+                ->setParameter('stop_ranking', $stop_ranking)
+                ->getQuery()
+                ->getResult();
+       }
 }

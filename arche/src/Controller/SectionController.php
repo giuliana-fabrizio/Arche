@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Section;
+use App\Entity\Ue;
+use App\Repository\SectionRepository;
 use App\Repository\UeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,9 +16,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class SectionController extends AbstractController {
 
     public function __construct(
+        private readonly SectionRepository $sectionRepository,
         private readonly UeRepository $ueRepository,
         private EntityManagerInterface $entityManager
     ) {
+    }
+
+    private function updateSectionsRanking(Ue $ue, Int $id_section, Int $start_ranking, Int $stop_ranking) {
+        $sections = $this->sectionRepository->getSectionsToUpdateRanking($ue, $id_section, $start_ranking, $stop_ranking);
+
+        foreach ($sections as $section) {
+            $ranking = $section->getRanking();
+            $section->setRanking(($start_ranking < $stop_ranking) ? $ranking - 1 : $ranking + 1);
+        }
+
+        $this->entityManager->flush();
     }
 
 
@@ -29,12 +43,13 @@ class SectionController extends AbstractController {
         $data = json_decode($request->getContent(), true);
         $ue = $this->ueRepository->find($data['id_ue']);
 
-        $section = new Section();
-        $section->setLabel($data['label']);
-        $section->setFkUe($ue);
+        $section = new Section()
+            ->setLabel($data['label'])
+            ->setFkUe($ue)
+            ->setFkUser($this->getUser());
 
         if (!empty($data['classement'])) {
-            $section->setRanking($data['classement']);
+            $section->setRanking((int) $data['classement']);
         }
 
         $this->entityManager->persist($section);
@@ -65,7 +80,13 @@ class SectionController extends AbstractController {
         $section->setLabel($data['label']);
 
         if (!empty($data['classement'])) {
-            $section->setRanking($data['classement']);
+            $this->updateSectionsRanking(
+                $section->getFkUe(),
+                $section->getId(),
+                $section->getRanking(),
+                (int) $data['classement']
+            );
+            $section->setRanking((int) $data['classement']);
         }
 
         $this->entityManager->flush();
