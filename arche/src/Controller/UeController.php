@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Ue;
-use App\Repository\UeRepository;
+use App\Repository\SectionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UeController extends AbstractController {
 
     public function __construct(
-        private readonly UeRepository $ueRepository,
+        private readonly SectionRepository $sectionRepository,
         private EntityManagerInterface $entityManager
     ) {
     }
@@ -61,7 +61,8 @@ class UeController extends AbstractController {
 
     #[Route('/basic/ue/{id}', name: 'app_ue_content')]
     public function getUe(Ue $ue) : Response {
-        $sections = $ue->getSections();
+        $sections = $this->sectionRepository->getSectionsWithPostsOrdered($ue);
+
         return $this->render(
             "/home/content_ue.html.twig",
             [   
