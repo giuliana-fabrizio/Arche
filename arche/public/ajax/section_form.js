@@ -36,7 +36,6 @@ async function addSection(origin, section) {
 
 async function editSection(data) {
     try {
-        console.log(data)
         const request = await fetch(`/teacher/ajax/edit/section/${data.id_section}`, {
             method: 'PUT',
             headers: {
@@ -49,7 +48,7 @@ async function editSection(data) {
         const response = await request.json();
 
         if (response.code == 200) {
-            document.getElementById("id_label_section").innerHTML = response.section_label;
+            document.getElementById(`id_label_section_${data.id_section}`).innerHTML = response.section_label;
 
             document.getElementById("id_btn_edit_section").addEventListener("click", function () {
                 wantEditSection(data.id_section, response.section_label, response.section_ranking);
