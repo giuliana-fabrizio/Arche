@@ -55,7 +55,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {% include '/teacher/post_form.html.twig'
+                        {% include '/teacher/_post_form.html.twig'
                             with {
                                 'origin': 'content_ue',
                                 'id_ue' : ue.id,
@@ -92,13 +92,15 @@
                             data-bs-target="#id_add_section_modal">
                             Ajouter une section
                         </button>
-                        <a
+                        <button
                             id="id_btn_add_post"
+                            onclick="getPostType()"
+                            type="button"
                             class="btn btn-primary mt-2 mt-md-0"
                             data-bs-toggle="modal"
                             data-bs-target="#id_add_post_modal">
                             Ajouter un post
-                        </a>
+                        </button>
                     </div>
                 {% endif %}
             </div>

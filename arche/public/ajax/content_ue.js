@@ -14,7 +14,7 @@ async function deletePost(id) {
             // response = JSON.parse(response);
 
             if (response == 200) {
-                document.getElementById(id).remove()
+                document.getElementById(id).remove();
             }
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
