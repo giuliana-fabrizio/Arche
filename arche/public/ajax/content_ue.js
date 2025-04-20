@@ -25,7 +25,6 @@ async function deletePost(id) {
 
 async function deleteSection(id) {
     const send_id = id.replace('id_section_', '');
-    console.log("ID envoyé pour suppression :", send_id);
     if (window.confirm("Souhaitez-vous vraiment supprimer cette section et tous les posts qui lui sont rattachés ?")) {
         try {
             const request = await fetch(`/teacher/ajax/delete/section/${send_id}`, {
