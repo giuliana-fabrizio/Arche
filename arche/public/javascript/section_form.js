@@ -53,5 +53,5 @@ function wantEditSection(id, label, ranking) {
     });
 
     document.getElementById("id_title_modal_section").innerHTML = "Modifier une section";
-    action_modal.value = "edit";
+    action_modal.innerHTML = "edit";
 }

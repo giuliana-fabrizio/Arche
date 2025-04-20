@@ -27,7 +27,7 @@ class SectionController extends AbstractController {
         }
 
         $data = json_decode($request->getContent(), true);
-        $ue = $this->ueRepository->find($data['ue_id']);
+        $ue = $this->ueRepository->find($data['id_ue']);
 
         $section = new Section();
         $section->setLabel($data['label']);
