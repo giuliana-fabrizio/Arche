@@ -44,40 +44,34 @@ class PostController extends AbstractController {
     }
 
 
-    #[Route('/teacher/ajax/create/post', name: 'app_ajax_post_create', methods: ['POST'])]
+#[Route('/teacher/ajax/create/post', name: 'app_ajax_post_create', methods: ['POST'])]
     public function createUe(Request $request) : Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
         }
 
         $data = json_decode($request->getContent(), true);
+        $section = $this->sectionRepository->find($data['id_section']);
 
         $post = new Post();
-        $post->setDatetime(new \DateTime());
-        $post->setDescription($data['description']);
-        $post->setLabel($data['title']);
-
-        $section = $this->sectionRepository->find($data['id_section']);
-        $post->setFkSection($section);
-
-        $user = $this->getUser();
-        $post->setFkUser($user);
+        $post = (new Post())
+            ->setLabel($data['id_title'])
+            ->setDescription($data['id_description'])
+            ->setDatetime(new \DateTime())
+            ->setFkUser($this->getUser())
+            ->setFkSection($section);
 
         // TODO pinned
 
-        if (!empty($data['post_type'])) {
-            $post_type = $this->postTypeRepository->find($data['post_type']);
-            $post->setFkPostType($post_type);
+        if (!empty($data['id_type'])) {
+            $postType = $this->postTypeRepository->find($data['id_type']);
+            $post->setFkPostType($postType);
         } else {
-            $post->setFilename($data['filename']);
-
-            preg_match('/\.([a-zA-Z0-9]+)$/', $data['filename'], $matches);
-            $filetype = strtolower($matches[1]);
-            $post->setFiletype($filetype);
+            // TODO upload ici :)
         }
 
-        if (!empty($data['classement'])) {
-            $section->setRanking($data['classement']);
+        if (isset($data['id_classement']) && is_numeric($data['id_classement'])) {
+            $post->setRanking((int) $data['id_classement']);
         }
 
         $this->entityManager->persist($post);

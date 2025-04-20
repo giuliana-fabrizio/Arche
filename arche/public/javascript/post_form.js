@@ -1,6 +1,6 @@
 const action_post_modal = document.getElementById("id_action_modal_post");
 const modal_post = document.getElementById('id_add_post_modal');
-const form_post = document.getElementById('id_form_post_text'); // TODO form file
+const form_post = document.getElementById('id_form_post'); // TODO form file
 
 document.addEventListener('DOMContentLoaded', function () {
     modal_post.addEventListener('hidden.bs.modal', function () {
@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function changePostTabs(dest) {
     if (dest == "text") {
-        document.getElementById("id_form_post_text").style.display = "block";
+        document.getElementById("id_post_form_text").style.display = "block";
         document.getElementById("id_text_tabs").classList.add("active");
-        document.getElementById("id_form_post_file").style.display = "none";
+        document.getElementById("id_post_form_file").style.display = "none";
         document.getElementById("id_file_tabs").classList.remove("active");
     } else {
-        document.getElementById("id_form_post_file").style.display = "block";
+        document.getElementById("id_post_form_file").style.display = "block";
         document.getElementById("id_file_tabs").classList.add("active");
-        document.getElementById("id_form_post_text").style.display = "none";
+        document.getElementById("id_post_form_text").style.display = "none";
         document.getElementById("id_text_tabs").classList.remove("active");
     }
 }
@@ -29,6 +29,7 @@ function changePostTabs(dest) {
 
 function clearPostForm() {
     form_post.reset();
+    document.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
 }
 
 
@@ -43,20 +44,34 @@ function displaySectionForm() {
 }
 
 
-function modalPost() {
-    if (form_post.checkValidity()) {
-        const formData = {};
-        new FormData(form_post).forEach((value, key) => {
-            formData[key] = value;
-        });
+function isTabsText() {
+    return document.getElementById("id_post_form_text").style.display == "" ||
+    document.getElementById("id_post_form_text").style.display == "block";
+}
 
-        if (action_post_modal.innerText == "add") {
-            addPost(formData);
+
+function modalPost() {
+    const formElements = form_post.querySelectorAll("input, textarea, select");
+    const formData = {};
+    let errors = "";
+
+    formElements.forEach(element => {
+        const key = element.name;
+        const value = element.value.trim();
+
+        if (
+            (!["id_classement", "id_post", "id_file"].includes(key)) &&
+            ((element.tagName === "SELECT" && element.options[element.selectedIndex].disabled) || (value === ""))
+        ) {
+            const label = document.querySelector(`label[for="${key}_post_form"]`);
+            errors += `- ${label.textContent} ;\n`;
         } else {
-            editPost(formData);
+            formData[key] = value;
         }
-        closeModalPost();
-    } else {
-        form_post.reportValidity();
-    }
+    });
+
+    if (errors != "") return alert(`Veuillez remplir tous les champs requis :\n${errors}`);
+
+    action_post_modal.innerText === "add" ? addPost(formData) : editPost(formData);
+    closeModalPost();
 }
