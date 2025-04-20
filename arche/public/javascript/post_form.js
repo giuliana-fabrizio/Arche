@@ -1,6 +1,15 @@
 const action_post_modal = document.getElementById("id_action_modal_post");
 const modal_post = document.getElementById('id_add_post_modal');
-const form_post = document.getElementById('id_form_post_text');
+const form_post = document.getElementById('id_form_post_text'); // TODO form file
+
+document.addEventListener('DOMContentLoaded', function () {
+    modal_post.addEventListener('hidden.bs.modal', function () {
+        const id_post = document.getElementById("id_section_form");
+        id_post.value = "";
+
+        clearPostForm();
+    });
+});
 
 
 function changePostTabs(dest) {
@@ -15,6 +24,11 @@ function changePostTabs(dest) {
         document.getElementById("id_form_post_text").style.display = "none";
         document.getElementById("id_text_tabs").classList.remove("active");
     }
+}
+
+
+function clearPostForm() {
+    form_post.reset();
 }
 
 

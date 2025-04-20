@@ -37,6 +37,8 @@ async function getPostType() {
 
         if (response.code == 200) {
             const select = document.getElementById("id_type_post_form");
+            removeAllChildNodes(select);
+
             const post_types = response.post_type;
 
             post_types.forEach(type => {
@@ -49,4 +51,10 @@ async function getPostType() {
     } catch (error) {
         console.error("Erreur lors de l'ajout de section:", error);
     }
+}
+
+
+function removeAllChildNodes(parent) {
+    const options = parent.querySelectorAll("option:not([disabled])");
+    options.forEach(option => option.remove());
 }
