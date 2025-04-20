@@ -347,3 +347,18 @@ input:disabled {
     font-size: 18px;
     text-decoration: none;
 }
+
+.post-title-message {
+    cursor: text !important;
+}
+
+.no-result {
+    font-weight: 600;
+}
+
+
+/* ========================================================================= post form */
+
+#id_display_section_form .btn-primary {
+    background-color: #6da8fd !important;
+}
