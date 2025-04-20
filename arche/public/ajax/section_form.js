@@ -50,6 +50,10 @@ async function editSection(data) {
 
         if (response.code == 200) {
             document.getElementById("id_label_section").innerHTML = response.section_label;
+
+            document.getElementById("id_btn_edit_section").addEventListener("click", function () {
+                wantEditSection(data.id_section, response.section_label, response.section_ranking);
+            });
         }
     } catch (error) {
         console.error("Erreur lors de l'ajout de section:", error);
