@@ -125,6 +125,15 @@ class SectionController extends AbstractController {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
         }
 
+        $count_sections = $this->sectionRepository->countSections($section->getFkUe());
+
+        $this->updateSectionsRanking(
+            $section->getFkUe(),
+            $section->getId(),
+            $section->getRanking(),
+            $count_sections + 1
+        );
+
         $this->entityManager->remove($section);
         $this->entityManager->flush();
 
