@@ -32,3 +32,26 @@ async function addSection(origin, section) {
         console.error("Erreur lors de l'ajout de section:", error);
     }
 }
+
+
+async function editSection(data) {
+    try {
+        console.log(data)
+        const request = await fetch(`/teacher/ajax/edit/section/${data.id_section}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-with": "XMLHttpRequest"
+            },
+            body: JSON.stringify(data),
+        });
+
+        const response = await request.json();
+
+        if (response.code == 200) {
+            document.getElementById("id_label_section").innerHTML = response.section_label;
+        }
+    } catch (error) {
+        console.error("Erreur lors de l'ajout de section:", error);
+    }
+}

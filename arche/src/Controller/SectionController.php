@@ -54,6 +54,30 @@ class SectionController extends AbstractController {
     }
 
 
+    #[Route('/teacher/ajax/edit/section/{id}', name: 'app_ajax_section_edit', methods: ['PUT'])]
+    public function editSection(Request $request, Section $section) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        $section->setLabel($data['label']);
+
+        if (!empty($data['classement'])) {
+            $section->setRanking($data['classement']);
+        }
+
+        $this->entityManager->flush();
+
+        return new JsonResponse([
+            'code' => 200,
+            'section_label' => $section->getLabel(),
+            'section_ranking' => $section->getRanking()
+        ]);
+    }
+
+
     #[Route('/teacher/ajax/delete/section/{id}', name: 'app_ajax_delete_section', methods: ['DELETE'])]
     public function deleteSection(Request $request, Section $section): Response {
         if(!$request->isXmlHttpRequest()) {
