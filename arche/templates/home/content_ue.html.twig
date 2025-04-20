@@ -52,21 +52,25 @@
                     </li>
                 </ul>
 
-                <div class="align-items-center d-flex flex-wrap">
-                    <button
-                        type="button"
-                        class="btn btn-primary me-2 mt-2 mt-md-0"
-                        data-bs-toggle="modal"
-                        data-bs-target="#id_add_section_modal">
-                        Ajouter une section
-                    </button>
-                    <a
-                        id="id_btn_add_post"
-                        href="{{ path('app_post_create') }}"
-                        class="btn btn-primary mt-2 mt-md-0">
-                        Ajouter un post
-                    </a>
-                </div>
+                {% if is_granted('ROLE_PROFESSEUR') %}
+                    <div class="align-items-center d-flex flex-wrap">
+                        <button
+                            id="id_btn_add_section"
+                            type="button"
+                            class="btn btn-primary me-2 mt-2 mt-md-0"
+                            data-bs-toggle="modal"
+                            data-bs-target="#id_add_section_modal">
+                            Ajouter une section
+                        </button>
+                        <a
+                            id="id_btn_add_post"
+                            class="btn btn-primary mt-2 mt-md-0"
+                            data-bs-toggle="modal"
+                            data-bs-target="#id_add_post_modal">
+                            Ajouter un post
+                        </a>
+                    </div>
+                {% endif %}
             </div>
 
             <div id="id_cours" class="accordion">
