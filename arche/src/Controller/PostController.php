@@ -44,7 +44,7 @@ class PostController extends AbstractController {
     }
 
 
-#[Route('/teacher/ajax/create/post', name: 'app_ajax_post_create', methods: ['POST'])]
+    #[Route('/teacher/ajax/create/post', name: 'app_ajax_post_create', methods: ['POST'])]
     public function createUe(Request $request) : Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
@@ -54,8 +54,7 @@ class PostController extends AbstractController {
         $section = $this->sectionRepository->find($data['id_section']);
 
         $post = new Post();
-        $post = (new Post())
-            ->setLabel($data['id_title'])
+        $post->setLabel($data['id_title'])
             ->setDescription($data['id_description'])
             ->setDatetime(new \DateTime())
             ->setFkUser($this->getUser())
@@ -85,6 +84,45 @@ class PostController extends AbstractController {
         }
 
         return new JsonResponse(['code' => 200, 'html' => $html, 'id_post' => $post->getId()]);
+    }
+
+
+    #[Route('/teacher/ajax/edit/post/{id}', name: 'app_ajax_post_edit', methods: ['PUT'])]
+    public function editUe(Request $request, Post $post) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = json_decode($request->getContent(), true);
+        $section = $this->sectionRepository->find($data['id_section']);
+
+        $post->setLabel($data['id_title'])
+            ->setDescription($data['id_description'])
+            ->setFkSection($section);
+
+        // TODO pinned
+
+        if (!empty($data['id_type'])) {
+            $postType = $this->postTypeRepository->find($data['id_type']);
+            $post->setFkPostType($postType);
+        }
+
+        if (isset($data['id_classement']) && is_numeric($data['id_classement'])) {
+            $post->setRanking((int) $data['id_classement']);
+        }
+
+        $this->entityManager->flush();
+
+        $html = null;
+
+        if ($post->getFkPostType()) {
+            $html = $this->renderView('home/_post.html.twig', [
+                'id_section' => $section->getId(),
+                'post' => $post
+            ]);
+        }
+
+        return new JsonResponse(['code' => 200, 'html' => $html]);
     }
 
 

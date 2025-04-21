@@ -30,6 +30,7 @@
     <form id="id_form_post">
         <fieldset>
             <input id="id_post_form" name="id_post" hidden>
+            <input id="id_post_container" name="id_post_container" hidden>
             
             <div class="mb-3">
                 <label for="id_title_post_form" class="form-label">Nom du post</label>
@@ -51,7 +52,10 @@
 
             <div id="id_post_form_file" style="display: none;">
                 <div class="mb-3">
-                    <label for="id_file_post_form" class="form-label">Fichier</label>
+                    <div class="d-flex">
+                        <label for="id_file_post_form" class="form-label mt-2">Fichier</label>
+                        <input id="id_filename_post_form" type="text" name="id_filename" class="form-control text-end" disabled>
+                    </div>
                     <input id="id_file_post_form" type="file" name="id_file" value="" class="form-control">
                 </div>
             </div>

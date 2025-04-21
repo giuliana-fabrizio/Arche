@@ -35,6 +35,44 @@ async function addPost(post, fileInput) {
 }
 
 
+async function editPost(data, fileInput, id_div) {
+    console.log("thgzsvqxljdioeuriyhfsjdn")
+    try {
+        const request = await fetch(`/teacher/ajax/edit/post/${data['id_post']}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-with": "XMLHttpRequest"
+            },
+            body: JSON.stringify(data),
+        });
+
+        let response = await request.json();
+
+        if (response.code == 200) {
+            if (fileInput && fileInput.files.length > 0) {
+                const file = fileInput.files[0]
+
+                const file_data = new FormData();
+                file_data.append('file', file);
+
+                response = await updatePostFile(data['id_post'], file_data);
+                response = await response.json()
+            }
+            document.getElementById(id_div).remove();
+
+            const section_posts = document.getElementById(`id_section_${data.id_section}_posts`);
+            section_posts.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
+
+            document.getElementById(`id_ajax_no_post_section_${data.id_section}`).style.display = "none";
+            closeModalPost();
+        }
+    } catch (error) {
+        console.error("Erreur lors de l'ajout de section:", error);
+    }
+}
+
+
 async function updatePostFile(id_post, file) {
     try {
         return await fetch(`/teacher/ajax/update/post_file/${id_post}`, {

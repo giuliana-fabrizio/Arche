@@ -8,24 +8,36 @@
                         onerror="this.onerror = null; this.src = '{{ asset('/assets/images/other.png') }}';"
                         class="me-3 post-img"
                     >
-                    <a href="{{ asset('/files/' ~ post.filename) }}" target="blank" class="m-0 post-title">
+                    <a id="id_label_post" href="{{ asset('/files/' ~ post.filename) }}" target="blank" class="m-0 post-title">
                         {{ post.label }}
                     </a>
                 {% else %}
                     <image src="{{ asset('/assets/images/' ~ post.getFkPostType().label ~ '.png') }}" class="me-3 post-img">
-                    <a role="button" class="m-0 post-title post-title-message">
+                    <a id="id_label_post" role="button" class="m-0 post-title post-title-message">
                         {{ post.label }}
                     </a>
                 {% endif %}
             </div>
-            <p class="ms-1">{{ post.description }}</p>
+            <p id="id_description_post" class="ms-1">{{ post.description }}</p>
         </div>
 
         {% if is_granted('ROLE_PROFESSEUR') %}
             <div class="d-flex flex-column justify-content-between ms-1">
                 <button
+                    onclick="wantEditPost(
+                        `id_section_{{ id_section }}_post_{{ post.id }}`,
+                        `{{ post.id }}`,
+                        `{{ post.label }}`,
+                        `{{ post.description }}`,
+                        `{{ id_section }}`,
+                        `{{ post.ranking }}`,
+                        {% if post.getFkPostType() %}
+                            `{{ post.getFkPostType().id }}`
+                        {% else %} `` {% endif %},
+                        `{{ post.filename }}`
+                    )"
                     data-bs-toggle="modal"
-                    data-bs-target="#id_add_modal"
+                    data-bs-target="#id_add_post_modal"
                     class="btn btn-success btn-sm mb-2">
                     <i class="bi bi-pencil-square"></i>
                 </button>
