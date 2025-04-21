@@ -104,12 +104,9 @@
                     </h2>
                     <div id="collapseStudent" class="accordion-collapse collapse show">
                         <div class="accordion-body">
-                            <div>
-                                {% for student in students %}
-                                    {% include 'home/_participants.html.twig' with { 'person' : student } %}
-                                {% endfor %}
-                                <hr>
-                            </div>
+                            {% for student in students %}
+                                {% include 'home/_participants.html.twig' with { 'person' : student } %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -126,12 +123,9 @@
                     </h2>
                     <div id="collapseTeacher" class="accordion-collapse collapse">
                         <div class="accordion-body">
-                            <div>
-                                {% for teacher in teachers %}
-                                    {% include 'home/_participants.html.twig' with { 'person' : teacher } %}
-                                {% endfor %}
-                                <hr>
-                            </div>
+                            {% for teacher in teachers %}
+                                {% include 'home/_participants.html.twig' with { 'person' : teacher } %}
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

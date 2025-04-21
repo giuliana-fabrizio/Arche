@@ -338,9 +338,11 @@ input:disabled {
     border-radius: 50%;
     color: #343a40;
     display: inline-flex;
+    height: 40px;
     justify-content: center;
     padding: 6px;
     vertical-align: middle;
+    width: 40px;
 }
 
 .post-img {
