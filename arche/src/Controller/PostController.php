@@ -96,12 +96,8 @@ class PostController extends AbstractController {
 
         $file = $request->files->get('file');
 
-        if (!$file) {
-            throw new \Exception("Aucun fichier reçu");
-        }
-
         $extension = $file->guessExtension() ?: 'bin';
-        $filename = uniqid().'.'.$extension;
+        $filename = $file->getClientOriginalName().'_'.uniqid().'.'.$extension;
         $uploadDir = $this->getParameter('kernel.project_dir').'/public/files';
 
         $file->move($uploadDir, $filename);
