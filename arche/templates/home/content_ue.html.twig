@@ -56,6 +56,7 @@
                     <div class="align-items-center d-flex flex-wrap">
                         <button
                             id="id_btn_add_section"
+                            onclick="getSections({{ ue.id }})"
                             type="button"
                             class="btn btn-primary me-2 mt-2 mt-md-0"
                             data-bs-toggle="modal"
@@ -77,6 +78,7 @@
                 {% for key, section in sections %}
                     {% include 'home/_section.html.twig'
                         with {
+                            'id_ue' : ue.id,
                             'section': section,
                             'isCollapse': key == 0
                         }

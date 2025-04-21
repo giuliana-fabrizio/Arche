@@ -19,9 +19,6 @@
 
             <select id="id_ranking_form_section" name="classement" class="form-select">
                 <option selected disabled>Choisissez la section suivante</option>
-                {% for key, section in sections %}
-                    <option value="{{ key + 1 }}" class="ranking-option">{{ section.label }}</option>
-                {% endfor %}
             </select>
         </div>
 

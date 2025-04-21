@@ -40,6 +40,29 @@ class SectionController extends AbstractController {
     }
 
 
+    #[Route('/teacher/ajax/sections/{id}', name: 'app_ajax_get_sections', methods: ['GET'])]
+    public function getPostType(Request $request, Ue $ue) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $sections = $this->sectionRepository->getSectionsWithPostsOrdered($ue);
+
+        $data = array_map(function($section) {
+            return [
+                'id' => $section->getId(),
+                'label' => $section->getLabel(),
+                'ranking' => $section->getRanking()
+            ];
+        }, $sections);
+
+        return new JsonResponse([
+            'code' => 200,
+            'sections' => $data
+        ]);
+    }
+
+
     #[Route('/teacher/ajax/create/section', name: 'app_ajax_section_create', methods: ['POST'])]
     public function createSection(Request $request) : Response {
         if(!$request->isXmlHttpRequest()) {
@@ -76,6 +99,7 @@ class SectionController extends AbstractController {
         $this->entityManager->flush();
 
         $html = $this->renderView('home/_section.html.twig', [
+            'id_ue' => $ue->getId(),
             'section' => $section,
             'isCollapse' => false
         ]);

@@ -62,6 +62,36 @@ async function editSection(data) {
 }
 
 
+async function getSections(id_ue) {
+    try {
+        const request = await fetch(`/teacher/ajax/sections/${id_ue}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-with": "XMLHttpRequest"
+            }
+        });
+
+        const response = await request.json();
+
+        if (response.code == 200) {
+            const select = document.getElementById("id_ranking_form_section");
+            removeAllChildNodes(select);
+            const sections = response.sections;
+
+            sections.forEach((section, index) => {
+                const option = document.createElement("option");
+                option.value = index + 1;
+                option.textContent = section.label + " " + (index + 1);
+                select.appendChild(option);
+            });
+        }
+    } catch (error) {
+        console.error("Erreur lors de l'ajout de section:", error);
+    }
+}
+
+
 function updateDisplay(html, section_ranking, isExisting) {
     const cours = document.getElementById("id_cours").getElementsByClassName('accordion-item');
     let isOrdered = false;
@@ -80,4 +110,10 @@ function updateDisplay(html, section_ranking, isExisting) {
     if (!isOrdered) {
         isExisting ? cours.insertAdjacentElement('beforeend', html) : cours.insertAdjacentHTML('beforeend', html);
     }
+}
+
+
+function removeAllChildNodes(parent) {
+    const options = parent.querySelectorAll("option:not([disabled])");
+    options.forEach(option => option.remove());
 }
