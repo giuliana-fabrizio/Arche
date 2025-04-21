@@ -36,7 +36,6 @@ async function addPost(post, fileInput) {
 
 
 async function editPost(data, fileInput, id_div) {
-    console.log("thgzsvqxljdioeuriyhfsjdn")
     try {
         const request = await fetch(`/teacher/ajax/edit/post/${data['id_post']}`, {
             method: 'PUT',
@@ -88,7 +87,7 @@ async function updatePostFile(id_post, file) {
 }
 
 
-async function getPostType() {
+async function getPostType(id_ue) {
     try {
         const request = await fetch(`/teacher/ajax/post_type`, {
             method: 'GET',
@@ -99,6 +98,7 @@ async function getPostType() {
         });
 
         const response = await request.json();
+        await getSections(id_ue, "id_section_post_form");
 
         if (response.code == 200) {
             const select = document.getElementById("id_type_post_form");

@@ -32,7 +32,6 @@
                             with {
                                 'origin': 'content_ue',
                                 'id_ue' : ue.id,
-                                'sections' : sections
                             }
                         %}
                     </div>
@@ -59,7 +58,6 @@
                             with {
                                 'origin': 'content_ue',
                                 'id_ue' : ue.id,
-                                'sections' : sections
                             }
                         %}
                     </div>
@@ -86,7 +84,7 @@
                     <div class="align-items-center d-flex flex-wrap">
                         <button
                             id="id_btn_add_section"
-                            onclick="getSections({{ ue.id }})"
+                            onclick="getSections({{ ue.id }}, 'id_ranking_form_section')"
                             type="button"
                             class="btn btn-primary me-2 mt-2 mt-md-0"
                             data-bs-toggle="modal"
@@ -95,7 +93,7 @@
                         </button>
                         <button
                             id="id_btn_add_post"
-                            onclick="getPostType()"
+                            onclick="getPostType({{ ue.id }})"
                             type="button"
                             class="btn btn-primary mt-2 mt-md-0"
                             data-bs-toggle="modal"

@@ -62,7 +62,7 @@ async function editSection(data) {
 }
 
 
-async function getSections(id_ue) {
+async function getSections(id_ue, id_select) {
     try {
         const request = await fetch(`/teacher/ajax/sections/${id_ue}`, {
             method: 'GET',
@@ -75,7 +75,7 @@ async function getSections(id_ue) {
         const response = await request.json();
 
         if (response.code == 200) {
-            const select = document.getElementById("id_ranking_form_section");
+            const select = document.getElementById(id_select);
             removeAllChildNodes(select);
             const sections = response.sections;
 
