@@ -9,23 +9,24 @@ async function addPost(post, fileInput) {
             body: JSON.stringify(post),
         });
 
-        const response = await request.json();
+        let response = await request.json();
 
         if (response.code == 200) {
-            if (fileInput.files.length) {
+            if (fileInput && fileInput.files.length > 0) {
                 const file = fileInput.files[0]
                 const id_post = response.id_post;
 
                 const data = new FormData();
                 data.append('file', file);
 
-                updatePostFile(id_post, data);
-            } else {
-                const section_posts = document.getElementById(`id_section_${post.id_section}_posts`);
-                section_posts.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
-
-                document.getElementById(`id_ajax_no_post_section_${post.id_section}`).style.display = "none";
+                response = await updatePostFile(id_post, data);
+                response = await response.json()
             }
+
+            const section_posts = document.getElementById(`id_section_${post.id_section}_posts`);
+            section_posts.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
+
+            document.getElementById(`id_ajax_no_post_section_${post.id_section}`).style.display = "none";
             closeModalPost();
         }
     } catch (error) {
@@ -36,7 +37,7 @@ async function addPost(post, fileInput) {
 
 async function updatePostFile(id_post, file) {
     try {
-        await fetch(`/teacher/ajax/update/post_file/${id_post}`, {
+        return await fetch(`/teacher/ajax/update/post_file/${id_post}`, {
             method: 'POST',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
