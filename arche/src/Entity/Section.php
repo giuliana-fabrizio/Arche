@@ -31,6 +31,10 @@ class Section
     #[ORM\Column(nullable: true)]
     private ?int $ranking = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $fk_user = null;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -103,6 +107,18 @@ class Section
     public function setRanking(?int $ranking): static
     {
         $this->ranking = $ranking;
+
+        return $this;
+    }
+
+    public function getFkUser(): ?User
+    {
+        return $this->fk_user;
+    }
+
+    public function setFkUser(?User $fk_user): static
+    {
+        $this->fk_user = $fk_user;
 
         return $this;
     }
