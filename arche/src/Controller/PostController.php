@@ -136,7 +136,9 @@ class PostController extends AbstractController {
         $file = $request->files->get('file');
 
         $extension = $file->guessExtension() ?: 'bin';
-        $filename = $file->getClientOriginalName().'_'.uniqid().'.'.$extension;
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filename = $filename."_".$post->getDateTime()->format('d-m-Y_H-i-s').".".$extension;
+
         $uploadDir = $this->getParameter('kernel.project_dir').'/public/files';
 
         $file->move($uploadDir, $filename);
@@ -147,6 +149,7 @@ class PostController extends AbstractController {
         $this->entityManager->flush();
 
         $html = $this->renderView('home/_post.html.twig', [
+            'id_ue' => $post->getFkSection()->getFkUe()->getId(),
             'id_section' => $post->getFkSection()->getId(),
             'post' => $post
         ]);
