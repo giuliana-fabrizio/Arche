@@ -22,7 +22,7 @@ async function addSection(origin, section) {
 
                 select_section.appendChild(option);
             } else {
-                updateDisplay(response.html, response.section_ranking, false);
+                updateDisplay(response.html, response.section_ranking, 0, false);
             }
 
             document.getElementById("id_ajax_no_result").style.display = "none";
@@ -54,7 +54,7 @@ async function editSection(data) {
             });
 
             const html = document.getElementById(`id_section_${data.id_section}`);
-            updateDisplay(html, response.section_ranking, true);
+            updateDisplay(html, response.section_ranking, response.old_section_ranking, true);
         }
     } catch (error) {
         console.error("Erreur lors de l'ajout de section:", error);
@@ -92,16 +92,21 @@ async function getSections(id_ue) {
 }
 
 
-function updateDisplay(html, section_ranking, isExisting) {
-    const cours = document.getElementById("id_cours").getElementsByClassName('accordion-item');
+function updateDisplay(html, section_ranking, old_section_ranking, isExisting) {
+    const cours = document.getElementById("id_cours")
+    const elems = cours.getElementsByClassName('accordion-item');
     let isOrdered = false;
     let index = 0;
 
-    while (index < cours.length && !isOrdered) {
-        elem = cours[index];
+    while (index < elems.length && !isOrdered) {
+        elem = elems[index];
         const ranking = document.getElementById(`${elem.id}_ranking`).innerHTML;
         if (ranking == section_ranking) {
-            isExisting ? elem.insertAdjacentElement('beforebegin', html) : elem.insertAdjacentHTML('beforebegin', html);
+            if (section_ranking > old_section_ranking) {
+                isExisting ? elem.insertAdjacentElement('afterend', html) : elem.insertAdjacentHTML('beforebegin', html);
+            } else {
+                isExisting ? elem.insertAdjacentElement('beforebegin', html) : elem.insertAdjacentHTML('afterend', html);
+            }
             isOrdered = true;
         }
         index += 1;
