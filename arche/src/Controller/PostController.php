@@ -66,8 +66,6 @@ class PostController extends AbstractController {
         if (!empty($data['id_type'])) {
             $postType = $this->postTypeRepository->find($data['id_type']);
             $post->setFkPostType($postType);
-        } else {
-            // TODO upload ici :)
         }
 
         if (isset($data['id_classement']) && is_numeric($data['id_classement'])) {
@@ -77,8 +75,44 @@ class PostController extends AbstractController {
         $this->entityManager->persist($post);
         $this->entityManager->flush();
 
+        $html = null;
+
+        if ($post->getFkPostType()) {
+            $html = $this->renderView('home/_post.html.twig', [
+                'id_section' => $section->getId(),
+                'post' => $post
+            ]);
+        }
+
+        return new JsonResponse(['code' => 200, 'html' => $html, 'id_post' => $post->getId()]);
+    }
+
+
+    #[Route('/teacher/ajax/update/post_file/{id}', name: 'app_ajax_edit_post_file', methods: ['POST'])]
+    public function updatePostFile(Request $request, Post $post) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $file = $request->files->get('file');
+
+        if (!$file) {
+            throw new \Exception("Aucun fichier reçu");
+        }
+
+        $extension = $file->guessExtension() ?: 'bin';
+        $filename = uniqid().'.'.$extension;
+        $uploadDir = $this->getParameter('kernel.project_dir').'/public/files';
+
+        $file->move($uploadDir, $filename);
+
+        $post->setFilename($filename);
+        $post->setFiletype($extension);
+
+        $this->entityManager->flush();
+
         $html = $this->renderView('home/_post.html.twig', [
-            'id_section' => $section->getId(),
+            'id_section' => $post->getFkSection()->getId(),
             'post' => $post
         ]);
 

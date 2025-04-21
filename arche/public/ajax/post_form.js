@@ -1,4 +1,4 @@
-async function addPost(post) {
+async function addPost(post, fileInput) {
     try {
         const request = await fetch(`/teacher/ajax/create/post`, {
             method: 'POST',
@@ -12,13 +12,39 @@ async function addPost(post) {
         const response = await request.json();
 
         if (response.code == 200) {
-            const section_posts = document.getElementById(`id_section_${post.id_section}_posts`);
-            section_posts.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
+            if (fileInput.files.length) {
+                const file = fileInput.files[0]
+                const id_post = response.id_post;
 
-            document.getElementById(`id_ajax_no_post_section_${post.id_section}`).style.display = "none";
+                const data = new FormData();
+                data.append('file', file);
+
+                updatePostFile(id_post, data);
+            } else {
+                const section_posts = document.getElementById(`id_section_${post.id_section}_posts`);
+                section_posts.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
+
+                document.getElementById(`id_ajax_no_post_section_${post.id_section}`).style.display = "none";
+            }
+            closeModalPost();
         }
     } catch (error) {
         console.error("Erreur lors de l'ajout de section:", error);
+    }
+}
+
+
+async function updatePostFile(id_post, file) {
+    try {
+        await fetch(`/teacher/ajax/update/post_file/${id_post}`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: file
+        });
+    } catch (error) {
+        console.error("Erreur lors de l'update du fichier:", error);
     }
 }
 

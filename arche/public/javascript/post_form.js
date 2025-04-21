@@ -2,6 +2,12 @@ const action_post_modal = document.getElementById("id_action_modal_post");
 const modal_post = document.getElementById('id_add_post_modal');
 const form_post = document.getElementById('id_form_post'); // TODO form file
 
+let fileInput = null;
+document.getElementById('id_file_post_form').addEventListener('change', function(event) {
+    fileInput = event.target;
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     modal_post.addEventListener('hidden.bs.modal', function () {
         const id_post = document.getElementById("id_section_form");
@@ -50,6 +56,8 @@ function isTabsText() {
 
 
 function modalPost() {
+    const isFile = document.getElementById("id_post_form_text").style.display == "none";
+
     const formElements = form_post.querySelectorAll("input, textarea, select");
     const formData = {};
     let errors = "";
@@ -59,7 +67,7 @@ function modalPost() {
         const value = element.value.trim();
 
         if (
-            (!["id_classement", "id_post", "id_file"].includes(key)) &&
+            (!["id_classement", "id_post", isFile ? "id_type" : "id_file"].includes(key)) &&
             ((element.tagName === "SELECT" && element.options[element.selectedIndex].disabled) || (value === ""))
         ) {
             const label = document.querySelector(`label[for="${key}_post_form"]`);
@@ -71,6 +79,5 @@ function modalPost() {
 
     if (errors != "") return alert(`Veuillez remplir tous les champs requis :\n${errors}`);
 
-    action_post_modal.innerText === "add" ? addPost(formData) : editPost(formData);
-    closeModalPost();
+    action_post_modal.innerText === "add" ? addPost(formData, fileInput) : editPost(formData);
 }
