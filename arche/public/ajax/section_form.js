@@ -22,8 +22,7 @@ async function addSection(origin, section) {
 
                 select_section.appendChild(option);
             } else {
-                const cours = document.getElementById("id_cours");
-                cours.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
+                updateDisplay(response.html, response.section_ranking, false);
             }
 
             document.getElementById("id_ajax_no_result").style.display = "none";
@@ -53,8 +52,32 @@ async function editSection(data) {
             document.getElementById("id_btn_edit_section").addEventListener("click", function () {
                 wantEditSection(data.id_section, response.section_label, response.section_ranking);
             });
+
+            const html = document.getElementById(`id_section_${data.id_section}`);
+            updateDisplay(html, response.section_ranking, true);
         }
     } catch (error) {
         console.error("Erreur lors de l'ajout de section:", error);
+    }
+}
+
+
+function updateDisplay(html, section_ranking, isExisting) {
+    const cours = document.getElementById("id_cours").getElementsByClassName('accordion-item');
+    let isOrdered = false;
+    let index = 0;
+
+    while (index < cours.length && !isOrdered) {
+        elem = cours[index];
+        const ranking = document.getElementById(`${elem.id}_ranking`).innerHTML;
+        if (ranking == section_ranking) {
+            isExisting ? elem.insertAdjacentElement('beforebegin', html) : elem.insertAdjacentHTML('beforebegin', html);
+            isOrdered = true;
+        }
+        index += 1;
+    }
+
+    if (!isOrdered) {
+        isExisting ? cours.insertAdjacentElement('beforeend', html) : cours.insertAdjacentHTML('beforeend', html);
     }
 }

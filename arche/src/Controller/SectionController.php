@@ -83,6 +83,7 @@ class SectionController extends AbstractController {
         return new JsonResponse([
             'code' => 200,
             'html' => $html,
+            'section_ranking' => $section->getRanking(),
             'section_id' => $section->getId(),
             'section_label' => $section->getLabel()
         ]);
@@ -113,6 +114,7 @@ class SectionController extends AbstractController {
 
         return new JsonResponse([
             'code' => 200,
+            'section_ranking' => $section->getRanking(),
             'section_label' => $section->getLabel(),
             'section_ranking' => $section->getRanking()
         ]);
