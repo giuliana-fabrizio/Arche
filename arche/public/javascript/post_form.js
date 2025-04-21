@@ -29,7 +29,6 @@ function changePostTabs(dest) {
 
 function clearPostForm() {
     form_post.reset();
-    document.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
 }
 
 
