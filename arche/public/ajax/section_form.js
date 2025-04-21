@@ -50,7 +50,7 @@ async function editSection(data) {
             document.getElementById(`id_label_section_${data.id_section}`).innerHTML = response.section_label;
 
             document.getElementById("id_btn_edit_section").addEventListener("click", function () {
-                wantEditSection(data.id_section, response.section_label, response.section_ranking);
+                wantEditSection(data.id_ue, data.id_section, response.section_label, response.section_ranking);
             });
 
             const html = document.getElementById(`id_section_${data.id_section}`);
