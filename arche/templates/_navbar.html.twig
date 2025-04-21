@@ -18,13 +18,7 @@
                             {# <a class="nav-link nav-link-navbar" href="{{ path('app_ue_create') }}">Créer UE</a> #}
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-navbar" href="{{ path('app_ue_choose') }}">Choisir UE</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-navbar" href="{{ path('app_ue_content') }}">Contenu UE</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-navbar" href="{{ path('app_post_create') }}">Créer post</a>
+                            <a class="nav-link nav-link-navbar" href="{{ path('app_ue_personal') }}">Choisir UE</a>
                         </li>
                     </ul>
                 </div>
@@ -46,8 +40,6 @@
                         {% include '/profile/_profile.html.twig' %}
                     </div>
                 </div>
-                <!-- TODO ou -->
-                <a class="ms-3 nav-link nav-link-navbar" href="{{ path('app_login') }}">Connexion</a>
             </div>
         </div>
     </div>

@@ -8,19 +8,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController {
 
-    #[Route('/', name: 'app_login')]
-    public function login() : Response {
-        return $this->render("login.html.twig");
+    #[Route('/', name: 'app_home')]
+    public function home() : Response {
+        if (
+            $this->getUser()->getRoles()[0] == "ROLE_ADMIN" ||
+            $this->getUser()->getRoles()[0] == "ROLE_ADMIN_PROFESSEUR"
+        ) {
+            return $this->render("/admin/catalogue.html.twig");
+        }
+        return $this->render("/home/home.html.twig");
     }
 
 
-    #[Route('/create_post', name: 'app_post_create')]
-    public function createUe() : Response {
-        return $this->render("/teacher/post_form.html.twig");
-    }
-
-
-    #[Route('/manage_resource', name: 'app_catalogue')]
+    #[Route('/admin/manage_resource', name: 'app_catalogue')] // TODO
     public function manageResource() : Response {
         return $this->render("/admin/catalogue.html.twig");
     }

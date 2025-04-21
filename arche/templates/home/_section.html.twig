@@ -1,0 +1,58 @@
+<div id="id_section_{{ section.id }}" class="accordion-item mb-5">
+    <div class="accordion-header">
+        <h2 class="w-100">
+            <button
+                id="id_label_section_{{ section.id }}"
+                class="accordion-button {% if not isCollapse %} collapsed {% endif %} fs-5 fw-bold"
+                data-bs-target="#collapse{{ section.id }}"
+                data-bs-toggle="collapse"
+                type="button">
+                {{ section.label }}
+            </button>
+        </h2>
+
+        {% if is_granted('ROLE_PROFESSEUR') %}
+            <div class="dropdown dropdown-plus">
+                <a class="dropdown-toggle-plus" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end p-0">
+                    <li>
+                        <button
+                            id="id_btn_edit_section"
+                            data-bs-toggle="modal"
+                            data-bs-target="#id_add_section_modal"
+                            onclick="wantEditSection('{{ section.id }}', '{{ section.label }}', '{{ section.ranking }}')"
+                            class="dropdown-item text-success bg-section-actions"
+                        >
+                            Éditer
+                        </button>
+                    </li>
+                    <li>
+                        <a
+                            class="dropdown-item text-danger bg-section-actions"
+                            onclick="deleteSection('id_section_{{ section.id }}')"
+                        >
+                            Supprimer
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+    <div id="collapse{{ section.id }}" class="accordion-collapse collapse {% if isCollapse %} show {% endif %}">
+        <div class="accordion-body">
+            {% for post in section.posts %}
+                {% include '/home/_post.html.twig' with { 'id_section': section.id, 'post': post } %}
+            {% endfor %}
+
+            <p
+                id="id_ajax_no_post"
+                class="text-center no-result"
+                style="display: {% if section.posts|length == 0%} block {% else %} none {% endif %};">
+                Aucun post pour cette section. Revenez plus tard !
+            </p>
+        </div>
+    </div>
+</div>

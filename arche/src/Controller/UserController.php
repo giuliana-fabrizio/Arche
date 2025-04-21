@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController {
 
-    #[Route('/ajax/create/user', name: 'app_ajax_user_create', methods: ['POST'])]
+    #[Route('/admin/ajax/create/user', name: 'app_ajax_user_create', methods: ['POST'])]
     public function createUser(Request $request) : Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
@@ -22,7 +22,7 @@ class UserController extends AbstractController {
     }
 
 
-    #[Route('/ajax/edit/user', name: 'app_ajax_user_edit', methods: ['PUT'])]
+    #[Route('/admin/ajax/edit/user', name: 'app_ajax_user_edit', methods: ['PUT'])]
     public function editUser(Request $request) : Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
@@ -34,7 +34,7 @@ class UserController extends AbstractController {
     }
 
 
-    #[Route('/ajax/delete/user/{id}', name: 'app_ajax_delete_user')]
+    #[Route('/admin/ajax/delete/user/{id}', name: 'app_ajax_delete_user')]
     public function deleteUe(Request $request) : Response {
         if($request->isXmlHttpRequest()) {
             return new JsonResponse(200);
