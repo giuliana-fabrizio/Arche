@@ -1,7 +1,12 @@
 #id_access_denied {
-    display: flex !important;
-    justify-content: center !important;
-    max-width: 65% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+svg.animated {
+    max-width: 55%;
 }
 
 @media screen and (max-width: 1140px) {

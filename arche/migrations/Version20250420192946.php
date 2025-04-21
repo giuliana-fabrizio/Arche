@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250417101500 extends AbstractMigration
+final class Version20250420192946 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -30,7 +30,7 @@ final class Version20250417101500 extends AbstractMigration
             CREATE TABLE post_type (id INT AUTO_INCREMENT NOT NULL, label VARCHAR(20) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
-            CREATE TABLE section (id INT AUTO_INCREMENT NOT NULL, fk_ue_id INT NOT NULL, label VARCHAR(50) NOT NULL, ranking INT DEFAULT NULL, INDEX IDX_2D737AEFA305A0C4 (fk_ue_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
+            CREATE TABLE section (id INT AUTO_INCREMENT NOT NULL, fk_ue_id INT NOT NULL, fk_user_id INT NOT NULL, label VARCHAR(50) NOT NULL, ranking INT DEFAULT NULL, INDEX IDX_2D737AEFA305A0C4 (fk_ue_id), INDEX IDX_2D737AEF5741EEB9 (fk_user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE ue (id INT AUTO_INCREMENT NOT NULL, fk_category_id INT NOT NULL, user_id INT NOT NULL, code VARCHAR(4) NOT NULL, label VARCHAR(100) NOT NULL, photo VARCHAR(50) DEFAULT NULL, INDEX IDX_2E490A9B7BB031D6 (fk_category_id), INDEX IDX_2E490A9BA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
@@ -52,6 +52,9 @@ final class Version20250417101500 extends AbstractMigration
         SQL);
         $this->addSql(<<<'SQL'
             ALTER TABLE section ADD CONSTRAINT FK_2D737AEFA305A0C4 FOREIGN KEY (fk_ue_id) REFERENCES ue (id)
+        SQL);
+        $this->addSql(<<<'SQL'
+            ALTER TABLE section ADD CONSTRAINT FK_2D737AEF5741EEB9 FOREIGN KEY (fk_user_id) REFERENCES user (id)
         SQL);
         $this->addSql(<<<'SQL'
             ALTER TABLE ue ADD CONSTRAINT FK_2E490A9B7BB031D6 FOREIGN KEY (fk_category_id) REFERENCES category (id)
@@ -81,6 +84,9 @@ final class Version20250417101500 extends AbstractMigration
         SQL);
         $this->addSql(<<<'SQL'
             ALTER TABLE section DROP FOREIGN KEY FK_2D737AEFA305A0C4
+        SQL);
+        $this->addSql(<<<'SQL'
+            ALTER TABLE section DROP FOREIGN KEY FK_2D737AEF5741EEB9
         SQL);
         $this->addSql(<<<'SQL'
             ALTER TABLE ue DROP FOREIGN KEY FK_2E490A9B7BB031D6
