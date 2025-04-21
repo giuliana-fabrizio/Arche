@@ -92,7 +92,7 @@
             </div>
 
             <div id="id_participants" class="accordion" style="display: none;">
-                <div class="accordion-item">
+                <div class="accordion-item mb-5">
                     <h2 class="accordion-header">
                         <button
                             class="accordion-button fs-5 fw-bold"
@@ -105,15 +105,9 @@
                     <div id="collapseStudent" class="accordion-collapse collapse show">
                         <div class="accordion-body">
                             <div>
-                                <div class="align-items-center d-flex flex-wrap justify-content-between">
-                                    <p class="m-0 participant-name">GG</p> <!-- TODO firstname[0] -->
-                                    <p class="m-0">Giuliana GODAIL-FABRIZIO</p>
-                                    <a
-                                        id="id_mail"
-                                        href="mailto:godailfabriziogiuliana@gmail.com" <!-- TODO changer la value
-                                        target="_blank"
-                                    >giuliana.godail-fabrizio.utbm.fr</a>
-                                </div>
+                                {% for student in students %}
+                                    {% include 'home/_participants.html.twig' with { 'person' : student } %}
+                                {% endfor %}
                                 <hr>
                             </div>
                         </div>
@@ -132,7 +126,12 @@
                     </h2>
                     <div id="collapseTeacher" class="accordion-collapse collapse">
                         <div class="accordion-body">
-                            
+                            <div>
+                                {% for teacher in teachers %}
+                                    {% include 'home/_participants.html.twig' with { 'person' : teacher } %}
+                                {% endfor %}
+                                <hr>
+                            </div>
                         </div>
                     </div>
                 </div>

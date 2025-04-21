@@ -1,0 +1,11 @@
+<div class="align-items-center d-flex flex-wrap justify-content-between">
+    <p class="m-0 participant-name">
+        {{ person.firstname|slice(0, 1) }}{{ person.lastname|slice(0, 1) }}
+    </p>
+    <p class="m-0">{{ person.firstname }} {{ person.lastname }}</p>
+    <a
+        id="id_mail"
+        href="mailto:godailfabriziogiuliana@gmail.com" <!-- TODO changer la value
+        target="_blank"
+    >{{ person.email }}</a>
+</div>

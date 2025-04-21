@@ -62,11 +62,26 @@ class UeController extends AbstractController {
     #[Route('/basic/ue/{id}', name: 'app_ue_content')]
     public function getUe(Ue $ue) : Response {
         $sections = $ue->getSections();
+
+        $associateUsers = $ue->getAssociatesUsers();
+
+        $associateStudents = [];
+        $associateTeachers = [];
+        foreach ($associateUsers as $user) {
+            if (in_array("ROLE_ETUDIANT", $user->getRoles())) {
+                $associateStudents[] = $user;
+            } else {
+                $associateTeachers[] = $user;
+            }
+        }
+
         return $this->render(
             "/home/content_ue.html.twig",
-            [   
+            [
                 'ue' => $ue,
-                'sections' => $sections
+                'sections' => $sections,
+                'students' => $associateStudents,
+                'teachers' => $associateTeachers
             ]
         );
     }
