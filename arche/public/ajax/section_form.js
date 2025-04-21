@@ -100,8 +100,9 @@ function updateDisplay(html, section_ranking, old_section_ranking, isExisting) {
 
     while (index < elems.length && !isOrdered) {
         elem = elems[index];
-        const ranking = document.getElementById(`${elem.id}_ranking`).innerHTML;
-        if (ranking == section_ranking) {
+        const ranking = document.getElementById(`${elem.id}_ranking`);
+        const ranking_value = ranking.innerHTML;
+        if (ranking_value == section_ranking) {
             if (section_ranking > old_section_ranking) {
                 isExisting ? elem.insertAdjacentElement('afterend', html) : elem.insertAdjacentHTML('beforebegin', html);
             } else {
