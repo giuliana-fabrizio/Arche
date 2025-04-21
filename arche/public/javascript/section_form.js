@@ -43,7 +43,7 @@ function modalSection(origin) {
 
 
 function wantEditSection(id_ue, id, label, ranking) {
-    getSections(id_ue);
+    getSections(id_ue, "id_ranking_form_section");
 
     document.getElementById("id_section_form").value = id;
     document.getElementById("id_name_form_section").value = label;

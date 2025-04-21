@@ -77,11 +77,13 @@ async function getSections(id_ue, id_select) {
         if (response.code == 200) {
             const select = document.getElementById(id_select);
             removeAllChildNodes(select);
+
             const sections = response.sections;
+            const needFk = id_select.includes("post") ? true : false;
 
             sections.forEach((section, index) => {
                 const option = document.createElement("option");
-                option.value = index + 1;
+                option.value = needFk ? section.id : index + 1;
                 option.textContent = section.label + " " + (index + 1);
                 select.appendChild(option);
             });

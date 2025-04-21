@@ -117,6 +117,7 @@ class PostController extends AbstractController {
 
         if ($post->getFkPostType()) {
             $html = $this->renderView('home/_post.html.twig', [
+                'id_ue' => $section->getFkUe()->getId(),
                 'id_section' => $section->getId(),
                 'post' => $post
             ]);

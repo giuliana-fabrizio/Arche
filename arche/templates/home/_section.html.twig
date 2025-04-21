@@ -45,7 +45,7 @@
     <div id="collapse{{ section.id }}" class="accordion-collapse collapse {% if isCollapse %} show {% endif %}">
         <div  id="id_section_{{ section.id }}_posts" class="accordion-body">
             {% for post in section.posts %}
-                {% include '/home/_post.html.twig' with { 'id_section': section.id, 'post': post } %}
+                {% include '/home/_post.html.twig' with { 'id_ue' : id_ue, 'id_section': section.id, 'post': post } %}
             {% endfor %}
 
             <p
