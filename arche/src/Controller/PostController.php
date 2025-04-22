@@ -229,6 +229,15 @@ class PostController extends AbstractController {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
         }
 
+        $count_posts = $this->postRepository->countPosts($post->getFkSection());
+
+        $this->updatePostsRanking(
+            $post->getFkSection(),
+            $post->getId(),
+            $post->getRanking(),
+            $count_posts + 1
+        );
+
         $this->entityManager->remove($post);
         $this->entityManager->flush();
 
