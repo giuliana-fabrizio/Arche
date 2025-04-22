@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController {
 
     public function __construct(
+        private readonly UserRepository $userRepository,
         private EntityManagerInterface $entityManager
     ) {
     }
@@ -85,7 +87,7 @@ class UserController extends AbstractController {
         $currentUser->setLastname($data['name']);
         $currentUser->setAddress($data['address']);
         $currentUser->setPhone($data['phone']);
-        $currentUser->setPassword($data['password']);
+        $this->userRepository->upgradePassword($data['password']);
         $currentUser->setAvatar($data['avatar']);
 
         $this->entityManager->flush();
