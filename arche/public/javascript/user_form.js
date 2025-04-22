@@ -46,7 +46,7 @@ function selectUe(event) {
     selected_ues.push(value);
 
     const tag = document.createElement('div');
-    tag.className = 'badge m-1 text-bg-blue';
+    tag.className = 'badge m-1 badge-ues';
     tag.innerHTML = `${value}<span onclick="removeTag(this, '${value}')">&times;</span>`;
 
     searchInput.insertAdjacentElement('beforebegin', tag);

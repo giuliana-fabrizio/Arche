@@ -1,0 +1,22 @@
+<div id="id_user_{{ user.id }}" class="align-items-center justify-content-between mb-3 row">
+    <p id="id_name_user_{{ user.id }}" class="d-flex col-12 col-md-2 m-0">{{ user.firstname }} {{ user.lastname }}</p>
+    <p id="id_mail_user_{{ user.id }}" class="d-flex col-12 col-md-3 m-0">{{ user.email }}</p>
+    <p id="id_role_user_{{ user.id }}" class="col-12 col-md-2 m-0">{{ user.roles[0]|slice(5)|lower }}</p>
+    <div class="align-items-center col-12 col-md-3 d-flex flex-wrap justify-content-start">
+        {% for ue in user.getAssociatesUes() %}
+            <p class="badge m-0 m-1 badge-ues">{{ ue.code }}</p>
+        {% endfor %}
+    </div>
+    <div class="col-12 col-md-2 d-flex justify-content-center">
+        <button
+            data-bs-toggle="modal"
+            data-bs-target="#id_add_modal"
+            onclick="wantEditUser({{ user.id }})"
+            class="btn btn-success btn-sm me-2">
+            <i class="bi bi-pencil-square"></i>
+        </button>
+        <button onclick="deleteUser('id_user_{{ user.id }}')" class="btn btn-danger btn-sm">
+            <i class="bi bi-trash"></i>
+        </button>
+    </div>
+</div>
