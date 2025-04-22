@@ -40,17 +40,8 @@ function updateFields(response, firstname, surname, address, phone, password, av
 }
 
 
-async function update() {
+async function update(user) {
     const { firstname, surname, address, phone, password, avatar, avatar_default, avatar_selected, mail } = getFields();
-
-    const user = {
-        firstname: firstname.value,
-        name: surname.value,
-        address: address.value,
-        phone: phone.value,
-        password: password.value,
-        avatar: avatar_selected.value
-    };
 
     try {
         const request = await fetch('/ajax/post/profile', {

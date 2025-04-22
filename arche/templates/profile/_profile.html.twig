@@ -1,87 +1,91 @@
-<div class="d-flex justify-content-center">
-    <i id="id_avatar_default" class="bi bi-person-circle fs-1 mb-3"></i>
-    <img id="id_avatar_image" class="img-person-avatar m-1" style="display: none;">
-</div>
+<form id="id_form_profile">
+    <fieldset>
+        <div class="d-flex justify-content-center">
+            <i id="id_avatar_default" class="bi bi-person-circle fs-1 mb-3"></i>
+            <img id="id_avatar_image" class="img-person-avatar m-1" style="display: none;">
+        </div>
 
-<div class="align-items-center d-flex mb-1">
-    <div class="me-2 input-group-profile">
-        <input id="id_firstname" type="text" class="form-control profile-name" placeholder="">
-        <label for="id_firstname">Prénom</label>
-    </div>
+        <div class="align-items-center d-flex mb-1">
+            <div class="me-2 input-group-profile">
+                <input id="id_firstname" type="text" name="firstname" class="form-control profile-name" placeholder="" required>
+                <label for="id_firstname">Prénom</label>
+            </div>
 
-    <div class="input-group-profile">
-        <input id="id_name" type="text" class="form-control profile-name" placeholder="">
-        <label for="id_name">Nom</label>
-    </div>
+            <div class="input-group-profile">
+                <input id="id_name" type="text" name="name" class="form-control profile-name" placeholder="" required>
+                <label for="id_name">Nom</label>
+            </div>
 
-    <button id="id_btn_edit" type="button" onclick="editProfile()" class="btn">
-        <i class="bi bi-pencil-square"></i>
-    </button>
-</div>
+            <button id="id_btn_edit" type="button" onclick="wantEditProfile()" class="btn">
+                <i class="bi bi-pencil-square"></i>
+            </button>
+        </div>
 
-<a
-    id="id_mail"
-    href="mailto:godailfabriziogiuliana@gmail.com" <!-- TODO changer la value
-    target="_blank"
-    class="mb-3"
-></a>
+        <a
+            id="id_mail"
+            href="mailto:godailfabriziogiuliana@gmail.com" <!-- TODO changer la value
+            target="_blank"
+            class="mb-3"
+        ></a>
 
-<div class="mb-3 input-group-profile">
-    <input id="id_address" type="text" name="adress" class="form-control" placeholder="">
-    <label for="id_address">Adresse</label>
-</div>
+        <div class="mb-3 input-group-profile">
+            <input id="id_address" type="text" name="address" class="form-control" placeholder="" required>
+            <label for="id_address">Adresse</label>
+        </div>
 
-<div class="mb-3 input-group-profile">
-    <input id="id_phone" type="text" name="phone" class="form-control" placeholder="">
-    <label for="id_phone">Téléphone</label>
-</div>
+        <div class="mb-3 input-group-profile">
+            <input id="id_phone" type="text" name="phone" class="form-control" placeholder="" required>
+            <label for="id_phone">Téléphone</label>
+        </div>
 
-<div id="id_password_container" class="mb-3 input-group-profile" style="display: none;">
-    <input id="id_password" type="password" name="password" class="form-control mb-3" placeholder="">
-    <label for="id_password">Mot de passe</label>
-</div>
+        <div id="id_password_container" class="mb-3 input-group-profile" style="display: none;">
+            <input id="id_password" type="password" name="password" class="form-control mb-3" placeholder="" required>
+            <label for="id_password">Mot de passe</label>
+        </div>
 
-<a
-    id="id_engage_collapse_avatar"
-    aria-expanded="false"
-    data-bs-toggle="collapse"
-    href="#id_collapse_avatar"
-    role="button"
-    onclick="collapseAvatar()"
-    class="btn mb-3"
-    style="display: none;"
->
-    Changer votre avatar
-</a>
+        <a
+            id="id_engage_collapse_avatar"
+            aria-expanded="false"
+            data-bs-toggle="collapse"
+            href="#id_collapse_avatar"
+            role="button"
+            onclick="collapseAvatar()"
+            class="btn mb-3"
+            style="display: none;"
+        >
+            Changer votre avatar
+        </a>
 
-<div id="id_collapse_avatar" class="collapse mb-4" style="max-width: 245px;">
-    <div class="align-items-center d-flex flex-wrap justify-content-start">
-        <input id="id_avatar" type="hidden" name="avatar" value="">
-        <!-- TODO debut boucle -->
-        <img
-            id="id_avatar_astronaut"
-            src="{{ asset('assets/images/avatar/astronaut.png') }}"
-            class="img-avatar m-1"
-            onclick="changeAvatar('astronaut', 'id_avatar_astronaut')">
-        <img id="id_avatar_bee" src="{{ asset('assets/images/avatar/bee.png') }}" class="img-avatar m-1" onclick="changeAvatar('bee', 'id_avatar_bee')">
-        <img id="id_avatar_cat" src="{{ asset('assets/images/avatar/cat.png') }}" class="img-avatar m-1" onclick="changeAvatar('cat', 'id_avatar_cat')">
-        <img id="id_avatar_cow" src="{{ asset('assets/images/avatar/cow.png') }}" class="img-avatar m-1" onclick="changeAvatar('cow', 'id_avatar_cow')">
-        <img id="id_avatar_dinosaur" src="{{ asset('assets/images/avatar/dinosaur.png') }}" class="img-avatar m-1" onclick="changeAvatar('dinosaur', 'id_avatar_dinosaur')">
-        <img id="id_avatar_elephant" src="{{ asset('assets/images/avatar/elephant.png') }}" class="img-avatar m-1" onclick="changeAvatar('elephant', 'id_avatar_elephant')">
-        <img id="id_avatar_ghosts" src="{{ asset('assets/images/avatar/ghosts.png') }}" class="img-avatar m-1" onclick="changeAvatar('ghosts', 'id_avatar_ghosts')">
-        <img id="id_avatar_ninja" src="{{ asset('assets/images/avatar/ninja.png') }}" class="img-avatar m-1" onclick="changeAvatar('ninja', 'id_avatar_ninja')">
-        <img id="id_avatar_rabbit" src="{{ asset('assets/images/avatar/rabbit.png') }}" class="img-avatar m-1" onclick="changeAvatar('rabbit', 'id_avatar_rabbit')">
-        <!-- fin boucle -->
-        <i
-            class="bi bi-x-circle d-flex icon-remove-avatar m-1"
-            onclick="resetAvatar()">
-        </i>
-    </div>
-</div>
+        <div id="id_collapse_avatar" class="collapse mb-4" style="max-width: 245px;">
+            <div class="align-items-center d-flex flex-wrap justify-content-start">
+                <input id="id_avatar" type="hidden" name="avatar" value="">
+                <!-- TODO debut boucle -->
+                <img
+                    id="id_avatar_astronaut"
+                    src="{{ asset('assets/images/avatar/astronaut.png') }}"
+                    class="img-avatar m-1"
+                    onclick="changeAvatar('astronaut', 'id_avatar_astronaut')">
+                <img id="id_avatar_bee" src="{{ asset('assets/images/avatar/bee.png') }}" class="img-avatar m-1" onclick="changeAvatar('bee', 'id_avatar_bee')">
+                <img id="id_avatar_cat" src="{{ asset('assets/images/avatar/cat.png') }}" class="img-avatar m-1" onclick="changeAvatar('cat', 'id_avatar_cat')">
+                <img id="id_avatar_cow" src="{{ asset('assets/images/avatar/cow.png') }}" class="img-avatar m-1" onclick="changeAvatar('cow', 'id_avatar_cow')">
+                <img id="id_avatar_dinosaur" src="{{ asset('assets/images/avatar/dinosaur.png') }}" class="img-avatar m-1" onclick="changeAvatar('dinosaur', 'id_avatar_dinosaur')">
+                <img id="id_avatar_elephant" src="{{ asset('assets/images/avatar/elephant.png') }}" class="img-avatar m-1" onclick="changeAvatar('elephant', 'id_avatar_elephant')">
+                <img id="id_avatar_ghosts" src="{{ asset('assets/images/avatar/ghosts.png') }}" class="img-avatar m-1" onclick="changeAvatar('ghosts', 'id_avatar_ghosts')">
+                <img id="id_avatar_ninja" src="{{ asset('assets/images/avatar/ninja.png') }}" class="img-avatar m-1" onclick="changeAvatar('ninja', 'id_avatar_ninja')">
+                <img id="id_avatar_rabbit" src="{{ asset('assets/images/avatar/rabbit.png') }}" class="img-avatar m-1" onclick="changeAvatar('rabbit', 'id_avatar_rabbit')">
+                <!-- fin boucle -->
+                <i
+                    class="bi bi-x-circle d-flex icon-remove-avatar m-1"
+                    onclick="resetAvatar()">
+                </i>
+            </div>
+        </div>
 
-<div class="d-flex justify-content-end">
-    <a id="id_btn_logout" href="{{ path('app_logout') }}" role="button" class="btn btn-danger">Déconnexion</a>
+        <div class="d-flex justify-content-end">
+            <a id="id_btn_logout" href="{{ path('app_logout') }}" role="button" class="btn btn-danger">Déconnexion</a>
 
-    <button id="id_btn_cancel" type="button" onclick="initialView()" class="btn btn-danger d-none me-2">Annuler</button>
-    <button id="id_btn_valid" type="button" onclick="update()" class="btn btn-success d-none">Valider</button>
-</div>
+            <button id="id_btn_cancel" type="button" onclick="initialView()" class="btn btn-danger d-none me-2">Annuler</button>
+            <button id="id_btn_valid" type="button" onclick="editProfile()" class="btn btn-success d-none">Valider</button>
+        </div>
+    </fielset>
+</form>

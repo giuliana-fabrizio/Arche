@@ -27,7 +27,7 @@ function displayItems(disabled) {
 }
 
 
-function editProfile() { displayItems(false); }
+function wantEditProfile() { displayItems(false); }
 
 
 function cancelEdit() {
@@ -59,4 +59,20 @@ function changeAvatar(avatar, id_selected) {
 function collapseAvatar() {
     const collapse = document.getElementById("id_engage_collapse_avatar");
     if (collapse.classList.contains("collapsed")) resetAvatar(); // TODO corriger si le mec sélectionne juste pas d'icon
+}
+
+
+function editProfile() {
+    const form = document.getElementById("id_form_profile");
+
+    if (form.checkValidity()) {
+        const formData = {};
+        new FormData(form).forEach((value, key) => {
+            formData[key] = value;
+        });
+
+        update(formData);
+    } else {
+        form.reportValidity();
+    }
 }
