@@ -48,14 +48,14 @@ class PostController extends AbstractController {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
         }
 
-        $posts = $section->getPosts();
+        $posts = $this->postRepository->getPostsOrdered($section);
 
         $data = array_map(function($post) {
             return [
                 'id' => $post->getId(),
                 'label' => $post->getLabel(),
             ];
-        }, $posts->toArray());
+        }, $posts);
 
         return new JsonResponse([
             'code' => 200,
@@ -109,16 +109,16 @@ class PostController extends AbstractController {
             $post->setFkPostType($postType);
         }
 
-        $count_sections = $this->sectionRepository->countSections($section->getFkUe());
+        $count_posts = $this->postRepository->countPosts($section);
 
-        if (!empty($data['classement'])) {
+        if (!empty($data['id_classement'])) {
             $this->updatePostsRanking(
                 $section,
                 0,
                 $count_posts + 1,
-                (int) $data['classement']
+                (int) $data['id_classement']
             );
-            $post->setRanking((int) $data['classement']);
+            $post->setRanking((int) $data['id_classement']);
         } else {
             $post->setRanking($count_posts + 1);
         }
@@ -160,18 +160,14 @@ class PostController extends AbstractController {
             $post->setFkPostType($postType);
         }
 
-        if (isset($data['id_classement']) && is_numeric($data['id_classement'])) {
-            $post->setRanking((int) $data['id_classement']);
-        }
-
-        if (!empty($data['classement'])) {
+        if (!empty($data['id_classement'])) {
             $this->updatePostsRanking(
                 $section,
                 $post->getId(),
                 $post->getRanking(),
-                (int) $data['classement']
+                (int) $data['id_classement']
             );
-            $post->setRanking((int) $data['classement']);
+            $post->setRanking((int) $data['id_classement']);
         }
 
         $this->entityManager->flush();

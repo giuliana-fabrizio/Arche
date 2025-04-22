@@ -35,6 +35,8 @@ function changePostTabs(dest) {
 
 function clearPostForm() {
     form_post.reset();
+    document.getElementById("id_title_modal_post").innerText = "Ajouter un post";
+    action_post_modal.innerText = "add";
 }
 
 

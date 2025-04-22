@@ -107,10 +107,10 @@ async function getSectionPosts() {
 
             const posts = response.posts;
 
-            posts.forEach(post => {
+            posts.forEach((post, index) => {
                 const option = document.createElement("option");
-                option.value = post.id;
-                option.textContent = post.label;
+                option.value = index + 1;
+                option.textContent = post.label + " : position " + (index + 1);
                 select.appendChild(option);
             });
         }
