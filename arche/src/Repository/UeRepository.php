@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Ue;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,19 @@ class UeRepository extends ServiceEntityRepository
         parent::__construct($registry, Ue::class);
     }
 
-    //    /**
-    //     * @return Ue[] Returns an array of Ue objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('u.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
 
-    //    public function findOneBySomeField($value): ?Ue
-    //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+        * @return User[] Returns an array of User objects
+        */
+    public function getAssociateUsers(Int $id_ue, array $roles) {
+        return $this->createQueryBuilder('ue')
+            ->join('ue.associates_users', 'u')
+            ->select('u.firstname, u.lastname, u.email')
+            ->where('ue.id = :id_ue')
+            ->andWhere('u.roles in (:roles)')
+            ->setParameter('id_ue', $id_ue)
+            ->setParameter('roles', $roles)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Section;
+use App\Entity\Ue;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,59 @@ class SectionRepository extends ServiceEntityRepository
         parent::__construct($registry, Section::class);
     }
 
-    //    /**
-    //     * @return Section[] Returns an array of Section objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+        /**
+            * @return Section[] Returns an array of Section objects
+            */
+        public function getSectionsWithPostsOrdered(Ue $ue): array
+        {
+            return $this->createQueryBuilder('s')
+                ->leftJoin('s.posts', 'p')
+                ->addSelect('p')
+                ->andWhere('s.fk_ue = :ue')
+                ->setParameter('ue', $ue)
+                ->orderBy('s.ranking', 'ASC')
+                ->addOrderBy('p.ranking', 'ASC')
+                ->getQuery()
+                ->getResult();
+       }
 
-    //    public function findOneBySomeField($value): ?Section
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        /**
+            * @return Section[] Returns an array of Section objects
+            */
+        public function getSectionsToUpdateRanking(Ue $ue, Int $id_section, Int $start_ranking, Int $stop_ranking): array
+        {
+            $request = $this->createQueryBuilder('s')
+                ->where('s.fk_ue = :ue')
+                ->andWhere('s.id != :id_section');
+
+            if ($start_ranking < $stop_ranking) {
+                $request
+                    ->andWhere('s.ranking > :start_ranking')
+                    ->andWhere('s.ranking <= :stop_ranking');
+            } else {
+                $request
+                    ->andWhere('s.ranking < :start_ranking')
+                    ->andWhere('s.ranking >= :stop_ranking');
+            }
+            return $request
+                ->setParameter('ue', $ue)
+                ->setParameter('id_section', $id_section)
+                ->setParameter('start_ranking', $start_ranking)
+                ->setParameter('stop_ranking', $stop_ranking)
+                ->getQuery()
+                ->getResult();
+       }
+
+        /**
+            * @return Int Returns number of Section objects
+            */
+        public function countSections(Ue $ue): int
+        {
+            return $this->createQueryBuilder('s')
+                ->select('count(s.id)')
+                ->where('s.fk_ue = :ue')
+                ->setParameter('ue', $ue)
+                ->getQuery()
+                ->getSingleScalarResult();;
+        }
 }
