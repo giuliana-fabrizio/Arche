@@ -94,7 +94,10 @@ function modalPost() {
 
 
 function wantEditPost(id_container, id_ue, id, label, description, id_section, ranking, post_type, filename) {
-    getPostType(id_ue);
+    document.getElementById("id_section_post_form").value = id_section;
+
+    getPostType(id_ue, id_section);
+    getSectionPosts();
     changePostTabs(post_type ? "text" : "file");
 
     document.getElementById("id_post_form").value = id;
@@ -102,7 +105,6 @@ function wantEditPost(id_container, id_ue, id, label, description, id_section, r
 
     document.getElementById("id_title_post_form").value = label;
     document.getElementById("id_description_post_form").value = description;
-    document.getElementById("id_section_post_form").value = id_section;
     document.getElementById("id_classement_post_form").value = ranking;
 
     document.getElementById("id_type_post_form").value = post_type;

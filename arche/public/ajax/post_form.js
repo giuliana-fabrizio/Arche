@@ -89,7 +89,7 @@ async function updatePostFile(id_post, file) {
 
 async function getSectionPosts() {
     const id_section = document.getElementById("id_section_post_form").value;
-    console.log(id_section)
+
     try {
         const request = await fetch(`/teacher/ajax/posts/${id_section}`, {
             method: 'GET',
@@ -120,7 +120,7 @@ async function getSectionPosts() {
 }
 
 
-async function getPostType(id_ue) {
+async function getPostType(id_ue, id_section) {
     try {
         const request = await fetch(`/teacher/ajax/post_type`, {
             method: 'GET',
@@ -131,7 +131,7 @@ async function getPostType(id_ue) {
         });
 
         const response = await request.json();
-        await getSections(id_ue, "id_section_post_form");
+        await getSections(id_ue, "id_section_post_form", id_section);
 
         if (response.code == 200) {
             const select = document.getElementById("id_type_post_form");

@@ -62,7 +62,7 @@ async function editSection(data) {
 }
 
 
-async function getSections(id_ue, id_select) {
+async function getSections(id_ue, id_select, id_section) {
     try {
         const request = await fetch(`/teacher/ajax/sections/${id_ue}`, {
             method: 'GET',
@@ -84,7 +84,10 @@ async function getSections(id_ue, id_select) {
             sections.forEach((section, index) => {
                 const option = document.createElement("option");
                 option.value = needFk ? section.id : index + 1;
-                option.textContent = section.label + " " + (index + 1);
+                option.textContent = section.label + " : position " + (index + 1);
+                if(id_section == section.id) {
+                    option.selected = true;
+                }
                 select.appendChild(option);
             });
         }
