@@ -87,7 +87,7 @@ class UserController extends AbstractController {
         $currentUser->setLastname($data['name']);
         $currentUser->setAddress($data['address']);
         $currentUser->setPhone($data['phone']);
-        $this->userRepository->upgradePassword($data['password']);
+        $this->userRepository->upgradePassword($currentUser, $data['password']);
         $currentUser->setAvatar($data['avatar']);
 
         $this->entityManager->flush();
