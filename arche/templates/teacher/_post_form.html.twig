@@ -1,0 +1,94 @@
+<div>
+    <div class="mb-4">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a id="id_text_tabs" class="nav-link active" onclick="changePostTabs('text')">
+                    Message textuel
+                </a>
+            </li>
+            <li class="nav-item">
+                <a id="id_file_tabs" class="nav-link" onclick="changePostTabs('file')">Fichier</a>
+            </li>
+        </ul>
+    </div>
+
+    {# <div id="id_display_section_form" class="mb-4 mt-4">
+        <hr>
+        <p class="fw-bold text-center">Ajouter une section</p>
+        <div class="pe-4 ps-4 mb-4 mt-2">
+            {% include '/teacher/_section_form.html.twig'
+                with {
+                    'origin': 'post_form',
+                    'id_ue' : id_ue,
+                    'sections' : sections
+                }
+            %}
+        </div>
+        <hr>
+    </div> #}
+
+    <form id="id_form_post">
+        <fieldset>
+            <input id="id_post_form" name="id_post" hidden>
+            <input id="id_post_container" name="id_post_container" hidden>
+            
+            <div class="mb-3">
+                <label for="id_title_post_form" class="form-label">Nom du post</label>
+                <input id="id_title_post_form" type="text" name="id_title" value="" class="form-control">
+            </div>
+
+            {# ============================================================== champ pour les messages #}
+
+            <div id="id_post_form_text">
+                <div class="mb-3">
+                    <label for="id_type_post_form" class="form-label">Type de message</label>
+                    <select id="id_type_post_form" name="id_type" class="form-select">
+                        <option selected disabled>Sélectionner un type</option>
+                    </select>
+                </div>
+            </div>
+
+            {# ============================================================== champ pour les fichiers #}
+
+            <div id="id_post_form_file" style="display: none;">
+                <div class="mb-3">
+                    <div class="d-flex">
+                        <label for="id_file_post_form" class="form-label mt-2">Fichier</label>
+                        <input id="id_filename_post_form" type="text" name="id_filename" class="form-control text-end" disabled>
+                    </div>
+                    <input id="id_file_post_form" type="file" name="id_file" value="" class="form-control">
+                </div>
+            </div>
+
+            {# ======================================================================= champs communs #}
+
+            <div class="mb-3">
+                <label for="id_description_post_form" class="form-label">Description</label>
+                <textarea id="id_description_post_form" name="id_description" class="form-control"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <div class="align-items-center d-flex justify-content-between mb-2">
+                    <label for="id_section_post_form" class="form-label">Section du post</label>
+                    <button type="button" onclick="displaySectionForm()" class="btn btn-primary">Ajouter une section</button>
+                </div>
+
+                <select id="id_section_post_form" onchange="getSectionPosts()" name="id_section" class="form-select"> {# TODO onchange pour trouver les post qui sont dans la section sélectoinnée #}
+                    <option selected disabled>Choisissez la section du post</option>
+                    {% for section in sections %}
+                        <option value="{{ section.id }}">{{ section.label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="id_classement_post_form" class="form-label">Position du post (laisser vide pour le placer à la fin)</label>
+                <select id="id_classement_post_form" name="id_classement" class="form-select" >
+                    <option selected disabled>Choisissez le post suivant</option>
+                </select>
+            </div>
+
+            <button id="id_btn_post_form" onclick="modalPost()" type="button" class="btn btn-primary w-100">Valider</button>
+        </fieldset>
+    </form>
+</div>

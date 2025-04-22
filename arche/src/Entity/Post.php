@@ -29,7 +29,7 @@ class Post
     #[ORM\Column(nullable: true)]
     private ?bool $pinned = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 200, nullable: true)]
     private ?string $filename = null;
 
     #[ORM\Column(length: 5, nullable: true)]

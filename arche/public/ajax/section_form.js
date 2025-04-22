@@ -50,7 +50,7 @@ async function editSection(data) {
             document.getElementById(`id_label_section_${data.id_section}`).innerHTML = response.section_label;
 
             document.getElementById("id_btn_edit_section").addEventListener("click", function () {
-                wantEditSection(data.id_section, response.section_label, response.section_ranking);
+                wantEditSection(data.id_ue, data.id_section, response.section_label, response.section_ranking);
             });
 
             const html = document.getElementById(`id_section_${data.id_section}`);
@@ -62,7 +62,7 @@ async function editSection(data) {
 }
 
 
-async function getSections(id_ue) {
+async function getSections(id_ue, id_select, id_section) {
     try {
         const request = await fetch(`/teacher/ajax/sections/${id_ue}`, {
             method: 'GET',
@@ -75,14 +75,19 @@ async function getSections(id_ue) {
         const response = await request.json();
 
         if (response.code == 200) {
-            const select = document.getElementById("id_ranking_form_section");
+            const select = document.getElementById(id_select);
             removeAllChildNodes(select);
+
             const sections = response.sections;
+            const needFk = id_select.includes("post") ? true : false;
 
             sections.forEach((section, index) => {
                 const option = document.createElement("option");
-                option.value = index + 1;
-                option.textContent = section.label + " " + (index + 1);
+                option.value = needFk ? section.id : index + 1;
+                option.textContent = section.label + " : position " + (index + 1);
+                if(id_section == section.id) {
+                    option.selected = true;
+                }
                 select.appendChild(option);
             });
         }

@@ -1,9 +1,9 @@
 const action_modal = document.getElementById("id_action_modal_section");
-const modalElement = document.getElementById('id_add_section_modal');
+const modal_section = document.getElementById('id_add_section_modal');
 const form_section = document.getElementById('id_form_section');
 
 document.addEventListener('DOMContentLoaded', function () {
-    modalElement.addEventListener('hidden.bs.modal', function () {
+    modal_section.addEventListener('hidden.bs.modal', function () {
         const id_section = document.getElementById("id_section_form");
         id_section.value = "";
 
@@ -18,7 +18,7 @@ function clearSectionForm() {
 
 
 function closeModalSection() {
-    const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+    const modalInstance = bootstrap.Modal.getInstance(modal_section) || new bootstrap.Modal(modal_section);
     modalInstance.hide();
 }
 
@@ -43,7 +43,7 @@ function modalSection(origin) {
 
 
 function wantEditSection(id_ue, id, label, ranking) {
-    getSections(id_ue);
+    getSections(id_ue, "id_ranking_form_section");
 
     document.getElementById("id_section_form").value = id;
     document.getElementById("id_name_form_section").value = label;

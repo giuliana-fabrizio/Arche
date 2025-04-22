@@ -4,8 +4,11 @@
 
 {% block javascripts %}
     <script src="{{ asset('ajax/content_ue.js') }}" defer></script>
+    <script src="{{ asset('ajax/post_form.js') }}" defer></script>
     <script src="{{ asset('ajax/section_form.js') }}" defer></script>
+
     <script src="{{ asset('javascript/content_ue.js') }}" defer></script>
+    <script src="{{ asset('javascript/post_form.js') }}" defer></script>
     <script src="{{ asset('javascript/section_form.js') }}" defer></script>
 {% endblock %}
 
@@ -29,7 +32,32 @@
                             with {
                                 'origin': 'content_ue',
                                 'id_ue' : ue.id,
-                                'sections' : sections
+                            }
+                        %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="id_add_post_modal" class="modal fade" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="id_title_modal_post" class="modal-title">Ajouter un post</h5>
+                        <span id="id_action_modal_post" hidden>add</span>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% include '/teacher/_post_form.html.twig'
+                            with {
+                                'origin': 'content_ue',
+                                'id_ue' : ue.id,
                             }
                         %}
                     </div>
@@ -45,10 +73,10 @@
             <div class="align-items-center d-flex flex-wrap justify-content-between mb-4">
                 <ul class="nav nav-underline">
                     <li class="nav-item-ue">
-                        <a id="id_tab_cours" class="nav-link active p-3 pe-5 ps-5" onclick="changeTabs(this, 'cours')">Cours</a>
+                        <a id="id_tab_cours" class="nav-link active p-3 pe-5 ps-5" onclick="changeContentTabs('cours')">Cours</a>
                     </li>
                     <li class="nav-item-ue">
-                        <a id="id_tab_participants" class="nav-link p-3 pe-5 ps-5" onclick="changeTabs(this, 'participants')">Participants</a>
+                        <a id="id_tab_participants" class="nav-link p-3 pe-5 ps-5" onclick="changeContentTabs('participants')">Participants</a>
                     </li>
                 </ul>
 
@@ -56,20 +84,22 @@
                     <div class="align-items-center d-flex flex-wrap">
                         <button
                             id="id_btn_add_section"
-                            onclick="getSections({{ ue.id }})"
+                            onclick="getSections({{ ue.id }}, 'id_ranking_form_section')"
                             type="button"
                             class="btn btn-primary me-2 mt-2 mt-md-0"
                             data-bs-toggle="modal"
                             data-bs-target="#id_add_section_modal">
                             Ajouter une section
                         </button>
-                        <a
+                        <button
                             id="id_btn_add_post"
+                            onclick="getPostType({{ ue.id }})"
+                            type="button"
                             class="btn btn-primary mt-2 mt-md-0"
                             data-bs-toggle="modal"
                             data-bs-target="#id_add_post_modal">
                             Ajouter un post
-                        </a>
+                        </button>
                     </div>
                 {% endif %}
             </div>

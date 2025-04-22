@@ -43,15 +43,15 @@
         {% endif %}
     </div>
     <div id="collapse{{ section.id }}" class="accordion-collapse collapse {% if isCollapse %} show {% endif %}">
-        <div class="accordion-body">
+        <div  id="id_section_{{ section.id }}_posts" class="accordion-body">
             {% for post in section.posts %}
-                {% include '/home/_post.html.twig' with { 'id_section': section.id, 'post': post } %}
+                {% include '/home/_post.html.twig' with { 'id_ue' : id_ue, 'id_section': section.id, 'post': post } %}
             {% endfor %}
 
             <p
-                id="id_ajax_no_post"
+                id="id_ajax_no_post_section_{{ section.id }}"
                 class="text-center no-result"
-                style="display: {% if section.posts|length == 0%} block {% else %} none {% endif %};">
+                style="display: {% if section.posts|length == 0 %} block {% else %} none {% endif %};">
                 Aucun post pour cette section. Revenez plus tard !
             </p>
         </div>

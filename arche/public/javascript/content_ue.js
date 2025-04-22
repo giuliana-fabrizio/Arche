@@ -1,4 +1,4 @@
-function changeTabs(elem, dest) {
+function changeContentTabs(dest) {
     if (dest == "cours") {
         document.getElementById("id_cours").style.display = "block";
         document.getElementById("id_participants").style.display = "none";
