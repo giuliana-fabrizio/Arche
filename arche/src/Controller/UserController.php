@@ -9,11 +9,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController {
 
     public function __construct(
         private readonly UserRepository $userRepository,
+        private UserPasswordHasherInterface $passwordHasher,
         private EntityManagerInterface $entityManager
     ) {
     }
@@ -87,7 +89,7 @@ class UserController extends AbstractController {
         $currentUser->setLastname($data['name']);
         $currentUser->setAddress($data['address']);
         $currentUser->setPhone($data['phone']);
-        $this->userRepository->upgradePassword($currentUser, $data['password']);
+        $currentUser->setPassword($this->passwordHasher->hashPassword($currentUser, $data['password']));
         $currentUser->setAvatar($data['avatar']);
 
         $this->entityManager->flush();

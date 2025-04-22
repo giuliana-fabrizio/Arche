@@ -1,16 +1,16 @@
 <div class="d-flex justify-content-center">
     <i id="id_avatar_default" class="bi bi-person-circle fs-1 mb-3"></i>
-    <img id="id_avatar_image" class="img-person-avatar m-1">
+    <img id="id_avatar_image" class="img-person-avatar m-1" style="display: none;">
 </div>
 
 <div class="align-items-center d-flex mb-1">
     <div class="me-2 input-group-profile">
-        <input id="id_firstname" type="text" class="form-control profile-name" placeholder="" required>
+        <input id="id_firstname" type="text" class="form-control profile-name" placeholder="">
         <label for="id_firstname">Prénom</label>
     </div>
 
     <div class="input-group-profile">
-        <input id="id_name" type="text" class="form-control profile-name" placeholder="" disabled>
+        <input id="id_name" type="text" class="form-control profile-name" placeholder="">
         <label for="id_name">Nom</label>
     </div>
 
@@ -27,12 +27,12 @@
 ></a>
 
 <div class="mb-3 input-group-profile">
-    <input id="id_address" type="text" name="adress" class="form-control" placeholder="" disabled>
+    <input id="id_address" type="text" name="adress" class="form-control" placeholder="">
     <label for="id_address">Adresse</label>
 </div>
 
 <div class="mb-3 input-group-profile">
-    <input id="id_phone" type="text" name="phone" class="form-control" placeholder="" disabled>
+    <input id="id_phone" type="text" name="phone" class="form-control" placeholder="">
     <label for="id_phone">Téléphone</label>
 </div>
 
@@ -82,6 +82,6 @@
 <div class="d-flex justify-content-end">
     <a id="id_btn_logout" href="{{ path('app_logout') }}" role="button" class="btn btn-danger">Déconnexion</a>
 
-    <button id="id_btn_cancel" type="button" onclick="initialView()" class="btn btn-danger me-2">Annuler</button>
-    <button id="id_btn_valid" type="button" onclick="update()" class="btn btn-success">Valider</button>
+    <button id="id_btn_cancel" type="button" onclick="initialView()" class="btn btn-danger d-none me-2">Annuler</button>
+    <button id="id_btn_valid" type="button" onclick="update()" class="btn btn-success d-none">Valider</button>
 </div>
