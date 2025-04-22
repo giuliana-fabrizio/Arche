@@ -1,7 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    initialView();
-});
-
 function getFields() {
     return {
         firstname: document.getElementById('id_firstname'),

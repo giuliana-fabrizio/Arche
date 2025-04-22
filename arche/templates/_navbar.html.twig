@@ -26,15 +26,15 @@
 
             <div class="d-flex fixed-items-navbar">
                 <div class="container dropdown">
-                    <a
+                    <button
                         class="nav-link nav-link-navbar dropdown-toggle"
-                        href="#"
-                        role="button"
+                        onclick="initialView()"
+                        type="button"
                         id="dropdownProfile"
                         data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Profil
-                    </a>
+                    </button>
 
                     <div class="dropdown-menu dropdown-menu-end p-3 dimens-profile">
                         {% include '/profile/_profile.html.twig' %}
