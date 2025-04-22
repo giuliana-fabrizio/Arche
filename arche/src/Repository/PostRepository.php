@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Post;
+use App\Entity\Section;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,30 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    //    /**
-    //     * @return Post[] Returns an array of Post objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+        * @return Section[] Returns an array of Section objects
+        */
+       public function getPostsToUpdateRanking(Section $section, Int $id_post, Int $start_ranking, Int $stop_ranking): array
+       {
+            $request = $this->createQueryBuilder('p')
+                ->where('p.fk_section = :section')
+                ->andWhere('p.id != :id_post');
 
-    //    public function findOneBySomeField($value): ?Post
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+            if ($start_ranking < $stop_ranking) {
+                $request
+                    ->andWhere('p.ranking > :start_ranking')
+                    ->andWhere('p.ranking <= :stop_ranking');
+            } else {
+                $request
+                    ->andWhere('p.ranking < :start_ranking')
+                    ->andWhere('p.ranking >= :stop_ranking');
+            }
+            return $request
+                ->setParameter('section', $section)
+                ->setParameter('id_section', $id_section)
+                ->setParameter('start_ranking', $start_ranking)
+                ->setParameter('stop_ranking', $stop_ranking)
+                ->getQuery()
+                ->getResult();
+       }
 }

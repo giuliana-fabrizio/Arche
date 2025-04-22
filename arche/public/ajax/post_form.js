@@ -87,6 +87,39 @@ async function updatePostFile(id_post, file) {
 }
 
 
+async function getSectionPosts() {
+    const id_section = document.getElementById("id_section_post_form").value;
+    console.log(id_section)
+    try {
+        const request = await fetch(`/teacher/ajax/posts/${id_section}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-with": "XMLHttpRequest"
+            }
+        });
+
+        const response = await request.json();
+
+        if (response.code == 200) {
+            const select = document.getElementById("id_classement_post_form");
+            removeAllChildNodes(select);
+
+            const posts = response.posts;
+
+            posts.forEach(post => {
+                const option = document.createElement("option");
+                option.value = post.id;
+                option.textContent = post.label;
+                select.appendChild(option);
+            });
+        }
+    } catch (error) {
+        console.error("Erreur lors de l'ajout de section:", error);
+    }
+}
+
+
 async function getPostType(id_ue) {
     try {
         const request = await fetch(`/teacher/ajax/post_type`, {

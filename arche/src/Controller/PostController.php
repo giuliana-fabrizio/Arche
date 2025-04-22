@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Post;
+use App\Entity\Section;
+use App\Repository\PostRepository;
 use App\Repository\PostTypeRepository;
 use App\Repository\SectionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,10 +17,50 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController {
 
     public function __construct(
+        private PostRepository $postRepository,
         private PostTypeRepository $postTypeRepository,
         private SectionRepository $sectionRepository,
         private EntityManagerInterface $entityManager
     ) {
+    }
+
+
+    private function updatePostsRanking(Section $section, Int $id_post, Int $start_ranking, Int $stop_ranking) {
+        $posts = $this->postRepository->getPostsToUpdateRanking(
+            $section,
+            $id_post,
+            $start_ranking,
+            $stop_ranking
+        );
+
+        foreach ($posts as $post) {
+            $ranking = $post->getRanking();
+            $post->setRanking(($start_ranking < $stop_ranking) ? $ranking - 1 : $ranking + 1);
+        }
+
+        $this->entityManager->flush();
+    }
+
+
+    #[Route('/teacher/ajax/posts/{id}', name: 'app_ajax_get_posts', methods: ['GET'])]
+    public function getSectionPosts(Request $request, Section $section) : Response {
+        if(!$request->isXmlHttpRequest()) {
+            return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $posts = $section->getPosts();
+
+        $data = array_map(function($post) {
+            return [
+                'id' => $post->getId(),
+                'label' => $post->getLabel(),
+            ];
+        }, $posts->toArray());
+
+        return new JsonResponse([
+            'code' => 200,
+            'posts' => $data
+        ]);
     }
 
 
@@ -67,8 +109,18 @@ class PostController extends AbstractController {
             $post->setFkPostType($postType);
         }
 
-        if (isset($data['id_classement']) && is_numeric($data['id_classement'])) {
-            $post->setRanking((int) $data['id_classement']);
+        $count_sections = $this->sectionRepository->countSections($section->getFkUe());
+
+        if (!empty($data['classement'])) {
+            $this->updatePostsRanking(
+                $section,
+                0,
+                $count_posts + 1,
+                (int) $data['classement']
+            );
+            $post->setRanking((int) $data['classement']);
+        } else {
+            $post->setRanking($count_posts + 1);
         }
 
         $this->entityManager->persist($post);
@@ -94,6 +146,7 @@ class PostController extends AbstractController {
         }
 
         $data = json_decode($request->getContent(), true);
+        $old_post_ranking = $post->getRanking();
         $section = $this->sectionRepository->find($data['id_section']);
 
         $post->setLabel($data['id_title'])
@@ -111,6 +164,16 @@ class PostController extends AbstractController {
             $post->setRanking((int) $data['id_classement']);
         }
 
+        if (!empty($data['classement'])) {
+            $this->updatePostsRanking(
+                $section,
+                $post->getId(),
+                $post->getRanking(),
+                (int) $data['classement']
+            );
+            $post->setRanking((int) $data['classement']);
+        }
+
         $this->entityManager->flush();
 
         $html = null;
@@ -123,7 +186,12 @@ class PostController extends AbstractController {
             ]);
         }
 
-        return new JsonResponse(['code' => 200, 'html' => $html]);
+        return new JsonResponse([
+            'code' => 200,
+            'html' => $html,
+            'post_ranking' => $post->getRanking(),
+            'old_post_ranking' => $old_post_ranking,
+        ]);
     }
 
 

@@ -73,7 +73,7 @@
                     <button type="button" onclick="displaySectionForm()" class="btn btn-primary">Ajouter une section</button>
                 </div>
 
-                <select id="id_section_post_form" name="id_section" class="form-select"> {# TODO onchange pour trouver les post qui sont dans la section sélectoinnée #}
+                <select id="id_section_post_form" onchange="getSectionPosts()" name="id_section" class="form-select"> {# TODO onchange pour trouver les post qui sont dans la section sélectoinnée #}
                     <option selected disabled>Choisissez la section du post</option>
                     {% for section in sections %}
                         <option value="{{ section.id }}">{{ section.label }}</option>
@@ -85,10 +85,6 @@
                 <label for="id_classement_post_form" class="form-label">Position du post (laisser vide pour le placer à la fin)</label>
                 <select id="id_classement_post_form" name="id_classement" class="form-select" >
                     <option selected disabled>Choisissez le post suivant</option>
-                    <!-- TODO boucle -->
-                    <option value="1">Post 1</option> <!-- TODO changer la value -->
-                    <option value="2">Post 2</option>
-                    <!-- TODO fin boucle -->
                 </select>
             </div>
 

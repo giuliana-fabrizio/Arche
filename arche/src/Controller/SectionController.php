@@ -41,7 +41,7 @@ class SectionController extends AbstractController {
 
 
     #[Route('/teacher/ajax/sections/{id}', name: 'app_ajax_get_sections', methods: ['GET'])]
-    public function getPostType(Request $request, Ue $ue) : Response {
+    public function getSectionsWithPostsOrdered(Request $request, Ue $ue) : Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
         }
