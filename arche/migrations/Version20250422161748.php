@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250420192946 extends AbstractMigration
+final class Version20250422161748 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,7 +24,7 @@ final class Version20250420192946 extends AbstractMigration
             CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, label VARCHAR(30) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
-            CREATE TABLE post (id INT AUTO_INCREMENT NOT NULL, fk_post_type_id INT DEFAULT NULL, fk_section_id INT NOT NULL, fk_user_id INT NOT NULL, datetime DATETIME NOT NULL, description LONGTEXT DEFAULT NULL, label VARCHAR(50) NOT NULL, ranking INT DEFAULT NULL, pinned TINYINT(1) DEFAULT NULL, filename VARCHAR(50) DEFAULT NULL, filetype VARCHAR(5) DEFAULT NULL, INDEX IDX_5A8A6C8DD97939B9 (fk_post_type_id), INDEX IDX_5A8A6C8D284D29E9 (fk_section_id), INDEX IDX_5A8A6C8D5741EEB9 (fk_user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
+            CREATE TABLE post (id INT AUTO_INCREMENT NOT NULL, fk_post_type_id INT DEFAULT NULL, fk_section_id INT NOT NULL, fk_user_id INT NOT NULL, datetime DATETIME NOT NULL, description LONGTEXT DEFAULT NULL, label VARCHAR(50) NOT NULL, ranking INT DEFAULT NULL, pinned TINYINT(1) DEFAULT NULL, filename VARCHAR(200) DEFAULT NULL, filetype VARCHAR(5) DEFAULT NULL, INDEX IDX_5A8A6C8DD97939B9 (fk_post_type_id), INDEX IDX_5A8A6C8D284D29E9 (fk_section_id), INDEX IDX_5A8A6C8D5741EEB9 (fk_user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE post_type (id INT AUTO_INCREMENT NOT NULL, label VARCHAR(20) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
