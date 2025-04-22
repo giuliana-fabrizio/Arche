@@ -9,7 +9,6 @@ function getFields() {
         surname: document.getElementById('id_name'),
         address: document.getElementById('id_address'),
         phone: document.getElementById('id_phone'),
-        password: document.getElementById('id_password'),
         avatar: document.getElementById('id_avatar_image'),
         avatar_default: document.getElementById('id_avatar_default'),
         avatar_selected: document.getElementById('id_avatar'),
@@ -18,13 +17,12 @@ function getFields() {
 }
 
 
-function updateFields(response, firstname, surname, address, phone, password, avatar, avatar_default, avatar_selected, mail) {
+function updateFields(response, firstname, surname, address, phone, avatar, avatar_default, avatar_selected, mail) {
 
     firstname.value = response['firstname'];
     surname.value = response['name'];
     address.value = response['address'];
     phone.value = response['phone'];
-    password.value = response['password'];
     mail.innerHTML = response['mail'];
 
     if (response['avatar']) {
@@ -41,7 +39,7 @@ function updateFields(response, firstname, surname, address, phone, password, av
 
 
 async function update(user) {
-    const { firstname, surname, address, phone, password, avatar, avatar_default, avatar_selected, mail } = getFields();
+    const { firstname, surname, address, phone, avatar, avatar_default, avatar_selected, mail } = getFields();
 
     try {
         const request = await fetch('/ajax/post/profile', {
@@ -58,7 +56,7 @@ async function update(user) {
 
         cancelEdit();
 
-        updateFields(response, firstname, surname, address, phone, password, avatar, avatar_default, avatar_selected, mail);
+        updateFields(response, firstname, surname, address, phone, avatar, avatar_default, avatar_selected, mail);
     } catch (error) {
         console.error("Erreur lors de la récupération des données:", error);
     }
@@ -66,7 +64,7 @@ async function update(user) {
 
 
 async function initialView() {
-    const { firstname, surname, address, phone, password, avatar, avatar_default, avatar_selected, mail } = getFields();
+    const { firstname, surname, address, phone, avatar, avatar_default, avatar_selected, mail } = getFields();
 
     try {
         const request = await fetch('/ajax/profile', {
@@ -82,7 +80,7 @@ async function initialView() {
 
         cancelEdit();
 
-        updateFields(response, firstname, surname, address, phone, password, avatar, avatar_default, avatar_selected, mail);
+        updateFields(response, firstname, surname, address, phone, avatar, avatar_default, avatar_selected, mail);
     } catch (error) {
         console.error("Erreur lors de la récupération des données:", error);
     }

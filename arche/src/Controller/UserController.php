@@ -68,7 +68,6 @@ class UserController extends AbstractController {
             'address' => $currentUser->getAddress(),
             'mail' => $currentUser->getEmail(),
             'phone' => $currentUser->getPhone(),
-            'password' => $currentUser->getPassword(),
             'avatar' => $currentUser->getAvatar()
         ];
 
@@ -89,7 +88,10 @@ class UserController extends AbstractController {
         $currentUser->setLastname($data['name']);
         $currentUser->setAddress($data['address']);
         $currentUser->setPhone($data['phone']);
-        $currentUser->setPassword($this->passwordHasher->hashPassword($currentUser, $data['password']));
+
+        if (isset($data['password'])) {
+            $currentUser->setPassword($this->passwordHasher->hashPassword($currentUser, $data['password']));
+        }
         $currentUser->setAvatar($data['avatar']);
 
         $this->entityManager->flush();

@@ -68,7 +68,9 @@ function editProfile() {
     if (form.checkValidity()) {
         const formData = {};
         new FormData(form).forEach((value, key) => {
-            formData[key] = value;
+            if (key != "password" || (key == "password" && value != "")) {
+                formData[key] = value;
+            }
         });
 
         update(formData);
