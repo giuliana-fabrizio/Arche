@@ -103,7 +103,7 @@ function updateDisplay(sections_to_update, current_html, section_ranking, isExis
     const cours = document.getElementById("id_cours");
 
     if (sections_to_update.length == 0) {
-        isExisting ? cours.insertAdjacentElement('afterend', current_html) : cours.insertAdjacentHTML('afterend', current_html);
+        isExisting ? cours.insertAdjacentElement('beforeend', current_html) : cours.insertAdjacentHTML('afterend', current_html);
         return;
     }
 
