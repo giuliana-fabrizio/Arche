@@ -31,12 +31,17 @@ class SectionController extends AbstractController {
             $stop_ranking
         );
 
+        $sections_to_update = [];
+
         foreach ($sections as $section) {
             $ranking = $section->getRanking();
             $section->setRanking(($start_ranking < $stop_ranking) ? $ranking - 1 : $ranking + 1);
+            $sections_to_update[] = ['id' => $section->getId(), 'ranking' => $section->getRanking()];
         }
 
         $this->entityManager->flush();
+
+        return $sections_to_update;
     }
 
 
@@ -69,10 +74,10 @@ class SectionController extends AbstractController {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
         }
 
-        $data = json_decode($request->getContent(), true);
+        $data = json_decode($request->getContent(), true); // On récupère les données transmises (section ici) par Ajax dans le BODY
         $ue = $this->ueRepository->find($data['id_ue']);
 
-        $section = new Section()
+        $section = (new Section())
             ->setLabel($data['label'])
             ->setFkUe($ue)
             ->setFkUser($this->getUser());
@@ -82,9 +87,10 @@ class SectionController extends AbstractController {
         }
 
         $count_sections = $this->sectionRepository->countSections($section->getFkUe());
+        $sections_to_update = [];
 
         if (!empty($data['classement'])) {
-            $this->updateSectionsRanking(
+            $sections_to_update = $this->updateSectionsRanking(
                 $section->getFkUe(),
                 0,
                 $count_sections + 1,
@@ -104,12 +110,17 @@ class SectionController extends AbstractController {
             'isCollapse' => false
         ]);
 
+        usort($sections_to_update, function($a, $b) {
+            return $a['ranking'] <=> $b['ranking'];
+        });
+
         return new JsonResponse([
             'code' => 200,
             'html' => $html,
-            'section_ranking' => $section->getRanking(),
             'section_id' => $section->getId(),
-            'section_label' => $section->getLabel()
+            'section_label' => $section->getLabel(),
+            'section_ranking' => $section->getRanking(),
+            'sections_to_update' => $sections_to_update
         ]);
     }
 
@@ -121,12 +132,13 @@ class SectionController extends AbstractController {
         }
 
         $data = json_decode($request->getContent(), true);
-        $old_section_ranking = $section->getRanking();
 
         $section->setLabel($data['label']);
 
-        if (!empty($data['classement'])) {
-            $this->updateSectionsRanking(
+        $sections_to_update = [];
+
+        if (!empty($data['classement']) && $data['classement'] != $section->getRanking()) {
+            $sections_to_update = $this->updateSectionsRanking(
                 $section->getFkUe(),
                 $section->getId(),
                 $section->getRanking(),
@@ -137,12 +149,16 @@ class SectionController extends AbstractController {
 
         $this->entityManager->flush();
 
+        usort($sections_to_update, function($a, $b) {
+            return $a['ranking'] <=> $b['ranking'];
+        });
+
         return new JsonResponse([
             'code' => 200,
             'id_ue' => $section->getFkUe()->getId(),
             'section_label' => $section->getLabel(),
             'section_ranking' => $section->getRanking(),
-            'old_section_ranking' => $old_section_ranking,
+            'sections_to_update' => $sections_to_update
         ]);
     }
 
