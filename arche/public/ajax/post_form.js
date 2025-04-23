@@ -87,8 +87,8 @@ async function updatePostFile(id_post, file) {
 }
 
 
-async function getSectionPosts() {
-    const id_section = document.getElementById("id_section_post_form").value;
+async function getSectionPosts(id_section) {
+    id_section = id_section ? id_section : document.getElementById("id_section_post_form").value;
 
     try {
         const request = await fetch(`/teacher/ajax/posts/${id_section}`, {

@@ -99,7 +99,7 @@ function wantEditPost(id_container, id_ue, id, label, description, id_section, r
     document.getElementById("id_section_post_form").value = id_section;
 
     getPostType(id_ue, id_section);
-    getSectionPosts();
+    getSectionPosts(id_section);
     changePostTabs(post_type ? "text" : "file");
 
     document.getElementById("id_post_form").value = id;
