@@ -33,12 +33,17 @@ class PostController extends AbstractController {
             $stop_ranking
         );
 
+        $posts_to_update = [];
+
         foreach ($posts as $post) {
             $ranking = $post->getRanking();
             $post->setRanking(($start_ranking < $stop_ranking) ? $ranking - 1 : $ranking + 1);
+            $posts_to_update[] = ['id' => $post->getId(), 'ranking' => $post->getRanking()];
         }
 
         $this->entityManager->flush();
+
+        return $posts_to_update;
     }
 
 
@@ -87,7 +92,7 @@ class PostController extends AbstractController {
 
 
     #[Route('/teacher/ajax/create/post', name: 'app_ajax_post_create', methods: ['POST'])]
-    public function createUe(Request $request) : Response {
+    public function createPost(Request $request) : Response {
         if(!$request->isXmlHttpRequest()) {
             return new JsonResponse(['error' => 'Cet appel doit être effectué via AJAX.'], Response::HTTP_BAD_REQUEST);
         }
@@ -110,9 +115,10 @@ class PostController extends AbstractController {
         }
 
         $count_posts = $this->postRepository->countPosts($section);
+        $posts_to_update = [];
 
         if (!empty($data['id_classement'])) {
-            $this->updatePostsRanking(
+            $posts_to_update = $this->updatePostsRanking(
                 $section,
                 0,
                 $count_posts + 1,
@@ -136,7 +142,17 @@ class PostController extends AbstractController {
             ]);
         }
 
-        return new JsonResponse(['code' => 200, 'html' => $html, 'id_post' => $post->getId()]);
+        usort($posts_to_update, function($a, $b) {
+            return $a['ranking'] <=> $b['ranking'];
+        });
+
+        return new JsonResponse([
+            'code' => 200,
+            'html' => $html,
+            'id_post' => $post->getId(),
+            'post_ranking' => $post->getRanking(),
+            'posts_to_update' => $posts_to_update
+        ]);
     }
 
 
@@ -147,7 +163,6 @@ class PostController extends AbstractController {
         }
 
         $data = json_decode($request->getContent(), true);
-        $old_post_ranking = $post->getRanking();
         $section = $this->sectionRepository->find($data['id_section']);
 
         $post->setLabel($data['id_title'])
@@ -161,8 +176,10 @@ class PostController extends AbstractController {
             $post->setFkPostType($postType);
         }
 
+        $posts_to_update = [];
+
         if (!empty($data['id_classement'])) {
-            $this->updatePostsRanking(
+            $posts_to_update = $this->updatePostsRanking(
                 $section,
                 $post->getId(),
                 $post->getRanking(),
@@ -183,11 +200,15 @@ class PostController extends AbstractController {
             ]);
         }
 
+        usort($posts_to_update, function($a, $b) {
+            return $a['ranking'] <=> $b['ranking'];
+        });
+
         return new JsonResponse([
             'code' => 200,
             'html' => $html,
             'post_ranking' => $post->getRanking(),
-            'old_post_ranking' => $old_post_ranking,
+            'posts_to_update' => $posts_to_update
         ]);
     }
 
@@ -219,7 +240,12 @@ class PostController extends AbstractController {
             'post' => $post
         ]);
 
-        return new JsonResponse(['code' => 200, 'html' => $html]);
+        return new JsonResponse([
+            'code' => 200,
+            'html' => $html,
+            'id_post' => $post->getId(),
+            'post_ranking' => $post->getRanking()
+        ]);
     }
 
 

@@ -10,6 +10,7 @@ async function addPost(post, fileInput) {
         });
 
         let response = await request.json();
+        const posts_to_update = response.posts_to_update;
 
         if (response.code == 200) {
             if (fileInput && fileInput.files.length > 0) {
@@ -23,8 +24,12 @@ async function addPost(post, fileInput) {
                 response = await response.json()
             }
 
-            const section_posts = document.getElementById(`id_section_${post.id_section}_posts`);
-            section_posts.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
+            updatePostDisplay(
+                post.id_section,
+                posts_to_update,
+                response.html,
+                response.post_ranking
+            );
 
             document.getElementById(`id_ajax_no_post_section_${post.id_section}`).style.display = "none";
             closeModalPost();
@@ -47,6 +52,7 @@ async function editPost(data, fileInput, id_div) {
         });
 
         let response = await request.json();
+        const posts_to_update = response.posts_to_update;
 
         if (response.code == 200) {
             if (fileInput && fileInput.files.length > 0) {
@@ -60,8 +66,12 @@ async function editPost(data, fileInput, id_div) {
             }
             document.getElementById(id_div).remove();
 
-            const section_posts = document.getElementById(`id_section_${data.id_section}_posts`);
-            section_posts.insertAdjacentHTML('beforeend', response.html); // TODO tenir compte de la position demandée par le user
+            updatePostDisplay(
+                data.id_section,
+                posts_to_update,
+                response.html,
+                response.post_ranking
+            );
 
             document.getElementById(`id_ajax_no_post_section_${data.id_section}`).style.display = "none";
             closeModalPost();
@@ -149,6 +159,39 @@ async function getPostType(id_ue, id_section) {
     } catch (error) {
         console.error("Erreur lors de l'ajout de section:", error);
     }
+}
+
+
+function updatePostDisplay(id_section, posts_to_update, current_html, post_ranking) {
+    const posts = document.getElementById(`id_section_${id_section}_posts`);
+
+    if (posts_to_update.length == 0) {
+        posts.insertAdjacentHTML('afterend', current_html);
+        return;
+    }
+
+    const first_post = posts_to_update[0];
+    const last_post = posts_to_update[posts_to_update.length - 1];
+    const first_post_html = document.getElementById(`id_section_${id_section}_post_${first_post.id}`);
+    const last_post_html = document.getElementById(`id_section_${id_section}_post_${last_post.id}`);
+
+    if (post_ranking < first_post.ranking) {
+        first_post_html.insertAdjacentHTML('beforebegin', current_html);
+    } else {
+        last_post_html.insertAdjacentHTML('afterend', current_html);
+    }
+
+    posts_to_update.forEach(post => {
+        const ranking = document.getElementById(`id_section_${id_section}_post_${post.id}_ranking`);
+        ranking.innerText = post.ranking;
+
+        const elem_html = document.getElementById(`id_section_${id_section}_post_${post.id}`);
+        if (ranking < post_ranking) {
+            first_post_html.insertAdjacentElement('afterend', elem_html)
+        } else {
+            last_post_html.insertAdjacentElement('beforebegin', elem_html)
+        }
+    });
 }
 
 
